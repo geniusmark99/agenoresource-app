@@ -1,5 +1,6 @@
 <!doctype html>
-<html x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', sidebarOpen: false }" :class="{ 'dark': darkMode }">
+<html x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', sidebarOpen: false }" 
+:class="{ 'dark': darkMode }">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,7 @@
   <title>
     Ageno resource: @yield('app-title','Home')
   </title>
-<link rel="stylesheet" href="{{ asset('css/tw.css') }}">
-  {{-- @vite('resources/css/app.css') --}}
+  @vite(['resources/css/app.css','resources/js/app.js'])
   <style>
     
   </style>
@@ -23,6 +23,6 @@
 </main>
 
 <x-general-footer/>
-@vite('resources/js/app.js')
+@yield('app-script')
 </body>
 </html>

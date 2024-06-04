@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 
+[x-cloak] { display: none !important; }
 @layer components {
 
 
@@ -13,15 +14,15 @@
 
 
 .hero-bg {
-@apply bg-gradient-to-r from-indigo-500 from-70% to-sky-500 to-30%  bg-[url('http://127.0.0.1:8000/images/hero-one.jpg')]
+@apply bg-gradient-to-r from-indigo-500 from-70% to-sky-500 to-30%  
 }
 
 .ageno-btn {
-@apply px-6 py-2 font-medium tracking-wide w-full text-ageno dark:text-gray-300 capitalize transition-colors duration-300 transform bg-white dark:bg-gray-800 hover:bg-ageno hover:text-white
+@apply px-6 py-2 font-medium rounded-md tracking-wide w-full text-ageno dark:text-white capitalize transition-colors duration-300 transform bg-white dark:bg-ageno hover:bg-ageno hover:text-white
 }
 
 .ageno-btn.active {
-@apply bg-ageno text-white dark:bg-ageno-dark
+@apply bg-ageno text-white dark:bg-slate-900
 }
 
 .ageno-btn.active::after {
@@ -36,6 +37,10 @@ background: 0 0 !important;
 border-color: transparent transparent #fff;
 border-width: 0 10px 10px;
 display: inline-block;
+}
+
+.ageno-btn.active::after {
+@apply dark:border-b-slate-900
 }
 
 }

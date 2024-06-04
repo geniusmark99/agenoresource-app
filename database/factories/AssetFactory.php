@@ -2,21 +2,22 @@
 
 namespace Database\Factories;
 
-use App\Models\Assets;
+use App\Models\Asset;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
-class AssetsFactory extends Factory
+class AssetFactory extends Factory
 {
-    protected $model = Assets::class;
+    protected $model = Asset::class;
 
     public function definition()
     {
 
         $user = User::factory()->create();
         $durationDate = Carbon::now()->addDays(rand(7, 90));
+        $assetName = $this->faker->word;
 
         return [
             'user_id' => \App\Models\User::factory(),
@@ -43,6 +44,7 @@ class AssetsFactory extends Factory
             'active' => $this->faker->randomElement([false, true]),
             'times_viewed' => $this->faker->numberBetween(0, 100),
             'paid' => $this->faker->boolean,
+            'slug' => Str::slug($assetName . '-' . Str::random(6)),
         ];
     }
 }

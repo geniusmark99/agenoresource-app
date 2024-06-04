@@ -5,15 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Agenoresource') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-        <link rel="stylesheet" href="{{ asset('css/tw.css') }}">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- <link rel="stylesheet" href="{{ asset('css/tw.css') }}"> --}}
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -22,7 +22,7 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-4 px-2 sm:px-6 lg:px-8 flex justify-between items-center">
+                    <div class="max-w-7xl mx-auto py-2 px-2 sm:px-6 lg:px-8 flex justify-between items-center">
                         {{ $header }}
                     </div>
                 </header>
@@ -34,23 +34,171 @@
             </main>
         </div>
 
-        <script src="{{asset('./alpine.js')}}"></script>
-        <script>
-    document.addEventListener('alpine:init', () => {
-      Alpine.data('imageUploader', () => ({
-        images: [],
-        addImages(event) {
-          const fileList = event.target.files;
-          for (let i = 0; i < fileList.length; i++) {
-            this.images.push(fileList[i]);
-          }
-        },
-        removeImage(index) {
-          this.images.splice(index, 1);
+        {{-- <script src="{{asset('./alpine.js')}}"></script> --}}
+    
+<script>
+    function imageUploader() {
+        return {
+            files: [],
+            isDragging: false,
+            successMessage: '',
+            errorMessage: '',
+            dragOver() {
+                this.isDragging = true;
+            },
+            dragLeave() {
+                this.isDragging = false;
+            },
+            handleDrop(event) {
+                this.isDragging = false;
+                const files = Array.from(event.dataTransfer.files);
+                this.addFiles(files);
+            },
+            handleFiles(event) {
+                const files = Array.from(event.target.files);
+                this.addFiles(files);
+            },
+            addFiles(files) {
+                if (this.files.length + files.length > 5) {
+                    this.errorMessage = 'You can only upload a maximum of 5 images.';
+                    return;
+                }
+                this.errorMessage = '';
+                files.forEach(file => {
+                    const url = URL.createObjectURL(file);
+                    this.files.push({ file, url });
+                });
+                this.updateFileInput();
+            },
+            removeFile(index) {
+                this.files.splice(index, 1);
+                this.updateFileInput();
+            },
+            updateFileInput() {
+                const dataTransfer = new DataTransfer();
+                this.files.forEach(file => {
+                    dataTransfer.items.add(file.file);
+                });
+                this.$refs.fileInput.files = dataTransfer.files;
+            },
+            async submitForm(event) {
+                const formData = new FormData();
+                this.files.forEach((fileObj, index) => {
+                    formData.append('images[]', fileObj.file);
+                });
+
+                try {
+                    const response = await fetch('{{ route('upload.images') }}', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    });
+
+                    if (response.ok) {
+                        this.successMessage = 'Images uploaded successfully!';
+                        this.files = [];
+                        this.updateFileInput();
+                    } else {
+                        const errorData = await response.json();
+                        this.errorMessage = errorData.message || 'Something went wrong. Please try again.';
+                    }
+                } catch (error) {
+                    this.errorMessage = 'Something went wrong. Please try again.';
+                }
+            }
         }
-      }));
-    });
-  </script>
+    }
+</script>
+
+<script>
+    function videoUploader() {
+        return {
+            files: [],
+            isDragging: false,
+            successMessage: '',
+            errorMessage: '',
+            warningMessage: '',
+            dragOver() {
+                this.isDragging = true;
+            },
+            dragLeave() {
+                this.isDragging = false;
+            },
+            handleDrop(event) {
+                this.isDragging = false;
+                const files = Array.from(event.dataTransfer.files);
+                this.addFiles(files);
+            },
+            handleFiles(event) {
+                const files = Array.from(event.target.files);
+                this.addFiles(files);
+            },
+            addFiles(files) {
+                if (this.files.length + files.length > 2) {
+                    this.errorMessage = 'You can only upload a maximum of 2 videos.';
+                    setTimeout(() => { this.errorMessage = ''; }, 5000); // Remove error message after 5 seconds
+                    return;
+                }
+                this.errorMessage = '';
+                files.forEach(file => {
+                    const maxSizeInBytes = 50 * 1024 * 1024; // 50MB
+                    if (file.size > maxSizeInBytes) {
+                        this.warningMessage = `Warning: ${file.name} exceeds 50MB and won't be uploaded.`;
+                        setTimeout(() => { this.warningMessage = ''; }, 5000); // Remove warning message after 5 seconds
+                    } else {
+                        const url = URL.createObjectURL(file);
+                        this.files.push({ file, url });
+                    }
+                });
+                this.updateFileInput();
+            },
+            removeFile(index) {
+                this.files.splice(index, 1);
+                this.updateFileInput();
+            },
+            updateFileInput() {
+                const dataTransfer = new DataTransfer();
+                this.files.forEach(file => {
+                    dataTransfer.items.add(file.file);
+                });
+                this.$refs.fileInput.files = dataTransfer.files;
+            },
+            async submitForm(event) {
+                const formData = new FormData();
+                this.files.forEach((fileObj, index) => {
+                    formData.append('videos[]', fileObj.file);
+                });
+
+                try {
+                    const response = await fetch('{{ route('upload.videos') }}', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    });
+
+                    if (response.ok) {
+                        this.successMessage = 'Videos uploaded successfully!';
+                        setTimeout(() => { this.successMessage = ''; }, 5000); // Remove success message after 5 seconds
+                        this.files = [];
+                        this.updateFileInput();
+                    } else {
+                        const errorData = await response.json();
+                        this.errorMessage = errorData.message || 'Something went wrong. Please try again.';
+                        setTimeout(() => { this.errorMessage = ''; }, 5000); // Remove error message after 5 seconds
+                    }
+                } catch (error) {
+                    this.errorMessage = 'Something went wrong. Please try again.';
+                    setTimeout(() => { this.errorMessage = ''; }, 5000); // Remove error message after 5 seconds
+                }
+            }
+        }
+    }
+</script>
+
 
     </body>
 </html>

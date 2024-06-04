@@ -2,28 +2,151 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assets;
+use App\Models\Asset;
+use App\Models\UserAsset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
+
+
+    public function testImage()
+    {
+        return view('test-image-video');
+    }
+
+    public function testUpload(Request $request)
+    {
+        $request->validate([
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'videos.*' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime|max:50240',
+        ]);
+
+        $uploadedFiles = [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('public/images');
+                $uploadedFiles[] = [
+                    'user_id' => auth()->id(),
+                    'file_path' => $path,
+                    'file_type' => 'image',
+                ];
+            }
+        }
+
+        if ($request->hasFile('videos')) {
+            foreach ($request->file('videos') as $video) {
+                $path = $video->store('public/videos');
+                $uploadedFiles[] = [
+                    'user_id' => auth()->id(),
+                    'file_path' => $path,
+                    'file_type' => 'video',
+                ];
+            }
+        }
+
+        UserAsset::insert($uploadedFiles);
+
+        return response()->json(['message' => 'Files uploaded successfully!']);
+    }
+
+    public function testFilter()
+    {
+        $assets = Asset::latest()->get();
+        return view('test-filter-search', compact('assets'));
+    }
+
+    public function showAsset($slug)
+    {
+
+
+        $asset = Asset::with('user')->where('slug', $slug)->firstOrFail();
+        return view('guests.assetsmore', compact('asset'));
+    }
+
+
+    public function searchAsset(Request $request)
+    {
+        $query = Asset::query();
+
+        if ($request->filled('type')) {
+            $query->where('asset_type', $request->input('type'));
+        }
+
+        $assets = $query->get();
+
+        return view('assets.index', compact('assets'));
+    }
+
+
+
+    public function uploadImages(Request $request)
+    {
+
+        $request->validate([
+            'images' => 'required|array|min:1|max:5',
+            'images.*' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        $uploadedFiles = [];
+        foreach ($request->file('images') as $file) {
+            $path = $file->store('images', 'public');
+            $uploadedFiles[] = $path;
+        }
+
+        return redirect()->back()->with('success', 'Images uploaded successfully!');
+    }
+
+    public function  uploadVideo(Request $request)
+    {
+        // Validate the uploaded videos
+        $request->validate([
+            'videos.*' => 'required|mimes:mp4,mov,avi,wmv|max:50000', // Adjust the mime types and max file size as needed
+        ]);
+
+        // Process the uploaded videos
+        $uploadedVideos = [];
+        foreach ($request->file('videos') as $video) {
+            $path = $video->store('videos', 'public');
+            $uploadedVideos[] = $path;
+        }
+
+        // Optionally, perform additional actions like storing video metadata in the database
+
+        return response()->json(['message' => 'Videos uploaded successfully'], 200);
+    }
+
+
+    public function test()
+    {
+        return view('test');
+    }
+
+    public function testVideo()
+    {
+        return view('testVideo');
+    }
+
+
+
     public function home()
     {
         // $assets = Assets::all();
-        $assets = Assets::latest()->get();
+        $assets = Asset::latest()->get();
         return view('guests.home', ['assets' => $assets]);
     }
 
     public function assets()
     {
-        $assets = Assets::with('user')->paginate(15);
+        $assets = Asset::with('user')->paginate(15);
         return view('guests.assets', compact('assets'));
     }
 
-    public function assetsmore($id)
+    public function assetsmore($slug)
     {
-        $asset = Assets::with('user')->findOrFail($id);
+        $asset = Asset::with('user')->where('slug', $slug)->firstOrFail();
         return view('guests.assetsmore', compact('asset'));
     }
 
@@ -45,5 +168,10 @@ class GuestController extends Controller
     public function pricing()
     {
         return view('guests.pricing');
+    }
+
+    public function blog()
+    {
+        return view('guests.blog');
     }
 }

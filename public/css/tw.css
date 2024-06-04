@@ -1128,6 +1128,11 @@ select {
   margin-bottom: 4rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .-mb-px {
   margin-bottom: -1px;
 }
@@ -1493,6 +1498,14 @@ select {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
+.h-\[90vh\] {
+  height: 90vh;
+}
+
 .min-h-full {
   min-height: 100%;
 }
@@ -1628,6 +1641,30 @@ select {
 .w-max {
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-\[500px\] {
+  width: 500px;
+}
+
+.w-\[250px\] {
+  width: 250px;
+}
+
+.w-\[270px\] {
+  width: 270px;
+}
+
+.w-9\/12 {
+  width: 75%;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.w-\[30\%\] {
+  width: 30%;
 }
 
 .min-w-0 {
@@ -2106,6 +2143,10 @@ select {
   row-gap: 1.5rem;
 }
 
+.gap-y-10 {
+  row-gap: 2.5rem;
+}
+
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -2550,6 +2591,11 @@ select {
 
 .bg-white\/60 {
   background-color: rgb(255 255 255 / 0.6);
+}
+
+.bg-red-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .bg-\[url\(\'https\:\/\/preline\.co\/assets\/svg\/examples\/abstract-1\.svg\'\)\] {
@@ -3013,6 +3059,10 @@ select {
 
 .leading-tight {
   line-height: 1.25;
+}
+
+.leading-10 {
+  line-height: 2.5rem;
 }
 
 .tracking-tight {
@@ -5162,8 +5212,16 @@ select {
     width: 66.666667%;
   }
 
+  .md\:w-\[350px\] {
+    width: 350px;
+  }
+
   .md\:max-w-full {
     max-width: 100%;
+  }
+
+  .md\:max-w-md {
+    max-width: 28rem;
   }
 
   .md\:columns-\[--cols-md\] {
@@ -5315,6 +5373,10 @@ select {
     display: block;
   }
 
+  .lg\:flex {
+    display: flex;
+  }
+
   .lg\:inline-grid {
     display: inline-grid;
   }
@@ -5372,12 +5434,24 @@ select {
     width: 100%;
   }
 
+  .lg\:w-\[400px\] {
+    width: 400px;
+  }
+
+  .lg\:w-\[70\%\] {
+    width: 70%;
+  }
+
   .lg\:max-w-7xl {
     max-width: 80rem;
   }
 
   .lg\:max-w-screen-xl {
     max-width: 1280px;
+  }
+
+  .lg\:max-w-lg {
+    max-width: 32rem;
   }
 
   .lg\:columns-\[--cols-lg\] {
@@ -5476,6 +5550,11 @@ select {
     padding-right: 0px;
   }
 
+  .lg\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
   .lg\:px-28 {
     padding-left: 7rem;
     padding-right: 7rem;
@@ -5567,6 +5646,11 @@ select {
   .lg\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .lg\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .lg\:font-normal {

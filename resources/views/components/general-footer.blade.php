@@ -20,7 +20,7 @@
           <h4 class="text-xs font-semibold text-gray-900 uppercase dark:text-gray-100">Product</h4>
   
           <div class="mt-3 grid space-y-3 text-sm">
-            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Pricing</a></p>
+            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('pricing')}}">Pricing</a></p>
           </div>
         </div>
         <!-- End Col -->
@@ -29,8 +29,8 @@
           <h4 class="text-xs font-semibold text-gray-900 uppercase dark:text-gray-100">Company</h4>
   
           <div class="mt-3 grid space-y-3 text-sm">
-            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">About us</a></p>
-            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Blog</a></p>
+            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('about')}}">About us</a></p>
+            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('blog')}}">Blog</a></p>
             <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Customers</a></p>
           </div>
         </div>
@@ -95,15 +95,15 @@
             <!-- End Language Dropdown -->
   
             <div class="space-x-4 text-sm ms-4">
-              <a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Terms</a>
-              <a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Privacy</a>
+              <a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('terms')}}">Terms</a>
+              <a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('privacy')}}">Privacy</a>
             </div>
           </div>
   
           <div class="flex justify-between items-center">
             <div class="mt-3 sm:hidden">
               <a class="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">Brand</a>
-              <p class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400">© 2022 Preline.</p>
+              <p class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400">© {{date('Y')}} Agenoresources</p>
             </div>
   
             <!-- Social Brands -->

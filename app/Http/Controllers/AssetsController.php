@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assets;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 
 class AssetsController extends Controller
@@ -39,10 +39,16 @@ class AssetsController extends Controller
         //
     }
 
+    // public function show($slug)
+    // {
+    //     $asset = Assets::with('user')->where('slug', $slug)->firstOrFail();
+    //     return view('assets.show', compact('asset'));
+    // }
+
     /**
      * Display the specified resource.
      */
-    public function show(Assets $assets)
+    public function show(Asset $assets)
     {
         //
     }
@@ -50,7 +56,7 @@ class AssetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Assets $assets)
+    public function edit(Asset $assets)
     {
         //
     }
@@ -58,7 +64,7 @@ class AssetsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Assets $assets)
+    public function update(Request $request, Asset $assets)
     {
         //
     }
@@ -66,7 +72,7 @@ class AssetsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Assets $assets)
+    public function destroy(Asset $assets)
     {
         //
     }

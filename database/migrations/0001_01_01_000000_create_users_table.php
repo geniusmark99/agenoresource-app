@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
-            $table->string('name');
-            $table->string('lastname')->nullable();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->enum('account_type', ['seller', 'leaser', 'partner']);
             $table->string('email')->unique();
             $table->string('phone_number')->nullable();
             $table->string('profile_pics')->nullable();

@@ -24,10 +24,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->firstName(),
-            'uuid' => 'E' . substr(str_shuffle('0123456789'), 0, 6),
+            'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
+            'uuid' => 'E' . substr(str_shuffle('0123456789'), 0, 6),
             'email' => fake()->unique()->safeEmail(),
+            'account_type' => fake()->randomElement(['seller', 'leaser', 'partner']),
             'phone_number' => fake()->unique()->phoneNumber(),
             'profile_pics' => fake()->imageUrl(200, 200),
             'email_verified_at' => now(),

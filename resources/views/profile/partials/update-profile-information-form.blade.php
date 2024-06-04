@@ -18,12 +18,21 @@
         @method('patch')
 <div class="grid grid-cols-1 lg:grid-cols-2 w-full lg:w-[1000px] gap-y-4 lg:gap-x-10">
 <div class="w-full flex flex-col gap-y-4">
+  <div>
+    <x-input-label for="uuid" :value="__('Your ID')" />
+    <x-text-input id="uuid" name="uuid" type="text" class="mt-1 block w-full" :value="old('uuid', $user->uuid)" required autofocus autocomplete="name" disabled />
+</div>
+        <div>
+            <x-input-label for="firstname" :value="__('Firstname')" />
+            <x-text-input id="firstname" name="firstname" type="text" class="mt-1 block w-full" :value="old('firstname', $user->firstname)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('firstname')" />
+        </div>
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
+          <x-input-label for="lastname" :value="__('Lastname')" />
+          <x-text-input id="lastname" name="lastname" type="text" class="mt-1 block w-full" :value="old('lastname', $user->lastname)" required autofocus autocomplete="name" />
+          <x-input-error class="mt-2" :messages="$errors->get('lastname')" />
+      </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -48,6 +57,19 @@
                 </div>
             @endif
         </div>
+
+
+        <div class="mt-4">
+          <label for="account_type" class="block text-sm font-medium text-gray-700">Account Type</label>
+          <select id="account_type" name="account_type" class="mt-1 block w-full py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <option  :value="old('account_type', $user->account_type)>{{ $user->account_type }}</option>
+              <option value="seller">Seller</option>
+              <option value="leaser">Leaser</option>
+              <option value="partner">Partner</option>
+          </select>
+          <x-input-error :messages="$errors->get('account_type')" class="mt-2" />
+
+      </div>
 </div>
 
 <div class="rounded-sm border border-gray-300 bg-white shadow-default dark:border-gray-700 dark:bg-gray-900">
@@ -56,11 +78,27 @@
         Your Photo
       </h3>
     </div>
-<div class="p-7">
-    <form action="#">
+<div class="p-7" 
+  x-data="{ 
+  previewUrl: './images/user-profile.svg',
+  updatePreview(event) {
+  const file = event.target.files[0];
+  if (file) {
+  this.previewUrl = URL.createObjectURL(file);
+  }
+  },
+  clearPreview() {
+  this.previewUrl = 'https://via.placeholder.com/128';
+  this.$refs.fileInput.value = '';
+  }
+  }" 
+>
       <div class="mb-4 flex items-center gap-3">
         <div class="h-14 w-14 rounded-full">
-          <img src="{{ asset('./images/users-profile-pic.png') }}" alt="User">
+          <img 
+          :src="previewUrl" 
+          
+          alt="User">
         </div>
         <div>
           <span class="mb-1.5 font-medium text-black dark:text-white">Edit your photo</span>
@@ -76,8 +114,14 @@
       </div>
 
     
-      <div id="FileUpload" class="relative mb-5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-blue-600 bg-gray py-4 px-4 bg-blue-400/5 dark:bg-blue-500/5 sm:py-7.5">
-        <input type="file" name="profile_pics" accept="image/*" class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none">
+      <div id="FileUpload" 
+   
+      class="relative mb-5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-blue-600 bg-gray py-4 px-4 bg-blue-400/5 dark:bg-blue-500/5 sm:py-7.5"
+      
+      >
+        <input type="file" name="profile_pics" accept="image/*" 
+        x-ref="fileInput" @change="updatePreview"
+        class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none">
         <div class="flex flex-col items-center justify-center space-y-3 dark:text-gray-200 font-thin">
           <span class="flex h-10 w-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-gray-500 dark:bg-gray-800">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,23 +138,23 @@
             SVG, PNG, JPG or GIF
           </p>
           <p class="text-sm font-medium">
-            (max, 800 X 800px)
+            (max, 800px by 800px)
           </p>
         </div>
  
 
+    
+    </div>
       <div class="flex justify-end gap-4 mt-4">
-        <button class="flex justify-center rounded border border-gray-400 t py-2 px-6 font-medium text-black hover:shadow-md dark:border-gray-600 dark:text-white" type="submit">
+        <button @click="clearPreview" class="flex justify-center rounded border border-gray-400 t py-2 px-6 font-medium text-black hover:shadow-md dark:border-gray-600 dark:text-white" >
           Cancel
         </button>
         <button class="flex justify-center rounded bg-blue-600 py-2 px-6 font-medium text-white hover:bg-opacity-90" type="submit">
           Save
         </button>
       </div>
-    </div>
 </div>
 
-    </form>
   </div>
 
 </div>

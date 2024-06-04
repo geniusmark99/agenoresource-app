@@ -1,5 +1,5 @@
 <!-- ========== HEADER ========== -->
-<header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-ageno dark:bg-ageno-dark shadow-sm text-sm py-3 sm:py-0 dark:border-gray-700">
+<header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-gradient-to-tr from-ageno to-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0 dark:border-gray-700 ">
     <nav class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
       <div class="flex items-center justify-between">
         <a class="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">
@@ -40,7 +40,8 @@
                 {{ __('Blog') }}
             </x-general-nav-link>
 
-            <x-general-nav-link :href="route('assets')" :active="request()->routeIs('assets')">
+            <x-general-nav-link :href="route('assets')" 
+            :active="request()->routeIs('assets') || request()->routeIs('assets.*')"   >
                 {{ __('Assets') }}
             </x-general-nav-link>
 
@@ -52,21 +53,21 @@
               {{ __('Pricing') }}
           </x-general-nav-link>
 
-            <button class="flex bg-amber-500 text-white justify-between rounded-sm gap-x-4 py-1 px-2 items-center">
-              Post a assets
+            <a href="{{ route('post.assets') }}" class="flex bg-amber-500 text-white justify-between rounded-sm gap-x-4 py-1 px-2 items-center">
+              Post an asset
               <span class="bg-white text-ageno px-2 py-1 rounded-sm">Free</span>
-            </button>
+            </a>
 
         
   
-          <div class="flex items-center gap-x-10 sm:ms-auto justify-between">
-            <div class="flex gap-x-2">
+          <div class="flex items-center gap-x-10 sm:ms-auto justify-between mb-4 lg:mb-0">
+            <div class="flex gap-x-2 ">
             @auth(  )
 <form method="POST" action="{{ route('logout') }}">
   @csrf
   <a class='block w-full px-4 py-2 text-start text-sm leading-5 text-white dark:text-gray-300
-  bg-ageno-2 rounded-md cursor-pointer hover:text-ageno-2 
-  hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 
+  bg-slate-900 rounded-md cursor-pointer 
+  hover:bg-slate-700 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 
   dark:focus:bg-gray-800 transition duration-150 ease-in-out'
     href="route('logout')"
   onclick="event.preventDefault();

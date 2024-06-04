@@ -4,7 +4,7 @@
     </div>
     <div class="p-4 md:p-6">
       <span class="block mb-1 text-xs font-semibold uppercase text-ageno-2">
-        Asset type: {{ $type }}
+        Asset type: {{ $asset->type }}
       </span>
       <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-300 dark:hover:text-white">
         Description:  {{ $description }}

@@ -15,7 +15,7 @@ Check to see latest Notification(s)
 <div class="flex flex-col justify-center items-center">
 
 <img src="{{ asset('./images/no-notification.svg') }}" alt="" class="size-60">
-<p class="dark:text-gray-400">No notication</p>
+<p class="dark:text-gray-400 text-gray-500 text-2xl">No notification</p>
 </div>
 
 </div>

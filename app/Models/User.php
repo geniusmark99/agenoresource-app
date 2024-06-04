@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use Filament\Panel;
-use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Assets;
+use App\Models\Asset;
 
-class User extends Authenticatable implements MustVerifyEmail, FilamentUser
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, HasRoles;
 
@@ -22,7 +20,9 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
      */
     protected $fillable = [
         'uuid',
-        'name',
+        'firstname',
+        'lastname',
+        'account_type',
         'email',
         'password',
         'email_verified_at'
@@ -45,7 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 
     public function assets()
     {
-        return $this->hasMany(Assets::class);
+        return $this->hasMany(Asset::class);
     }
 
 
@@ -71,17 +71,4 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
             'password' => 'hashed',
         ];
     }
-
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return str_ends_with($this->email, 'markthavalor@gmail.com') && $this->hasVerifiedEmail();
-    }
 }
-
-
-/*
-
-
-    youtube time: 43:15
-*/

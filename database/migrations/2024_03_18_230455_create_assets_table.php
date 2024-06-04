@@ -37,6 +37,7 @@ return new class extends Migration
             $table->integer('times_viewed')->default(0);
             $table->boolean('paid'); // restricted
             $table->boolean('active')->default(false); // restricted
+            $table->string('slug')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

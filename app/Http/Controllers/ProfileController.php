@@ -7,7 +7,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\AssetRequest;
 use Illuminate\View\View;
+use App\Models\Asset;
 
 class ProfileController extends Controller
 {
@@ -62,6 +64,23 @@ class ProfileController extends Controller
     {
         return view('users.post-assets');
     }
+
+    public function postSaleAsset(AssetRequest $request)
+    {
+        $validated = $request->validated();
+
+
+        $uploadedFiles = [];
+        foreach ($request->file('pictures') as $file) {
+            $path = $file->store('pictures', 'public');
+            $uploadedFiles[] = $path;
+        }
+
+        $asset = Asset::create($validated);
+        return redirect()->route('post.assets', $asset->slug)
+            ->with('success', 'Asset created successfully.');
+    }
+
 
     public function notification()
     {
