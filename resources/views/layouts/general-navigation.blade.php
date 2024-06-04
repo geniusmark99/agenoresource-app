@@ -1,6 +1,7 @@
 <!-- ========== HEADER ========== -->
 <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-gradient-to-tr from-ageno to-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0 dark:border-gray-700 ">
-    <nav class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
+  
+  <nav class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
       <div class="flex items-center justify-between">
         <a class="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">
             <x-application-logo/>
@@ -101,4 +102,5 @@
       </div>
     </nav>
   </header>
+
   <!-- ========== END HEADER ========== -->

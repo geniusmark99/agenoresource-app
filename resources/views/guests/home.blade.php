@@ -7,6 +7,17 @@ style="background-image: url('./images/hero-one.jpg');"
 
 
 >
+
+  <!-- Announcement Banner -->
+  <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto  absolute top-2">
+    <div class="bg-blue-600 bg-opacity-70 bg-[url('https://preline.co/assets/svg/examples/abstract-1.svg')] bg-no-repeat bg-cover bg-center p-4 rounded-lg text-center">
+      <p class="me-2 inline-block text-white text-sm lg:text-xl font-semibold">
+        Site is still under development, coming soon...
+      </p>
+     
+    </div>
+  </div>
+  <!-- End Announcement Banner -->
 <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24">
 <div class="text-center">
 <h1 class="text-5xl sm:text-6xl font-bold text-gray-200 dark:text-gray-100">
