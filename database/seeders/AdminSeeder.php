@@ -15,9 +15,9 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         Admin::create([
-            'name' => 'Mark Okechukwu',
-            'email' => 'markthavalor@gmai.com',
-            'password' => Hash::make('password'),
+            'name' => 'Agenoresource',
+            'email' => 'agenoresource@gmai.com',
+            'password' => Hash::make('Agenoresource4Life'),
         ]);
     }
 }

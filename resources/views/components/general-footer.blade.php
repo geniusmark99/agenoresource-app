@@ -11,7 +11,7 @@
       <!-- Grid -->
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10">
         <div class="col-span-full hidden lg:col-span-1 lg:block">
-         <x-application-logo/>
+         <x-application-logo class="size-16"/>
           <p class="mt-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400">© {{ date('Y') }} Ageno Resources.</p>
         </div>
         <!-- End Col -->
@@ -31,7 +31,7 @@
           <div class="mt-3 grid space-y-3 text-sm">
             <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('about')}}">About us</a></p>
             <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('blog')}}">Blog</a></p>
-            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Customers</a></p>
+            <p><a class="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{ route('contact') }}">Contact</a></p>
           </div>
         </div>
         <!-- End Col -->

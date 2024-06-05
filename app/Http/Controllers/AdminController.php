@@ -72,6 +72,16 @@ class AdminController extends Controller
         return view('admin.active-user');
     }
 
+    public function activatedUser()
+    {
+        return view('admin.activated-user');
+    }
+
+    public function blockedUser()
+    {
+        return view('admin.blocked-user');
+    }
+
 
     public function   unactiveUsers()
     {
@@ -83,7 +93,10 @@ class AdminController extends Controller
 
     public function profile()
     {
-        return view('admin.profile');
+
+        $user = Auth::guard('admin')->user();
+
+        return view('admin.profile', compact('user'));
     }
 
     public function message()

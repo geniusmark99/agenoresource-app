@@ -9,9 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin: </title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    {{-- @vite --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/tw.css') }}"> --}}
 </head>
 <body 
 
@@ -20,7 +17,6 @@
     <main class="h-screen">
         {{ $slot }}
     </main>
-<script src="{{ asset('js/alpine.js') }}"></script>  
 <script>
        function darkMode() {
             return {

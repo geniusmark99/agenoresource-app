@@ -29,6 +29,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/user/unactive', [AdminController::class, 'unactiveUsers'])
             ->name('admin.unactive.users');
 
+        Route::get('/user/activated', [AdminController::class, 'activatedUser'])
+            ->name('admin.activated.users');
+        Route::get('/user/blocked', [AdminController::class, 'blockedUser'])
+            ->name('admin.blocked.users');
+
         Route::get('/profile', [AdminController::class, 'profile'])
             ->name('admin.profile');
 

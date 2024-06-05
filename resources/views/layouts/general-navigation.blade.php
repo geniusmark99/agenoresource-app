@@ -1,10 +1,10 @@
 <!-- ========== HEADER ========== -->
-<header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-gradient-to-tr from-ageno to-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0 dark:border-gray-700 ">
+<header class="flex flex-wrap sm:justify-start border-b border-gray-200/50 sm:flex-nowrap z-50 w-full bg-gradient-to-tr from-ageno to-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0 dark:border-gray-700 ">
   
   <nav class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
       <div class="flex items-center justify-between">
         <a class="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">
-            <x-application-logo/>
+            <x-application-logo class="size-16"/>
         </a>
         <div class="sm:hidden">
           <button  @click="sidebarOpen = !sidebarOpen"  type="button" class="size-9 rounded-full flex justify-center items-center text-sm font-semibol border border-gray-200 text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
@@ -50,9 +50,9 @@
                 {{ __('contact') }}
             </x-general-nav-link>
 
-            <x-general-nav-link :href="route('pricing')" :active="request()->routeIs('pricing')">
+            {{-- <x-general-nav-link :href="route('pricing')" :active="request()->routeIs('pricing')">
               {{ __('Pricing') }}
-          </x-general-nav-link>
+          </x-general-nav-link> --}} 
 
             <a href="{{ route('post.assets') }}" class="flex bg-amber-500 text-white justify-between rounded-sm gap-x-4 py-1 px-2 items-center">
               Post an asset

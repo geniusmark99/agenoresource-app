@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('lastname');
             $table->enum('account_type', ['seller', 'leaser', 'partner']);
             $table->string('email')->unique();
-            $table->string('phone_number')->nullable();
+            $table->string('phone_number')->unique();
             $table->string('profile_pics')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -1,30 +1,31 @@
 @extends('layouts.general')
 @section('app-title','Home')
 @section('app-content')
+<style>
+
+.bg-image-gradient {
+      background-image: url('./images/hero-one.jpg'), linear-gradient(to right, rgba(59, 130, 246, 0.5), rgba(17, 130, 53, 0.5));
+      background-blend-mode: hard-light;
+    }
+</style>
 <!-- Hero -->
-<div class="relative bg-no-repeat bg-cover bg-center hero-bg h-[70vh] flex justify-center items-center" 
-style="background-image: url('./images/hero-one.jpg');" 
+<div class="relative bg-no-repeat bg-image-gradient bg-cover bg-center h-[70vh] flex justify-center items-center" 
 
 
 >
 
   <!-- Announcement Banner -->
   <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto  absolute top-2">
-    <div class="bg-blue-600 bg-opacity-70 bg-[url('https://preline.co/assets/svg/examples/abstract-1.svg')] bg-no-repeat bg-cover bg-center p-4 rounded-lg text-center">
-      <p class="me-2 inline-block text-white text-sm lg:text-xl font-semibold">
-        Site is still under development, coming soon...
-      </p>
-     
-    </div>
+    <h1 class="text-2xl lg:text-5xl font-extrabold text-center"><span class="text-transparent bg-gradient-to-br bg-clip-text from-gray-300 via-slate-300 to-white dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500"> Coming </span><span class="text-transparent bg-gradient-to-tr bg-clip-text from-white to-gray-400"> Soon... </span></h1>
   </div>
   <!-- End Announcement Banner -->
 <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24">
 <div class="text-center">
-<h1 class="text-5xl sm:text-6xl font-bold text-gray-200 dark:text-gray-100">
+<h1 class="text-5xl sm:text-6xl font-bold text-white dark:text-gray-100 drop-shadow-2xl">
 Ageno resources
 </h1>
 
-<p class="mt-3 lg:text-xl font-semibold text-gray-200 dark:text-gray-100">
+<p class="mt-3 lg:text-xl font-semibold text-white drop-shadow-lg dark:text-gray-100">
 Post mining assets and get insights from industry experts.
 </p> 
 
@@ -39,6 +40,8 @@ class="flex justify-center items-center "
   <button @click="handleClick('buy-search', 'buy')" :class="{ 'active': activeElement === 'buy-search' }" class="ageno-btn"><a>Buy</a></button>
   <button @click="handleClick('sale-search', 'sell')" :class="{ 'active': activeElement === 'sale-search' }"  class="ageno-btn"><a>Sale</a></button>
   <button @click="handleClick('lease-search', 'lease')" :class="{ 'active': activeElement === 'lease-search' }" class="ageno-btn"><a>Lease</a></button>
+  <a  class="ageno-btn text-sm">Partners</a>
+
   </div>
 
   <div class="w-full flex">
@@ -93,14 +96,14 @@ class="flex justify-center items-center "
 <h2 class="text-black dark:text-gray-400 font-semibold text-xl lg:text-2xl">Trusted by top Mining Brand and enterprise</h2>
 
 <div class="grid grid-cols-1 mt-10 gap-4 lg:flex justify-center lg:justify-between">
-<div class="w-full h-20 flex justify-center items-center">
-  <img src="{{ asset('./images/nigeria-geology-logo.jpeg') }}" alt="" class="h-24">
+<div class="w-full h-28 flex justify-center items-center border dark:border-gray-700 shadow-md shadow-green-600/20 dark:shadow-ageno/10 rounded-md py-4">
+  <img src="{{ asset('./images/nigeria-geology-logo.jpeg') }}" alt="" class="h-24" draggable="false">
 </div>
-<div class="w-full h-20 flex justify-center items-center">
-  <img src="{{ asset('./images/nigeria-mining-logo.jpeg') }}" alt="" class="h-24">
+<div class="w-full h-28 flex justify-center items-center border dark:border-gray-700 shadow-md shadow-green-600/20 dark:shadow-ageno/10 rounded-md py-4">
+  <img src="{{ asset('./images/nigeria-mining-logo.jpeg') }}" alt="" class="h-24" draggable="false">
 </div>
-<div class="w-full h-20 flex justify-center items-center">
-  <img src="{{ asset('./images/mine-steel-logo.jpeg') }}" alt="" class="h-24">
+<div class="w-full h-28 flex justify-center items-center border dark:border-gray-700 shadow-md shadow-green-600/20 dark:shadow-ageno/10 rounded-md py-4">
+  <img src="{{ asset('./images/mine-steel-logo.jpeg') }}" alt="" class="h-24" draggable="false">
 </div>
 
 </div>
@@ -113,7 +116,9 @@ class="flex justify-center items-center "
 </div>
 <!-- End Clients -->
 
-<!-- Card Blog -->
+
+
+
 <div class="flex flex-col mt-4">
 <h3 class=" px-4 sm:px-6 lg:px-28 text-left text-ageno lg:text-3xl font-bold dark:text-white">Featured Latest assets</h3>
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

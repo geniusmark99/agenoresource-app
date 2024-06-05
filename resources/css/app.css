@@ -14,11 +14,11 @@
 
 
 .hero-bg {
-@apply bg-gradient-to-r from-indigo-500 from-70% to-sky-500 to-30%  
+@apply bg-gradient-to-r from-indigo-500/50 from-70% to-green-500 to-80%  
 }
 
 .ageno-btn {
-@apply px-6 py-2 font-medium rounded-md tracking-wide w-full text-ageno dark:text-white capitalize transition-colors duration-300 transform bg-white dark:bg-ageno hover:bg-ageno hover:text-white
+@apply px-4 py-1.5 md:py-2 md:px-6 text-xs sm:text-sm font-medium rounded-md tracking-wide w-full text-ageno dark:text-white capitalize transition-colors duration-300 transform bg-white dark:bg-ageno hover:bg-ageno hover:text-white
 }
 
 .ageno-btn.active {
