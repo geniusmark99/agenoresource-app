@@ -22,15 +22,16 @@ Route::controller(GuestController::class)->group(function () {
     Route::get('/assets/{slug}', 'showAsset')->name('assets.show');
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/pricing', 'pricing')->name('pricing');
-    Route::view('/pricing-testing','pricing-testing');
-    Route::view('/term-and-conditions','guests.term-conditions')->name('terms');
-    Route::view('/privacy','guests.privacy')->name('privacy');
+    Route::view('/pricing-testing', 'pricing-testing');
+    Route::view('/term-and-conditions', 'guests.term-conditions')->name('terms');
+    Route::view('/privacy', 'guests.privacy')->name('privacy');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/post-assets', [ProfileController::class, 'postAsset'])->name('post.assets');
+    Route::get('/choose-plan', [ProfileController::class, 'choosePlan'])->name('user.plan');
     Route::post('/post-sale-assets', [ProfileController::class, 'postSaleAsset'])->name('post.sale.assets');
     Route::get('/notification', [ProfileController::class, 'notification'])->name('user.notification');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

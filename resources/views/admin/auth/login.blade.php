@@ -3,8 +3,8 @@
 
     <div class=" w-full justify-center items-center flex">
 
-<section class="mx-6 lg:mx-10 bg-gray-100/50 p-4 rounded-xl border shadow-md w-full lg:w-[400px] flex justify-center flex-col gap-y-10 ">
-    <h1 class="text-center text-2xl font-bold">Admin</h1>
+<section class="mx-6 lg:mx-10 bg-gray-100/50  dark:bg-neutral-800 dark:border-neutral-700 p-4 rounded-xl border shadow-md w-full lg:w-[400px] flex justify-center flex-col gap-y-10 ">
+    <h1 class="text-center text-2xl font-bold dark:text-white">Admin</h1>
 <form action="{{ route('admin.login') }}" method="POST" class="flex flex-col gap-y-4" >
 @csrf
 
@@ -13,7 +13,7 @@
     <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="name">
     Name
     </label>
-    <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" 
+    <input class="border-gray-300 dark:border-gray-700 dark:bg-neutral-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" 
     id="name" type="text" name="name" required="required" autofocus="autofocus">
     </div>
 
@@ -23,7 +23,7 @@
 Email
 </label>
 <input
-class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" 
+class="border-gray-300 dark:border-gray-700 dark:bg-neutral-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" 
 id="email" type="email" name="email" required="required" autofocus="autofocus">
 </div>
 
@@ -34,7 +34,7 @@ Password
 </label>
 
 <input 
-class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+class="border-gray-300 dark:border-gray-700 dark:bg-neutral-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
  id="password" type="password" name="password" required="required" autocomplete="current-password">
 
 </div>

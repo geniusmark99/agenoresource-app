@@ -91,13 +91,13 @@
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
         <div  class="mb-4">
         <x-input-label for="asset_type" :value="__('Asset Type')" />
-        <x-text-input id="asset_type" name="asset_type" type="text" class="mt-1 block w-full" value="sales"   disabled autofocus />
+        <x-text-input id="asset_type" name="asset_type" type="text" class="mt-1 block w-full dark:bg-gray-900" value="sales"   disabled autofocus />
         {{-- <x-input-error class="mt-2" :messages="$errors->get('name')" /> --}}
         </div>
 
         <div class="mb-4">
         <x-input-label for="asset_type" :value="__('Asset Name')" />
-        <x-text-input id="asset_type" name="asset_name" type="text" class="mt-1 block w-full" :value="old('asset_name')" autofocus />
+        <x-text-input id="asset_type" name="asset_name" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_name')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('asset_name')" />
         </div>
     </div>
@@ -106,13 +106,13 @@
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
         <div  class="mb-4">
         <x-input-label for="technical_report" :value="__('Technical Report (URL)')" />
-        <x-text-input id="technical_report" name="technical_report" type="text" class="mt-1 block w-full" :value="old('technical_report')" autofocus />
+        <x-text-input id="technical_report" name="technical_report" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('technical_report')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('technical_report')" />
         </div>
 
         <div class="mb-4">
         <x-input-label for="asset_information" :value="__('Asset Information')" />
-        <x-text-input id="asset_information" name="asset_information" type="text" class="mt-1 block w-full" :value="old('asset_information')" autofocus />
+        <x-text-input id="asset_information" name="asset_information" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_information')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('asset_information')" />
         </div>
     </div>
@@ -120,14 +120,14 @@
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
       <div  class="mb-4">
       <x-input-label for="asset_location_details" :value="__('Assets Location Details')" />
-      <x-text-input id="asset_location_details" name="asset_location_details" type="text" class="mt-1 block w-full" :value="old('asset_location_details')" autofocus />
+      <x-text-input id="asset_location_details" name="asset_location_details" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_location_details')" autofocus />
       <x-input-error class="mt-2" :messages="$errors->get('asset_location_details')" />
      
     </div>
 
       <div class="mb-4">
       <x-input-label for="technical_report" :value="__('Geological Location')" />
-      <x-text-input id="technical_report" name="geological_location" type="text" class="mt-1 block w-full" :value="old('geological_location')" autofocus />
+      <x-text-input id="technical_report" name="geological_location" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('geological_location')" autofocus />
       <x-input-error class="mt-2" :messages="$errors->get('geological_location')" />
       </div>
   </div>
@@ -161,7 +161,7 @@
 
         <div class="mb-4">
         <x-input-label for="coordinates" :value="__('Coordinates')" />
-        <x-text-input id="coordinates" name="coordinates" type="text" class="mt-1 block w-full"  autofocus />
+        <x-text-input id="coordinates" name="coordinates" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('coordinates')" />
         </div>
     </div>
@@ -171,14 +171,14 @@
       <div  class="mb-4">
       <x-input-label for="reserve_deposit" :value="__('Reserve Deposit')" />
       <x-text-input id="reserve_deposit" name="reserve_deposit" type="text"
-       class="mt-1 block w-full" :value="old('reserve_deposit')" autofocus />
+       class="mt-1 block w-full dark:bg-gray-900" :value="old('reserve_deposit')" autofocus />
        <x-input-error class="mt-2" :messages="$errors->get('reserve_deposit')" />
 
       </div>
 
       <div class="mb-4">
       <x-input-label for="jorc_report" :value="__('JORC Report')" />
-      <x-text-input id="jorc_report" name="jorc_report" type="text" class="mt-1 block w-full"  autofocus />
+      <x-text-input id="jorc_report" name="jorc_report" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
       <x-input-error class="mt-2" :messages="$errors->get('jorc_report')" />
       </div>
   </div>
@@ -186,12 +186,12 @@
   <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
     <div  class="mb-4">
     <x-input-label for="opportunity_type" :value="__('Opportunity Type')" />
-    <x-text-input value="{{old('opportunity_type')}}" id="opportunity_type"  name="opportunity_type" type="text" class="mt-1 block w-full"  autofocus />
+    <x-text-input value="{{old('opportunity_type')}}" id="opportunity_type"  name="opportunity_type" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
     </div>
 
     <div class="mb-4">
     <x-input-label for="geological_location" :value="__('Geological Location')" />
-    <x-text-input id="geological_location" name="geological_location" type="text" class="mt-1 block w-full"  autofocus />
+    <x-text-input id="geological_location" name="geological_location" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
     <x-input-error class="mt-2" :messages="$errors->get('geological_location')" />
     </div>
 </div>
@@ -233,7 +233,7 @@ Kilometre
 
         <div class="mb-4 mt-2">
         <x-input-label for="coordinates" :value="__('Coordinates')" />
-        <x-text-input id="coordinates" name="coordinates" type="text" class="mt-1 block w-full"  autofocus />
+        <x-text-input id="coordinates" name="coordinates" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('coordinates')" />
         </div>
 

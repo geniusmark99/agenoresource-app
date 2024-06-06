@@ -17,14 +17,14 @@
         <!-- Firstame -->
         <div class="relative">
             <x-input-label for="firstname" :value="__('Firstname')" />
-            <x-text-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" autofocus autocomplete="name" />
+            <x-text-input id="firstname" class="dark:bg-gray-900 block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('firstname')" class="mt-2" />
         </div>
 
         <!-- Lastname -->
         <div class="mt-4 lg:mt-0 relative">
             <x-input-label for="lastname" :value="__('Lastname')" />
-            <x-text-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" autofocus autocomplete="name" />
+            <x-text-input id="lastname" class="dark:bg-gray-900 block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
         </div>
 
@@ -47,7 +47,7 @@
             <!-- Email Address -->
             <div class="mt-4 lg:mt-2 relative">
                 <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" autocomplete="username" />
+                <x-text-input id="email" class="dark:bg-gray-900 block mt-1 w-full" type="email" name="email" :value="old('email')" autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
     
@@ -84,7 +84,7 @@
                 <div class="mt-4 relative">
                     <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-text-input id="password" class="dark:bg-gray-900 block mt-1 w-full"
                             type="password"
                             name="password"
                             autocomplete="new-password" />
@@ -96,7 +96,7 @@
         <div class="mt-4 relative">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+            <x-text-input id="password_confirmation" class="dark:bg-gray-900 block mt-1 w-full"
                             type="password"
                             name="password_confirmation" autocomplete="new-password" />
 

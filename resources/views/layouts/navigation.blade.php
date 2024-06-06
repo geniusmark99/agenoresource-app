@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" x-data="{ textToCopy:  '{{Auth::user()->uuid}}',  copied: false }">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -19,6 +19,10 @@
 
                     <x-nav-link :href="route('post.assets')" :active="request()->routeIs('post.assets')">
                         {{ __('Post Assets') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('user.plan')" :active="request()->routeIs('user.plan')">
+                        {{ __('Choose plan') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
@@ -51,13 +55,17 @@
 
                     <x-slot name="content">
 
-                        <div class="hover:bg-gray-100 dark:hover:bg-gray-800 flex justify-between items-center px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800">
+                        <div  class=" flex justify-between items-center px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800">
                       <p>
-                        ID: {{ Auth::user()->uuid }}
+                        ID:&nbsp;<span x-text="textToCopy"></span>
 
                       </p>
-                      <button class="">
-                        <svg class="size-5 fill-gray-500 dark:fill-neutral-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                      <button class="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full size-7 flex justify-center items-center"
+                      title="Copy your ID"
+                      @click="navigator.clipboard.writeText(textToCopy).then(() => copied = true); 
+                      setTimeout(() => copied = false, 2000)"
+                      >
+                        <svg class="size-5 fill-gray-500 dark:fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                             <path d="M24 4C12.972066 4 4 12.972074 4 24C4 35.027926 12.972066 44 24 44C35.027934 44 44 35.027926 44 24C44 12.972074 35.027934 4 24 4 z M 24 7C33.406615 7 41 14.593391 41 24C41 33.406609 33.406615 41 24 41C14.593385 41 7 33.406609 7 24C7 14.593391 14.593385 7 24 7 z M 24 13C20.704135 13 18 15.704135 18 19L18 19.5 A 1.50015 1.50015 0 1 0 21 19.5L21 19C21 17.325865 22.325865 16 24 16C25.674135 16 27 17.325865 27 19C27 21.340909 26.39136 21.634239 25.324219 22.472656C24.790648 22.891865 24.091764 23.375202 23.494141 24.189453C22.896517 25.003704 22.5 26.138742 22.5 27.5 A 1.50015 1.50015 0 1 0 25.5 27.5C25.5 26.646758 25.665983 26.300186 25.912109 25.964844C26.158236 25.629501 26.584352 25.296698 27.175781 24.832031C28.35864 23.902698 30 22.159091 30 19C30 15.704135 27.295865 13 24 13 z M 24 32 A 2 2 0 0 0 24 36 A 2 2 0 0 0 24 32 z" />
                           </svg>
                       </button>
@@ -83,7 +91,11 @@
                 <x-dark-mode-toggle-widget/>
             {{-- <div>Dark mood</div> --}}
 
+
+
             </div>
+
+            <div x-show="copied"  class="text-green-500 ml-2 absolute right-5 top-10  lg:top-[20px] lg:right-[320px]">Copied!</div>
 
 
             <!-- Hamburger -->
@@ -111,6 +123,10 @@
                 {{ __('Post assets') }}
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('user.plan')" :active="request()->routeIs('user.plan')">
+                {{ __('Choose plan') }}
+            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('user.notification')" :active="request()->routeIs('user.notification')">
                 {{ __('Notification') }}
             </x-responsive-nav-link>
@@ -129,8 +145,25 @@
 
             <div class="mt-3 space-y-1">
 
-                <div class=" px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800">
+                <div class="flex justify-start items-center gap-x-10 px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800">
+                  <span>
                     ID: {{ Auth::user()->uuid }}
+
+                  </span>
+<button class="flex items-center gap-x-1 hover:bg-gray-100 dark:hover:bg-gray-900 px-2 py-1 rounded-md" 
+@click="navigator.clipboard.writeText(textToCopy).then(() => copied = true); 
+setTimeout(() => copied = false, 2000)"
+title="Copy your ID"
+>
+    Copy
+    <div class=" rounded-full size-7 flex justify-center items-center">
+      <svg class="size-5 fill-gray-500 dark:fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <path d="M24 4C12.972066 4 4 12.972074 4 24C4 35.027926 12.972066 44 24 44C35.027934 44 44 35.027926 44 24C44 12.972074 35.027934 4 24 4 z M 24 7C33.406615 7 41 14.593391 41 24C41 33.406609 33.406615 41 24 41C14.593385 41 7 33.406609 7 24C7 14.593391 14.593385 7 24 7 z M 24 13C20.704135 13 18 15.704135 18 19L18 19.5 A 1.50015 1.50015 0 1 0 21 19.5L21 19C21 17.325865 22.325865 16 24 16C25.674135 16 27 17.325865 27 19C27 21.340909 26.39136 21.634239 25.324219 22.472656C24.790648 22.891865 24.091764 23.375202 23.494141 24.189453C22.896517 25.003704 22.5 26.138742 22.5 27.5 A 1.50015 1.50015 0 1 0 25.5 27.5C25.5 26.646758 25.665983 26.300186 25.912109 25.964844C26.158236 25.629501 26.584352 25.296698 27.175781 24.832031C28.35864 23.902698 30 22.159091 30 19C30 15.704135 27.295865 13 24 13 z M 24 32 A 2 2 0 0 0 24 36 A 2 2 0 0 0 24 32 z" />
+        </svg>
+    </div>
+</button>
+                 
+
                     </div>
                     
                 <x-responsive-nav-link :href="route('profile.edit')">

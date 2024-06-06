@@ -11,26 +11,26 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    {{-- <form  method="post" action="#">
         @csrf
-    </form>
+    </form> --}}
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6 w-full">
-        @csrf
-        @method('patch')
+    <form action="#" class="mt-6 space-y-6 w-full">
+        {{-- @csrf --}}
+        {{-- @method('patch') --}}
 <div class="grid grid-cols-1 lg:grid-cols-2 w-full lg:w-[1000px] gap-y-4 lg:gap-x-10">
 <div class="w-full flex flex-col gap-y-4">
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-text-input id="name" name="name" type="text" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
 
         <div>
           <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-text-input id="email" name="email" type="email" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" /> 
 
         </div>
@@ -38,7 +38,7 @@
         
         <div>
             <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" :value="old('password', $user->password)" required autofocus autocomplete="name" />
+            <x-text-input id="password" name="password" type="password" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('password', $user->password)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('password')" />
         </div>
 
@@ -46,13 +46,13 @@
         
         <div>
             <x-input-label for="password" :value="__('Confirm Password')" />
-            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" :value="old('password', $user->password)" required autofocus autocomplete="name" />
+            <x-text-input id="password" name="password" type="password" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('password', $user->password)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('password')" />
         </div>
 
 </div>
 
-<div class="rounded-sm border border-gray-300 bg-white shadow-default dark:border-gray-700 dark:bg-gray-900">
+<div class="rounded-sm border border-gray-300 bg-white shadow-default dark:border-gray-700 dark:bg-neutral-800">
     <div class="border-b border-gray-300 py-4 px-7 dark:border-gray-700">
       <h3 class="font-medium text-black dark:text-white">
         Your Photo

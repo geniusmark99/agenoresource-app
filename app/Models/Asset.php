@@ -27,6 +27,12 @@ class Asset extends Model
         return $this->belongsTo(User::class);
     }
 
+
+    public function getActiveStatusAttribute()
+    {
+        return $this->user ? $this->user->active : false;
+    }
+
     protected function casts(): array
     {
         return [

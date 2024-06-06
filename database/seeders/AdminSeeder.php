@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     {
         Admin::create([
             'name' => 'Agenoresource',
-            'email' => 'agenoresource@gmai.com',
+            'email' => 'agenoresource@gmail.com',
             'password' => Hash::make('Agenoresource4Life'),
         ]);
     }

@@ -11,7 +11,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body 
-
+class="dark:bg-neutral-900"
+x-cloak
   x-data="{ sidebarOpen: false }" @click.outside="sidebarOpen = false"
 >
     <main class="h-screen">

@@ -14,19 +14,12 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            // UserSeeder::class,
-            // AssetSeeder::class,
-            // AdminSeeder::class,
+            UserSeeder::class,
+            AssetSeeder::class,
+            AdminSeeder::class,
         ]);
 
-        // User::factory(10)->create();
-        // Assets::factory(10)->create();
 
-
-        // $adminUser =  User::factory()->create([
-        //     'name' => 'Admin',
-        //     'password' => bcrypt('admin123')
-        // ]);
 
 
 

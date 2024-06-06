@@ -20,23 +20,23 @@
 <div class="w-full flex flex-col gap-y-4">
   <div>
     <x-input-label for="uuid" :value="__('Your ID')" />
-    <x-text-input id="uuid" name="uuid" type="text" class="mt-1 block w-full" :value="old('uuid', $user->uuid)" required autofocus autocomplete="name" disabled />
+    <x-text-input id="uuid" name="uuid" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('uuid', $user->uuid)" required autofocus autocomplete="name" disabled />
 </div>
         <div>
             <x-input-label for="firstname" :value="__('Firstname')" />
-            <x-text-input id="firstname" name="firstname" type="text" class="mt-1 block w-full" :value="old('firstname', $user->firstname)" required autofocus autocomplete="name" />
+            <x-text-input id="firstname" name="firstname" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('firstname', $user->firstname)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('firstname')" />
         </div>
 
         <div>
           <x-input-label for="lastname" :value="__('Lastname')" />
-          <x-text-input id="lastname" name="lastname" type="text" class="mt-1 block w-full" :value="old('lastname', $user->lastname)" required autofocus autocomplete="name" />
+          <x-text-input id="lastname" name="lastname" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('lastname', $user->lastname)" required autofocus autocomplete="name" />
           <x-input-error class="mt-2" :messages="$errors->get('lastname')" />
       </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full dark:bg-gray-900" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -60,8 +60,11 @@
 
 
         <div class="mt-4">
-          <label for="account_type" class="block text-sm font-medium text-gray-700">Account Type</label>
-          <select id="account_type" name="account_type" class="mt-1 block w-full py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <label for="account_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Account Type</label>
+          <select id="account_type" name="account_type" class="dark:bg-gray-900 mt-1 block w-full
+           dark:border-gray-700 dark:focus:border-indigo-600  dark:focus:ring-ageno 
+          dark:text-gray-300 py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
+           focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             <option  :value="old('account_type', $user->account_type)>{{ $user->account_type }}</option>
               <option value="seller">Seller</option>
               <option value="leaser">Leaser</option>

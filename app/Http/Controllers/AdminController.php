@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Asset;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,12 +13,21 @@ class AdminController extends Controller
 
     protected $redirectTo = '/admin/dashboard';
 
-    // public function __construct()
-    // {
-    //     $this->middleware('guest:admin')->except('logout');
-    // }
+
+    public function showAllUser()
+    {
+        $users = User::all();
+        return view('admin.all-users', compact('users'));
+    }
 
 
+    public function showUser($uuid)
+    {
+        $user = User::get()->where('uuid', $uuid)->firstOrFail();
+
+
+        return view('admin.user', compact('user'));
+    }
 
     public function loginView()
     {
@@ -58,7 +68,11 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $totalUsers = User::count();
+        $totalAmountPaid = Asset::where('paid', true)->sum('price');
+        $users = User::with('assets')->paginate(10);
+
+        return view('admin.dashboard', compact('users', 'totalUsers', 'totalAmountPaid'));
     }
 
     public function projects()
@@ -108,44 +122,4 @@ class AdminController extends Controller
     {
         return view('admin.users');
     }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(Admin $admin)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(Admin $admin)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, Admin $admin)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(Admin $admin)
-    // {
-    //     //
-    // }
 }

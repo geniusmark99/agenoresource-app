@@ -18,6 +18,7 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/dashboard', [AdminController::class, 'dashboard'])
             ->name('admin.dashboard');
+
         Route::get('/projects', [AdminController::class, 'projects'])
             ->name('admin.projects');
 
@@ -26,6 +27,13 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/user/active', [AdminController::class, 'activeUsers'])
             ->name('admin.active.users');
+
+        Route::get('/user/all', [AdminController::class, 'showAllUser'])
+            ->name('admin.all.users');
+
+        Route::get('/user/{uuid}', [AdminController::class, 'showUser'])
+            ->name('admin.user');
+
         Route::get('/user/unactive', [AdminController::class, 'unactiveUsers'])
             ->name('admin.unactive.users');
 

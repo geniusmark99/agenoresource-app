@@ -13,9 +13,13 @@ use App\Models\Asset;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+
+
+    public function choosePlan()
+    {
+        return view('users.plan');
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [

@@ -8,7 +8,47 @@
             </x-menu-desc-widget>
     </x-slot>
 
-<div class="py-12 lg:px-32">
+    <div class="px-4 lg:px-32 py-4 my-0 flex items-center justify-between">
+        <a href="{{ route('user.plan') }}" class="*:hover:text-indigo-500 dark:*:hover:text-indigo-500 flex flex-col justify-center text-center items-center">
+
+    <div class="inline-block bg-gradient-to-tl from-blue-600 via-transparent to-purple-400 p-px rounded-xl">
+        <div class="bg-white rounded-xl py-0.5 md:py-1.5 px-2 md:px-3 text-sm font-bold md:text-3xl lg:leading-tight dark:bg-gray-900">
+          <span class="bg-clip-text bg-gradient-to-tl from-blue-600 to-purple-400 text-transparent">
+            &#8358; 5000/per week
+          </span>
+        </div>
+      </div>
+      <span class="text-sm sm:text-base text-gray-600 font-semibold dark:text-gray-300 mt-2">Bronze plan</span>
+    </a>
+
+    <a href="{{ route('user.plan') }}" class="*:hover:text-indigo-500 dark:*:hover:text-indigo-500 flex flex-col justify-center text-center items-center">
+      <div class="inline-block bg-gradient-to-tl from-blue-600 via-transparent to-purple-400 p-px rounded-xl">
+        <div class="bg-white rounded-xl py-0.5 md:py-1.5 px-2 md:px-3 text-sm font-bold md:text-3xl lg:leading-tight dark:bg-gray-900">
+          <span class="bg-clip-text bg-gradient-to-tl from-blue-600 to-purple-400 text-transparent">
+            &#8358; 6000/per week
+          </span>
+        </div>
+      </div>
+      <span class="text-sm sm:text-base text-gray-600 font-semibold dark:text-gray-300 mt-2">Silver plan</span>
+
+    </a>
+
+    <a href="{{ route('user.plan') }}" class="*:hover:text-indigo-500 dark:*:hover:text-indigo-500 flex flex-col justify-center text-center items-center">
+
+      <div class="inline-block bg-gradient-to-tl from-blue-600 via-transparent to-purple-400 p-px rounded-xl">
+        <div class="bg-white rounded-xl py-0.5 md:py-1.5 px-2 md:px-3 text-sm font-bold md:text-3xl lg:leading-tight dark:bg-gray-900">
+          <span class="bg-clip-text bg-gradient-to-tl from-blue-600 to-purple-400 text-transparent">
+            &#8358; 9000/per week
+          </span>
+        </div>
+      </div>
+      <span class="text-sm sm:text-base text-gray-600 font-semibold dark:text-gray-300 mt-2">Gold plan</span>
+
+
+    </a>
+    </div>
+
+<div class="py-4 lg:px-32">
 <!-- Content -->
 <div class="w-full">
 
