@@ -4,14 +4,18 @@
             {{ __('Post Assets') }}
         </h2>
         <x-menu-desc-widget>
-        Post your assets for potential customers to see
+        Post your assets
         </x-menu-desc-widget>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="p-5 custom-scroller">
 
-            <div x-data="{
+            @include('posts.partials.post-assets-sales')
+            </div>
+
+            {{-- <div x-data="{
                 activeTab : 'tab1',
                 isActive(tab){
                     if(this.activeTab == tab){
@@ -53,7 +57,7 @@
                         @include('posts.partials.post-assets-equipment')                    
                     </div>
                 </div>
-            </div>
+            </div> --}}
            
         </div>
     </div>

@@ -40,13 +40,10 @@
         </li>
   
 <li x-data="{userDropdown: false}">
-<button type="button" x-on:click="userDropdown = !userDropdown"
-x-bind:class="(isActive('/admin/user/active') ? 'bg-gray-100 dark:bg-neutral-800 text-blue-600' : 'bg-red-600'"
+<button type="button" x-on:click="userDropdown = !userDropdown" 
+x-bind:class="isActive('/admin/user/active') ? 'bg-gray-100 dark:bg-neutral-800 text-blue-600' : ''"
 
-class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 dark:text-white
- text-sm text-neutral-700 rounded-lg dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
-
->
+class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 dark:text-white text-sm text-neutral-700 rounded-lg dark:hover:bg-neutral-800 dark:hover:text-neutral-300">
 <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
 Users
 

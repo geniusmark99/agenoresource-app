@@ -24,7 +24,6 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $userUuid = User::uuid;
 
         return [
             'firstname' => fake()->firstName(),

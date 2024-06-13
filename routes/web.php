@@ -30,9 +30,12 @@ Route::controller(GuestController::class)->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Route::get('/test-upload', [ProfileController::class, 'testView'])->name('test.view');
+    // Route::post('/upload-test', [ProfileController::class, 'testUpload'])->name('test.upload');
     Route::get('/post-assets', [ProfileController::class, 'postAsset'])->name('post.assets');
-    Route::get('/choose-plan', [ProfileController::class, 'choosePlan'])->name('user.plan');
     Route::post('/post-sale-assets', [ProfileController::class, 'postSaleAsset'])->name('post.sale.assets');
+    Route::get('/choose-plan', [ProfileController::class, 'choosePlan'])->name('user.plan');
+    Route::get('/my-assets', [ProfileController::class, 'myAsset'])->name('user.asset');
     Route::get('/notification', [ProfileController::class, 'notification'])->name('user.notification');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -5,19 +5,19 @@
     <section>
     <header class="flex justify-between flex-col gap-y-4 lg:flex-row">
     <div>
-    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-    {{ __('Post Assets for Sales') }}
+    <h2 class="text-sm md:text-lg font-medium text-gray-900 dark:text-gray-100">
+    {{ __('Post Assets for Sales, Lease or Partnership') }}
     </h2>
 
-    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-    {{ __("Post your assets for sales and information") }}
+    <p class="mt-1 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+    {{ __("Post your assets for sales, lease or partnership information") }}
     </p>
     </div>
 
 
     <div class="flex flex-col justify-start">
     <div class="flex gap-10 mb-5">
-    <div class="inline-flex items-center">
+    <div class="inline-flex items-center">  
     <label class="relative flex items-center p-3 rounded-full cursor-pointer" >
     <input name="type" type="radio"
     class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border-2 border-blue-gray-200 text-white transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-indigo-900 checked:before:bg-indigo-900 hover:before:opacity-10"
@@ -32,10 +32,10 @@
     <label class="mt-px font-light text-gray-700 dark:text-gray-300 cursor-pointer select-none">
     Publish
     </label>
-    </div>
+    </div>  
     <div class="inline-flex items-center" x-data="{ open: false }">
 
-    <button  @click="open = true" class="mt-px p-2 rounded-md bg-indigo-500 hover:bg-indigo-700 hover:shadow-md font-light text-white outline-none focus:outline-none focus:ring-0 appearance-none dark:bg-indigo-500 dark:text-gray-300 cursor-pointer select-none" >
+    <button  @click="open = true" class="mt-px p-2 rounded-md bg-indigo-500 hover:bg-indigo-500/80 hover:shadow-md font-light text-white outline-none focus:outline-none focus:ring-0 appearance-none dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:text-gray-200 cursor-pointer select-none" >
      How to publish
     </button>
 
@@ -49,19 +49,19 @@
              x-transition:leave="transition ease-in duration-300"
              x-transition:leave-start="opacity-100 transform scale-100"
              x-transition:leave-end="opacity-0 transform scale-90"
-             class="fixed inset-0 flex items-center justify-center bg-gray-300/80 dark:bg-slate-500/30 bg-opacity-80">
+             class="fixed inset-0 flex z-[1000] items-center justify-center bg-gray-300/80 dark:bg-slate-500/30 bg-opacity-80">
              <div class="mx-4">
             <div class="bg-white dark:bg-slate-900 dark:text-gray-300 rounded-lg shadow-lg p-6 w-full lg:max-w-[500px] min-h-[400px]">
                 <h2 class="text-xl font-semibold mb-4 text-center">How to publish</h2>
                 <p class="mb-4">
-                    <ul class="list-disc space-y-2">
-                        <li>Make your payment to Agenoresource Account based on your choosen plan</li>
-                        <li>Send your payment receipt with your ID at the top of your Dashboard profile to Admin Whatsapp</li>
-                        <li>After Admin has verified your payment then your assets will be publised</li>
+                    <ul class="list-disc space-y-2 mb-10">
+                        <li class="leading-7">Make your payment to Agenoresource Account based on your choosen plan (i.e Bronze,Silver,Gold,Diamond or Platinum)</li>
+                        <li class="leading-7">Send your payment receipt with your ID at the top of your Dashboard profile to Admin Whatsapp</li>
+                        <li class="leading-7">After Admin has verified your payment then your assets will be publised on our page for your potential customers to see</li>
                     </ul>
                 </p>
                 <div class="flex justify-end">
-                    <button @click="open = false" class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">Close</button>
+                    <button @click="open = false" class="px-4 py-2 text-white bg-indigo-500 rounded hover:bg-indigo-500/80">Close</button>
                 </div>
             </div>
              </div>
@@ -85,17 +85,94 @@
 
     </header>
 
-    <form  class="mt-6 space-y-6" method="POST" action="{{ route('post.sale.assets') }}" >
+@session('success')
+<div class="w-full flex justify-center items-center ">
+<div class="max-w-[250px] whitespace-nowrap bg-teal-600 dark:bg-green-700 text-green-200 rounded-lg px-2 py-1 shadow-lg">
+{{-- Asset uploaded successfully --}}
+{{ session('success') }}
+</div>
+</div>
+@endsession
+
+    <form id="assetForm" class="mt-6 space-y-6" method="POST" action="{{ route('post.sale.assets') }}" 
+    enctype="multipart/form-data">
     @csrf
-   
-    <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
-        <div  class="mb-4">
-        <x-input-label for="asset_type" :value="__('Asset Type')" />
-        <x-text-input id="asset_type" name="asset_type" type="text" class="mt-1 block w-full dark:bg-gray-900" value="sales"   disabled autofocus />
-        {{-- <x-input-error class="mt-2" :messages="$errors->get('name')" /> --}}
+
+    {{-- PRICING PLAN --}}
+<div>
+    <x-input-label for="plan" :value="__('Asset Plan')" />
+
+    <div class="gap-y-5 lg:py-4 mt-1 flex px-3 justify-start items-start flex-col lg:flex-row lg:justify-between lg:items-center bg-white dark:bg-gray-900 dark:border-gray-700 border shadow py-3 rounded-lg">
+        <div class="flex items-center">
+            <input id="bronze-plan" name="plan" type="radio" value="bronze" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="bronze-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                Bronze Plan
+            </label>
         </div>
 
-        <div class="mb-4">
+        <div class="flex items-center">
+            <input id="silver-plan" name="plan" type="radio" value="silver" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="silver-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                Silver Plan
+            </label>
+        </div>
+
+        <div class="flex items-center">
+            <input id="gold-plan" name="plan" type="radio" value="gold" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="gold-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                Gold Plan
+            </label>
+        </div>
+
+        <div class="flex items-center">
+            <input id="gold-plan" name="plan" type="radio" value="diamond" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="gold-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                Diamond Plan
+            </label>
+        </div>
+
+
+        <div class="flex items-center">
+            <input id="gold-plan" name="plan" type="radio" value="platinum" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="gold-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                Platinum Plan
+            </label>
+        </div>
+
+    
+</div>
+    </div>
+    {{-- END OF PRICING PLAN --}}
+   
+    <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
+        <div  class="mb-4 relative">
+        <x-input-label for="asset_type" :value="__('Asset Type')" />
+        {{-- <x-text-input id="asset_type" name="asset_type" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_type')"  autofocus /> --}}
+      
+        <div x-data="{ open: false, selectedMinPrice: '', selectedMaxPrice: '', selectedAssetType: '', searchTerm: '', }"
+         class=" relative min-w-24  md:min-w-32" x-data="{ open: false }">
+            <button type="button" @click="open = !open" class="whitespace-nowrap border mt-1 shadow-sm w-full px-2 border-gray-300 dark:border-gray-700  dark:text-gray-300 md:px-4 py-2 bg-white dark:bg-gray-900 flex justify-between items-center rounded-md text-left">
+                <span class="font-normal" x-text="selectedAssetType ? selectedAssetType : 'Asset Type'"></span>
+                <svg class="size-3 transition-transform dark:fill-gray-100" :class="open ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                    <path d="M41.586,12.586L24,30.172L6.414,12.586c-0.781-0.781-2.047-0.781-2.828,0s-0.781,2.047,0,2.828l19,19 C22.977,34.805,23.488,35,24,35s1.023-0.195,1.414-0.586l19-19c0.781-0.781,0.781-2.047,0-2.828S42.367,11.805,41.586,12.586z" />
+                  </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="z-[1000] absolute mt-1 w-full bg-white dark:bg-gray-900 border dark:border-gray-700  dark:text-gray-300 border-gray-300 rounded-md shadow-lg">
+                <ul>
+                    <li @click="selectedAssetType = ''; open = false" class="px-4 py-2 rounded-t-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">All</li>
+                    <li @click="selectedAssetType = 'sale'; open = false" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">Sale</li>
+                    <li @click="selectedAssetType = 'lease'; open = false" class="px-4 py-2 hover:bg-gray-100  dark:hover:bg-gray-700 cursor-pointer">Lease</li>
+                    <li @click="selectedAssetType = 'partner'; open = false" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">Partner</li>
+                    <li @click="selectedAssetType = 'equipment'; open = false" class="px-4 py-2 rounded-b-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">Equipment</li>
+                </ul>
+            </div>
+            <input type="hidden" id="asset_type" name="asset_type" x-model="selectedAssetType" value="{{ old('asset_type')}}">
+        </div>
+
+        <x-input-error class="mt-2" :messages="$errors->get('asset_type')" />
+        </div>
+
+        <div class="mb-4 relative">
         <x-input-label for="asset_type" :value="__('Asset Name')" />
         <x-text-input id="asset_type" name="asset_name" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_name')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('asset_name')" />
@@ -104,13 +181,13 @@
 
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
-        <div  class="mb-4">
+        <div  class="mb-4 relative">
         <x-input-label for="technical_report" :value="__('Technical Report (URL)')" />
         <x-text-input id="technical_report" name="technical_report" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('technical_report')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('technical_report')" />
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 relative">
         <x-input-label for="asset_information" :value="__('Asset Information')" />
         <x-text-input id="asset_information" name="asset_information" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_information')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('asset_information')" />
@@ -118,33 +195,28 @@
     </div>
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
-      <div  class="mb-4">
+      <div  class="mb-4 relative">
       <x-input-label for="asset_location_details" :value="__('Assets Location Details')" />
       <x-text-input id="asset_location_details" name="asset_location_details" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_location_details')" autofocus />
       <x-input-error class="mt-2" :messages="$errors->get('asset_location_details')" />
      
     </div>
 
-      <div class="mb-4">
-      <x-input-label for="technical_report" :value="__('Geological Location')" />
-      <x-text-input id="technical_report" name="geological_location" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('geological_location')" autofocus />
-      <x-input-error class="mt-2" :messages="$errors->get('geological_location')" />
+    <div  class="mb-4 relative">
+        <x-input-label for="geological_location" :value="__('Geological Location')" />
+        <x-text-input id="geological_location" name="geological_location" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('geological_location')"  autofocus />
+        <x-input-error class="mt-2" :messages="$errors->get('geological_location')" />
+       
       </div>
+
   </div>
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
-        <div  class="mb-4" x-data="{ price: '' }" >
+        <div  class="mb-4 relative" x-data="{ price: '' }" >
         <x-input-label for="price" :value="__('Price')" />
         <div class="flex items-center w-full gap-x-2">
-        <select 
-        class="mt-1 block w-2/12 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-ageno dark:focus:ring-ageno rounded-md shadow-sm"         
-         >
-         <option value="USD">NGN</option>
-         <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-        </select>
+        <div class="py-2 px-3 mt-1 rounded-md border shadow-sm  text-gray-500 dark:border-gray-700 dark:bg-gray-900 font-semibold text-base">&#8358;</div>
         <input 
-        x-model="price"
         x-on:input="price = price.replace(/[^0-9.]/g, '')"
         type="text"
         name="price"
@@ -159,16 +231,16 @@
         
       </div>
 
-        <div class="mb-4">
+        <div class="mb-4 relative">
         <x-input-label for="coordinates" :value="__('Coordinates')" />
-        <x-text-input id="coordinates" name="coordinates" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
+        <x-text-input id="coordinates" name="coordinates" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('coordinates')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('coordinates')" />
         </div>
     </div>
 
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
-      <div  class="mb-4">
+      <div  class="mb-4 relative">
       <x-input-label for="reserve_deposit" :value="__('Reserve Deposit')" />
       <x-text-input id="reserve_deposit" name="reserve_deposit" type="text"
        class="mt-1 block w-full dark:bg-gray-900" :value="old('reserve_deposit')" autofocus />
@@ -176,23 +248,43 @@
 
       </div>
 
-      <div class="mb-4">
+      <div class="mb-4 relative">
       <x-input-label for="jorc_report" :value="__('JORC Report')" />
-      <x-text-input id="jorc_report" name="jorc_report" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
+      <x-text-input id="jorc_report" name="jorc_report" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('jorc_report')"  autofocus />
       <x-input-error class="mt-2" :messages="$errors->get('jorc_report')" />
       </div>
   </div>
 
   <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
-    <div  class="mb-4">
+    <div  class="mb-4 relative">
     <x-input-label for="opportunity_type" :value="__('Opportunity Type')" />
-    <x-text-input value="{{old('opportunity_type')}}" id="opportunity_type"  name="opportunity_type" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
+    <x-text-input value="{{old('opportunity_type')}}" id="opportunity_type"  name="opportunity_type" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('opportunity_type')" autofocus />
     </div>
 
-    <div class="mb-4">
-    <x-input-label for="geological_location" :value="__('Geological Location')" />
-    <x-text-input id="geological_location" name="geological_location" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
-    <x-input-error class="mt-2" :messages="$errors->get('geological_location')" />
+    <div class="mb-4 relative">
+        <x-input-label for="land_size" :value="__('Land Size')" />
+        <div class="flex items-center gap-x-2">     
+        <div x-data="{ quantity: 1 }" class="flex gap-x-2 items-center">
+        <div @click="quantity = Math.max(1, quantity - 1)" class="cursor-pointer bg-gray-300 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm  dark:border-gray-700 dark:bg-gray-900 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+        -
+        </div>
+        <input  x-model="quantity" name="land_size" value="{{old('land_size')}}" type="number" min="1"  class='appearance-none bg-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 shadow-sm text-gray-700 text-center border border-gray-300 rounded w-[100px] py-2 px-4'>
+        <div @click="quantity = quantity + 1" class="cursor-pointer bg-gray-300 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+        +
+        </div>
+        </div>
+        <select
+        class="mt-1 block w-2/12 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-ageno dark:focus:ring-ageno rounded-md shadow-sm"         
+        >
+        <option value="USD">Cadastre</option>
+        <option value="USD">
+        Kilometre
+    
+        </option>
+        </select>
+        </div>
+    
+        <x-input-error class="mt-2" :messages="$errors->get('land_size')" />
     </div>
 </div>
 
@@ -200,42 +292,7 @@
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
 
-        <div class="mb-4">
-        <x-input-label for="land_size" :value="__('Land Size')" />
-        {{-- <x-number-input id="land_size" name="land_size"/> --}}
-   <div class="flex items-center gap-x-2">     
-<div x-data="{ quantity: 1 }" class="flex gap-x-2 items-center">
-  <div @click="quantity = Math.max(1, quantity - 1)" class="cursor-pointer bg-gray-300 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm  dark:border-gray-700 dark:bg-gray-900 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-      -
-  </div>
-<input  x-model="quantity" name="land_size" value="{{old('land_size')}}" type="number"  class='appearance-none bg-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 shadow-sm text-gray-700 text-center border border-gray-300 rounded w-[100px] py-2 px-4'>
 
-  <div @click="quantity = quantity + 1" class="cursor-pointer bg-gray-300 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
-      +
-  </div>
-</div>
-
-
-
-<select
-class="mt-1 block w-2/12 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-ageno dark:focus:ring-ageno rounded-md shadow-sm"         
->
-<option value="USD">Cadastre</option>
-<option value="USD">
-Kilometre
-
-</option>
-</select>
-   </div>
-
-        <x-input-error class="mt-2" :messages="$errors->get('land_size')" />
-        </div>
-
-        <div class="mb-4 mt-2">
-        <x-input-label for="coordinates" :value="__('Coordinates')" />
-        <x-text-input id="coordinates" name="coordinates" type="text" class="mt-1 block w-full dark:bg-gray-900"  autofocus />
-        <x-input-error class="mt-2" :messages="$errors->get('coordinates')" />
-        </div>
 
 
     </div>
@@ -243,58 +300,51 @@ Kilometre
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
 
-    <div class="mb-4 w-full">
+    <div class="mb-1 w-full relative">
     <x-input-label for="mineral_details" :value="__('Mineral Details')" />
     <x-input-textarea />
+    
     <x-input-error class="mt-2" :messages="$errors->get('mineral_details')" />
     </div>
 
-    
-<div class="container mx-auto py-8">
 
-<div x-data="imageUploader()" class="max-w-2xl mx-auto p-5 bg-white dark:bg-slate-900 rounded-lg shadow-md">
-  <x-input-label for="pictures" :value="__('Upload your assets images')" class="mb-5"/>
-  
+<div class="mb-1 mt-4 w-full relative flex flex-col gap-y-10 lg:gap-y-5">
 
-  <!-- Popup Messages -->
-  <div x-show="successMessage" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-green-100 text-green-700 rounded shadow-md" x-text="successMessage" x-transition x-init="setTimeout(() => successMessage = '', 5000)"></div>
-  <div x-show="errorMessage" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-red-100 text-red-700 rounded shadow-md" x-text="errorMessage" x-transition x-init="setTimeout(() => errorMessage = '', 5000)"></div>
 
-  
-
-  <div class="space-y-5">
-      <div
-          x-ref="dropArea"
-          @dragover.prevent="dragOver"
-          @dragleave.prevent="dragLeave"
-          @drop.prevent="handleDrop"
-          class="border-2 mb-5 border-dashed border-gray-200 rounded-lg p-10 text-center cursor-pointer"
-          :class="{'bg-gray-200': isDragging}"
-          @click="$refs.fileInput.click()"
-      >
-          <p class="text-gray-500">Drag & drop images here, or click to select images</p>
-          <input type="file" multiple name="pictures[]" x-ref="fileInput" @change="handleFiles" class="hidden">
-      </div>
-
-      <div class="grid grid-cols-3 gap-4 mb-5">
-          <template x-for="(file, index) in files" :key="index">
-              <div class="relative">
-                  <img :src="file.url" class="w-full h-32 object-cover rounded-lg">
-                  <button type="button" @click="removeFile(index)" 
-                  title="click to remove"
-                  class="absolute text-xl top-0 right-0 size-6 flex justify-center items-center hover:bg-red-700 bg-red-500 text-white p-1 rounded-full">
-                      &times;
-                  </button>
-              </div>
-          </template>
-      </div>
-
-      {{-- <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg" :disabled="files.length === 0 || files.length > 5" :class="{'opacity-50 cursor-not-allowed': files.length === 0 || files.length > 5}">
-          Upload
-      </button> --}}
-    </div>
+<div>
+<x-input-label for="mineral_details" :value="__('Duration')" />
+<div x-data="{ open: false, selectedDurationType: '', }"
+class=" relative min-w-24  md:min-w-32" x-data="{ open: false }">
+<button type="button" @click="open = !open" class="whitespace-nowrap border mt-1 shadow-sm w-full px-2 border-gray-300 dark:border-gray-700  dark:text-gray-300 md:px-4 py-2 bg-white dark:bg-gray-900 flex justify-between items-center rounded-md text-left">
+<span class="font-normal" x-text="selectedDurationType ? selectedDurationType : 'Duration'"></span>
+<svg class="size-3 transition-transform dark:fill-gray-100" :class="open ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+<path d="M41.586,12.586L24,30.172L6.414,12.586c-0.781-0.781-2.047-0.781-2.828,0s-0.781,2.047,0,2.828l19,19 C22.977,34.805,23.488,35,24,35s1.023-0.195,1.414-0.586l19-19c0.781-0.781,0.781-2.047,0-2.828S42.367,11.805,41.586,12.586z" />
+</svg>
+</button>
+<div x-show="open" @click.away="open = false" class="z-[1000] absolute mt-1 w-full bg-white dark:bg-gray-900 border dark:border-gray-700  dark:text-gray-300 border-gray-300 rounded-md shadow-lg">
+<ul>
+<li @click="selectedDurationType = ''; open = false" class="px-4 py-2 rounded-t-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">All</li>
+<li @click="selectedDurationType = '1 week'; open = false" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">1 week</li>
+<li @click="selectedDurationType = '2 weeks'; open = false" class="px-4 py-2 hover:bg-gray-100  dark:hover:bg-gray-700 cursor-pointer">2 weeks</li>
+<li @click="selectedDurationType = '3 weeks'; open = false" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">3 weeks</li>
+<li @click="selectedDurationType = '4 weeks'; open = false" class="px-4 py-2 rounded-b-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">4 weeks</li>
+</ul>
 </div>
-</div> 
+<input type="hidden"  id="duration" name="duration" x-model="selectedDurationType" value="{{ old('duration')}}">
+<x-input-error class="mt-2" :messages="$errors->get('duration')" />
+
+</div>
+</div>
+
+    <div class="mb-1 w-full relative">
+        <x-input-label for="contact_information" :value="__('Contact Information')" />
+        <x-text-input id="contact_information" name="contact_information" type="text"
+        class="mt-1 block w-full dark:bg-gray-900" :value="old('contact_information')" autofocus />
+        <x-input-error class="mt-2" :messages="$errors->get('contact_information')" />
+
+
+        </div>
+</div>
     
 
 
@@ -302,8 +352,13 @@ Kilometre
 
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
+        <div class="mb-1 w-full relative">
 
-      <div x-data="videoUploader()" class="p-5 bg-white dark:bg-slate-900 rounded-lg shadow-md">
+        <input type="file" multiple  name="video"  accept="video/*"/>
+        <x-input-error class="mt-2" :messages="$errors->get('video')" />
+
+        </div>
+      {{-- <div x-data="videoUploader()" class="p-5 bg-white dark:bg-slate-900 rounded-lg shadow-md">
         <x-input-label for="pictures" :value="__('Upload your assets video(s)')" class="mb-5"/>
 
     
@@ -323,7 +378,7 @@ Kilometre
                 @click="$refs.fileInput.click()"
             >
                 <p class="text-gray-500">Drag & drop videos here, or click to select videos</p>
-                <input type="file" multiple x-ref="fileInput" @change="handleFiles" accept="video/*" 
+                <input type="file" multiple x-ref="fileInput" name="video[]" @change="handleFiles" accept="video/*" 
                 class="hidden">
             </div>
     
@@ -343,12 +398,65 @@ Kilometre
                     </div>
                 </template>
             </div>
-{{--     
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg" :disabled="files.length === 0 || files.length > 2" :class="{'opacity-50 cursor-not-allowed': files.length === 0 || files.length > 2}">
-                Upload
-            </button> --}}
+
         </div>
+
+
+        
+    </div> --}}
+
+
+    
+        
+<div class="container mx-auto py-8">
+    <div class="mb-1 w-full relative">
+
+    <input type="file" multiple name="pictures[]" >
+    <x-input-error class="mt-2" :messages="$errors->get('pictures')" />
+    
+
     </div>
+    {{-- <div x-data="imageUploader()" class="max-w-2xl mx-auto p-5 bg-white dark:bg-slate-900 rounded-lg shadow-md">
+      <x-input-label for="pictures" :value="__('Upload your assets images')" class="mb-5"/>
+      
+    
+      <!-- Popup Messages -->
+      <div x-show="successMessage" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-green-100 text-green-700 rounded shadow-md" x-text="successMessage" x-transition x-init="setTimeout(() => successMessage = '', 5000)"></div>
+      <div x-show="errorMessage" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-red-100 text-red-700 rounded shadow-md" x-text="errorMessage" x-transition x-init="setTimeout(() => errorMessage = '', 5000)"></div>
+    
+      
+      <div class="space-y-5">
+          <div
+              x-ref="dropArea"
+              @dragover.prevent="dragOver"
+              @dragleave.prevent="dragLeave"
+              @drop.prevent="handleDrop"
+              class="border-2 mb-5 border-dashed border-gray-200 rounded-lg p-10 text-center cursor-pointer"
+              :class="{'bg-gray-200': isDragging}"
+              @click="$refs.fileInput.click()"
+          >
+              <p class="text-gray-500">Drag & drop images here, or click to select images</p>
+              <input type="file" multiple name="pictures[]" x-ref="fileInput" @change="handleFiles" class="hidden">
+          </div>
+    
+          <div class="grid grid-cols-3 gap-4 mb-5">
+              <template x-for="(file, index) in files" :key="index">
+                  <div class="relative">
+                      <img :src="file.url" class="w-full h-32 object-cover rounded-lg">
+                      <button type="button" @click="removeFile(index)" 
+                      title="click to remove"
+                      class="absolute text-xl top-0 right-0 size-6 flex justify-center items-center hover:bg-red-700 bg-red-500 text-white p-1 rounded-full">
+                          &times;
+                      </button>
+                  </div>
+              </template>
+          </div>
+    
+      
+        </div> 
+    </div> --}}
+    </div> 
+
     </div>
 
 

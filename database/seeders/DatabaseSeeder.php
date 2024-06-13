@@ -18,12 +18,5 @@ class DatabaseSeeder extends Seeder
             AssetSeeder::class,
             AdminSeeder::class,
         ]);
-
-
-
-
-
-        // $adminRole = Role::create(['firstname' => 'admin']);
-        // $adminUser->assignRole($adminRole);
     }
 }

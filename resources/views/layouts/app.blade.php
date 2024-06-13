@@ -199,6 +199,53 @@
     }
 </script>
 
+{{-- 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('assetForm');
+    
+        Object.keys(localStorage).forEach(key => {
+            const input = document.querySelector(`#assetForm [name="${key}"]`);
+            if (input) {
+                if (input.type === 'radio') {
+                    input.checked = localStorage.getItem(key) === input.value;
+                } else {
+                    input.value = localStorage.getItem(key);
+                }
+            }
+        });
+    
+        form.addEventListener('input', function(event) {
+            if (event.target.name) {
+                if (event.target.type === 'radio' && event.target.checked) {
+                    localStorage.setItem(event.target.name, event.target.value);
+                } else if (event.target.type !== 'radio') {
+                    localStorage.setItem(event.target.name, event.target.value);
+                }
+            }
+        });
+        
+        form.addEventListener('click', function(event) {
+            if (event.target.name) {
+                if (event.target.type === 'radio' && event.target.checked) {
+                    localStorage.setItem(event.target.name, event.target.value);
+                } else if (event.target.type !== 'radio') {
+                    localStorage.setItem(event.target.name, event.target.value);
+                }
+            }
+        });
+    
+        form.addEventListener('submit', function() {
+            Object.keys(localStorage).forEach(key => {
+            const input = document.querySelector(`#assetForm [name="${key}"]`);
+            if (input) {
+                input.value = '';
+            }
+        });
+        });
+    });
+
+    </script> --}}
 
     </body>
 </html>

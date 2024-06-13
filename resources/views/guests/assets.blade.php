@@ -2,6 +2,7 @@
 @section('app-title','Contact us')
 
 @section('app-content')
+@livewire('asset-filter')
 <div class="flex flex-col mt-4">
     <h3 class=" px-4 sm:px-6 lg:px-28 text-left text-ageno lg:text-3xl font-bold dark:text-white">Top Latest assets</h3>
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

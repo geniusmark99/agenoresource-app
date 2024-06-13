@@ -39,7 +39,14 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/user/activated', [AdminController::class, 'activatedUser'])
             ->name('admin.activated.users');
-        Route::get('/user/blocked', [AdminController::class, 'blockedUser'])
+
+        Route::post('/activate-asset/{assetId}', [AdminController::class, 'markAsActive'])
+            ->name('admin.activate-asset');
+
+        Route::post('/unactivate-asset/{assetId}', [AdminController::class, 'unmarkAsActive'])
+            ->name('admin.unactivate-asset');
+
+        Route::view('/user/blocked', 'admin.blocked-users')
             ->name('admin.blocked.users');
 
         Route::get('/profile', [AdminController::class, 'profile'])

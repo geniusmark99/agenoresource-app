@@ -183,6 +183,12 @@
     </div>
   
 
+
+
     </div>
  
+
+@yield('admin-script')
+
+
 </x-admin-app-layout>

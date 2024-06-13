@@ -14,30 +14,29 @@ return new class extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->id(); //ok
             $table->unsignedBigInteger('user_id');
-            $table->string('uid')->unique(); //ok
+            $table->string('uid')->unique();
             $table->string('project_id');
-            $table->string('asset_name'); //ok
-            $table->string('asset_type'); // sale, lease, partner, or equipment//ok
-            $table->string('asset_location_details'); //ok
-            $table->string('asset_information'); // greenfield or brownfield//ok
-            $table->text('pictures')->nullable(); //ok
-            $table->text('video')->nullable(); // restricted//ok
-            $table->text('technical_report')->nullable(); // restricted//ok
-            $table->double('price')->nullable(); // restricted /ok
-            $table->string('coordinates')->nullable(); // restricted //ok
-            $table->double('land_size')->nullable(); // in cadastre unit or kilometre (restricted) //ok
-            $table->text('mineral_details')->nullable(); // quantity or quality of mineral (restricted) //ok
-            $table->text('reserve_deposit')->nullable(); // if listing a mining asset (restricted) //ok
-            $table->text('jorc_report')->nullable(); // if available (restricted)
-            $table->string('opportunity_type')->nullable(); // JV or partnership, sale, lease //ok
-            $table->text('geological_location')->nullable(); // restricted //ok
-            $table->text('contact_information')->nullable(); // restricted
-            $table->timestamp('date_added')->useCurrent();
-            $table->date('duration_date')->nullable();
-            $table->integer('times_viewed')->default(0);
-            $table->boolean('paid'); // restricted
-            $table->boolean('active')->default(false); // restricted
+            $table->string('asset_name');
+            $table->string('asset_type');
             $table->string('slug')->unique();
+            $table->text('pictures')->nullable();
+            $table->text('video')->nullable();
+            $table->string('asset_location_details');
+            $table->string('asset_information');
+            $table->text('technical_report');
+            $table->double('price');
+            $table->string('coordinates');
+            $table->double('land_size')->nullable();
+            $table->text('mineral_details');
+            $table->text('reserve_deposit')->nullable();
+            $table->string('plan');
+            $table->boolean('active')->default(false);
+            $table->string('duration');
+            $table->text('contact_information');
+            $table->text('jorc_report')->nullable();
+            $table->string('opportunity_type')->nullable();
+            $table->text('geological_location');
+            $table->timestamp('date_added')->useCurrent();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

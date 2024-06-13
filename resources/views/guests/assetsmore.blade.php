@@ -183,9 +183,23 @@
         <p class="text-lg text-gray-800 dark:text-neutral-200">We're proud to be a part of creating a more open culture and to continue building a product that supports this vision.</p>
   
         <figure>
-          <img class="w-full object-cover rounded-xl" src="https://images.unsplash.com/photo-1670272505340-d906d8d77d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Image Description">
+        
+
+          @forelse ($asset->pictures as $picture)
+          <img class="w-full object-cover rounded-xl"  src="{{ $picture }}" alt="{{ $asset->slug }}" draggable="false">
+     @empty
+     @guest
+     <p  class="w-full block object-cover rounded-xl text-gray-600/90 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 shadow-md px-3 text-center py-4">Agent didn't Upload Image</a>
+       
+     @endguest
+     @auth
+     <a href="{{ route('user.asset') }}" class="w-full block object-cover rounded-xl text-gray-600/90 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 shadow-md px-3 text-center py-4">Please Kindly upload your asset image(s)</a>
+       
+     @endauth
+          @endforelse
+          
           <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-            A woman sitting at a table.
+            {{-- A woman sitting at a table. --}}
           </figcaption>
         </figure>
   

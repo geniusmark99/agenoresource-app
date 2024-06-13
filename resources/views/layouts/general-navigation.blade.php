@@ -1,5 +1,5 @@
 <!-- ========== HEADER ========== -->
-<header class="flex flex-wrap sm:justify-start border-b border-gray-200/50 sm:flex-nowrap z-50 w-full bg-gradient-to-tr from-ageno to-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0 dark:border-gray-700 ">
+<header class="flex flex-wrap sm:justify-start border-b border-gray-200/50 sm:flex-nowrap z-50 w-full bg-gradient-to-tr from-ageno to-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0">
   
   <nav class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
       <div class="flex items-center justify-between">
@@ -7,13 +7,13 @@
             <x-application-logo class="size-16"/>
         </a>
         <div class="sm:hidden">
-          <button  @click="sidebarOpen = !sidebarOpen"  type="button" class="size-9 rounded-full flex justify-center items-center text-sm font-semibol border border-gray-200 text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
+          <button  @click="sidebarOpen = !sidebarOpen"  type="button" class="size-9 rounded-full flex justify-center items-center text-sm font-semibol border border-gray-200 text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:text-white  dark:focus:outline-none dark:focus:ring-0" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
 
-            <svg x-show="sidebarOpen" class="flex-shrink-0 size-4 fill-white" viewBox="0 0 50 50" class="fill-white">
+            <svg x-cloak x-show="sidebarOpen" class="flex-shrink-0 size-4 fill-white" viewBox="0 0 50 50" class="fill-white">
               <path d="M7.71875 6.28125L6.28125 7.71875L23.5625 25L6.28125 42.28125L7.71875 43.71875L25 26.4375L42.28125 43.71875L43.71875 42.28125L26.4375 25L43.71875 7.71875L42.28125 6.28125L25 23.5625Z" />
             </svg>
 
-            <svg x-show="!sidebarOpen" class="flex-shrink-0 size-4 fill-white" viewBox="0 0 50 50" class="fill-white">
+            <svg  x-show="!sidebarOpen" class="flex-shrink-0 size-4 fill-white" viewBox="0 0 50 50" class="fill-white">
               <path d="M3 9 A 1.0001 1.0001 0 1 0 3 11L47 11 A 1.0001 1.0001 0 1 0 47 9L3 9 z M 3 24 A 1.0001 1.0001 0 1 0 3 26L47 26 A 1.0001 1.0001 0 1 0 47 24L3 24 z M 3 39 A 1.0001 1.0001 0 1 0 3 41L47 41 A 1.0001 1.0001 0 1 0 47 39L3 39 z" />
             </svg>
 
@@ -66,15 +66,13 @@
             @auth(  )
 <form method="POST" action="{{ route('logout') }}">
   @csrf
-  <a class='block w-full px-4 py-2 text-start text-sm leading-5 text-white dark:text-gray-300
-  bg-slate-900 rounded-md cursor-pointer 
-  hover:bg-slate-700 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 
-  dark:focus:bg-gray-800 transition duration-150 ease-in-out'
-    href="route('logout')"
+  <a class='block w-full px-4 py-2 text-start text-sm leading-5 text-ageno font-semibold dark:text-ageno
+  bg-white rounded-md cursor-pointer shadow-sm scale-95 hover:scale-100 transition-transform focus:outline-none focus:bg-gray-100  duration-150 ease-in-out'
+    href="{{route('logout')}}"
   onclick="event.preventDefault();
               this.closest('form').submit();">
 
-{{ __('Log Out') }}
+{{ __('Log out') }}
   </a>
 </form>
           @endauth

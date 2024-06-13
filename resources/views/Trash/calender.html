@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Date Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <div class="calendar-container">
+            <div class="calendar-header flex justify-between items-center mb-4">
+                <button id="prevYear"
+                    class="px-2 py-1 border rounded-md transition duration-300 hover:bg-gray-200">Previous Year</button>
+                <div id="monthDropdown" class="relative">
+                    <div
+                        class="flex items-center  gap-x-2 px-2 py-1 border rounded-md transition duration-300 hover:bg-gray-200 cursor-pointer">
+                        <span id="selectedMonth">January</span>
+                        <svg class="h-4 w-4 text-gray-500 ml-1" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div id="monthOptions" class="absolute bg-white border rounded-md mt-1 py-1 w-32 hidden">
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="0">January</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="1">February</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="2">March</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="3">April</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="4">May</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="5">June</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="6">July</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="7">August</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="8">September</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="9">October</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="10">November</div>
+                        <div class="cursor-pointer px-2 py-1 hover:bg-gray-200" data-month="11">December</div>
+                    </div>
+                </div>
+                <button id="nextYear" class="px-2 py-1 border rounded-md transition duration-300 hover:bg-gray-200">Next
+                    Year</button>
+            </div>
+            <div class="calendar-grid grid grid-cols-7 gap-1" id="calendarGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        const currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        let currentMonth = currentDate.getMonth();
+        let currentDay = currentDate.getDate();
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        const calendarGrid = document.getElementById('calendarGrid');
+        const selectedMonth = document.getElementById('selectedMonth');
+        const monthDropdown = document.getElementById('monthDropdown');
+        const monthOptions = document.getElementById('monthOptions');
+        const prevYearBtn = document.getElementById('prevYear');
+        const nextYearBtn = document.getElementById('nextYear');
+
+        function renderCalendar(year, month) {
+            calendarGrid.innerHTML = '';
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+            const startingDay = firstDayOfMonth.getDay();
+
+            // Render days of the week
+            for (let i = 0; i < 7; i++) {
+                const dayOfWeek = document.createElement('div');
+                dayOfWeek.textContent = dayNames[i];
+                dayOfWeek.classList.add('text-center', 'text-gray-500', 'text-sm', 'font-bold');
+                calendarGrid.appendChild(dayOfWeek);
+            }
+
+            // Render days of the month
+            for (let i = 0; i < startingDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('calendar-day', 'text-gray-400');
+                calendarGrid.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const calendarDay = document.createElement('div');
+                calendarDay.textContent = day;
+                calendarDay.classList.add('calendar-day', 'cursor-pointer', 'transition', 'duration-300', 'hover:bg-gray-200');
+                if (year === currentDate.getFullYear() && month === currentDate.getMonth() && day === currentDate.getDate()) {
+                    calendarDay.classList.add('bg-blue-500', 'text-white');
+                }
+                calendarGrid.appendChild(calendarDay);
+            }
+        }
+
+        renderCalendar(currentYear, currentMonth);
+
+        prevYearBtn.addEventListener('click', () => {
+            currentYear--;
+            renderCalendar(currentYear, currentMonth);
+        });
+
+        nextYearBtn.addEventListener('click', () => {
+            currentYear++;
+            renderCalendar(currentYear, currentMonth);
+        });
+
+        monthDropdown.addEventListener('click', () => {
+            monthOptions.classList.toggle('hidden');
+        });
+
+        monthOptions.addEventListener('click', (event) => {
+            const selectedMonthIndex = parseInt(event.target.getAttribute('data-month'));
+            currentMonth = selectedMonthIndex;
+            selectedMonth.textContent = monthNames[selectedMonthIndex];
+            renderCalendar(currentYear, currentMonth);
+            monthOptions.classList.add('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!monthDropdown.contains(event.target)) {
+                monthOptions.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

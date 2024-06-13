@@ -61,7 +61,6 @@ class GuestController extends Controller
     public function showAsset($slug)
     {
 
-
         $asset = Asset::with('user')->where('slug', $slug)->firstOrFail();
         return view('guests.assetsmore', compact('asset'));
     }
@@ -69,10 +68,23 @@ class GuestController extends Controller
 
     public function searchAsset(Request $request)
     {
+
         $query = Asset::query();
 
-        if ($request->filled('type')) {
-            $query->where('asset_type', $request->input('type'));
+        if ($request->minPrice) {
+            $query->where('price', '>=', $request->minPrice);
+        }
+
+        if ($request->maxPrice) {
+            $query->where('price', '<=', $request->maxPrice);
+        }
+
+        if ($request->assetType) {
+            $query->where('asset_type', $request->assetType);
+        }
+
+        if ($request->search) {
+            $query->where('asset_name', 'like', '%' . $request->search . '%');
         }
 
         $assets = $query->get();
@@ -133,14 +145,13 @@ class GuestController extends Controller
 
     public function home()
     {
-        // $assets = Assets::all();
         $assets = Asset::latest()->get();
         return view('guests.home', ['assets' => $assets]);
     }
 
     public function assets()
     {
-        $assets = Asset::with('user')->paginate(15);
+        $assets = Asset::with('user')->where('active', 1)->paginate(15);
         return view('guests.assets', compact('assets'));
     }
 

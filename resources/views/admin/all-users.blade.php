@@ -5,12 +5,12 @@
   <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
     <thead class="bg-gray-50 dark:bg-neutral-800">
       <tr>
-        <th scope="col" class="ps-6 py-3 text-start">
+        {{-- <th scope="col" class="ps-6 py-3 text-start">
           <label for="hs-at-with-checkboxes-main" class="flex">
             <input type="checkbox" class="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-main">
             <span class="sr-only">Checkbox</span>
           </label>
-        </th>
+        </th> --}}
 
         <th scope="col" class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
           <div class="flex items-center gap-x-2">
@@ -31,7 +31,7 @@
         <th scope="col" class="px-6 py-3 text-start">
           <div class="flex items-center gap-x-2">
             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-              Status
+              No of Assets
             </span>
           </div>
         </th>
@@ -59,14 +59,14 @@
     <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
       @foreach ($users as $user)
       <tr>
-        <td class="size-px whitespace-nowrap">
+        {{-- <td class="size-px whitespace-nowrap">
           <div class="ps-6 py-3">
             <label for="hs-at-with-checkboxes-1" class="flex">
               <input type="checkbox" class="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-1">
               <span class="sr-only">Checkbox</span>
             </label>
           </div>
-        </td>
+        </td> --}}
         <td class="size-px whitespace-nowrap">
           <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
             <div class="flex items-center gap-x-3">
@@ -87,7 +87,18 @@
         </td>
         <td class="size-px whitespace-nowrap">
           <div class="px-6 py-3">
-            @if($user->active)  
+           @if ($user->assets->isEmpty())
+           <p class="text-neutral-600 dark:text-neutral-500">User have no asset posted</p>
+           @else
+           <p class="text-neutral-600 dark:text-neutral-500 font-semibold">
+              {{ count($user->assets) > 1 ? count($user->assets) . ' assets' : count($user->assets) . ' asset' }}
+           </p>
+           {{-- @foreach ($user->assets as $asset)
+           {{ $asset->active ? 'Yes' : 'No' }}
+        
+       @endforeach --}}
+           @endif
+            {{-- @if($user->assets->active)  
             
             <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
               <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -102,7 +113,7 @@
               </svg>
               Unactive
             </span>
-            @endif
+            @endif --}}
             
           </div>
         </td>
