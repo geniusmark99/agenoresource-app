@@ -1,6 +1,6 @@
-@extends('admin.layout')
+@extends('admin.app')
+
 @section('admin-content')
-<!-- Card Section -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-12 mx-auto">
     <!-- Grid -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -235,6 +235,7 @@
                   x-transition:leave-start="scale-100 opacity-100" 
                   x-transition:leave-end="scale-95 opacity-0"
                   class="bg-white dark:bg-neutral-900 rounded-lg shadow-lg w-full max-w-[600px] lg:mx-auto mt-20 lg:mt-0 absolute border dark:border-neutral-700">
+                  
                   <div class="flex justify-between border-b dark:border-neutral-700 shadow-sm p-2">
                     <h2 class="text-xl font-bold dark:text-neutral-300">Create new user</h2>
 <button @click="modalOpen = false" class="text-xl hover:bg-gray-300 dark:hover:bg-neutral-800 dark:text-neutral-500 rounded-full size-10 flex justify-center items-center">&times;</button>
@@ -544,11 +545,6 @@
           </div>
         </div>
       </div>
-      <!-- End Card -->
-
-
-    
-
 @endsection
 
 @section('admin-script')
@@ -787,5 +783,3 @@ function phoneInput() {
 </script>
 
 @endsection
-
-

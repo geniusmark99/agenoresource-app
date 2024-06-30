@@ -11,6 +11,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-5 custom-scroller">
+                <div class="flex justify-center items-center w-full my-2">
+                @if (session('error'))
+                <div class="text-center py-2 rounded-lg w-[300px]  bg-rose-500 text-rose-300">
+                {{session('error')}}
+                </div>
+                @endif
+            </div>
 
             @include('posts.partials.post-assets-sales')
             </div>

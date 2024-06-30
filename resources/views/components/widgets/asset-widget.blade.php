@@ -1,40 +1,43 @@
 @foreach($assets as $asset)
-<div class="flex flex-col justify-between gap-y-1 bg-white border border-gray-300/50 rounded-xl dark:bg-gray-800 dark:border-gray-700">
+<div class="group flex flex-col relative justify-between gap-y-1 overflow-hidden bg-white border border-gray-300/50 rounded-xl dark:bg-gray-800 dark:border-gray-700">
+    <span class="absolute inset-x-0 top-[-0.5px] h-2 bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-blue-500 group-hover:to-purple-600"></span>
+   
     <!-- Header -->
-    <div class="p-2 md:p-2.5 flex justify-between items-center">
-    <h2 class="text-sm md:text-base lg:text-xl text-gray-800 font-bold dark:text-gray-300">
-     Agent: <a class="text-blue-600 underline" href="/assets/{{ $asset->id }}">{{ $asset->user->name }}</a>
-    </h2>
+    <div class="p-2 md:p-2.5  flex justify-between items-center">
+    <a class="text-sm hover:text-blue-600 cursor-pointer font-semibold md:text-base text-gray-800 dark:text-gray-300 truncate w-[250px] lg:w-[350px]">
+       {{ $asset->technical_report }}
+     {{-- Agent: <a class="text-blue-600" href="#">{{ $asset->user->firstname }}</a> --}}
+    </a>
     </div>
     <!-- End Header -->
 
     <div class="p-2 md:p-2.5 flex gap-x-3 flex-col lg:flex-row w-full">
     <div class="w-full lg:w-5/12">
 
-    <img src="{{$asset->profile_pics}}" alt="" class="w-full h-[230px] rounded-md">
+    <img src="{{ asset('./images/placeholder.jpg') }}" alt="" class="w-full h-[230px] rounded-md">
 
     {{-- <img src="{{ asset('./images/placeholder.jpg') }}" alt="" class="w-full h-[230px] rounded-md"> --}}
     </div>
 
     <div class="w-full lg:w-7/12 flex flex-col gap-y-3">
-    <h2 class="text-base lg:text-2xl font-bold text-blue-600">Precious Metals</h2>
-    <p class="text-gray-500 relative before:absolute before:content-[''] before:w-full before:h-[0.1px] before:bg-gray-200 before:-bottom-1">
+    <h2 class="text-base lg:text-2xl font-bold text-blue-600">{{ $asset->asset_information }}</h2>
+    <p class="text-gray-500 dark:text-gray-200 relative min-h-[150px] before:absolute before:content-[''] before:w-full before:h-[0.1px] before:bg-gray-200 dark:before:bg-gray-600 before:-bottom-1">
 {{ $asset->mineral_details }}
     <div class="flex gap-x-3 items-center">
-    <h1 class="text-base lg:text-2xl font-bold text-blue-600"><span class="lowercase">For {{ $asset->asset_type }}:</span>
-     &#8358;<span>{{ $asset->price }}</span>
+    <h1 class="text-base lg:text-2xl font-bold"><span class="text-gray-600 dark:text-gray-300">Price:</span>
+     <span class="text-blue-600">&#8358;{{ $asset->price }}</span>
     </h1>
     </div>
     </div>
     </div>
 
-    <div class="flex border-t-[0.5px] p-2 bg-gray-500/20 rounded-br-xl rounded-bl-xl border-gray-300/50 justify-between dark:text-gray-300">
+    <div class="flex border-t-[0.5px] p-2 bg-gray-300/20 rounded-br-xl rounded-bl-xl border-gray-300/50 dark:border-gray-500 justify-between dark:text-gray-300">
     <div class="flex gap-x-2 items-center">
-    <div>
+    <div class="text-xs md:text:sm text-gray-500 font-semibold dark:text-gray-100">
         Asset Type:
     </div>
     <div class="text-blue-600 font-bold">
-        Gold(Au), Silver(Ag)
+    {{ $asset->asset_type }}
     </div>
     </div>
   

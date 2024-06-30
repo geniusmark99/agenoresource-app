@@ -7,6 +7,8 @@ use App\Models\Asset;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AdminUpdateRequest;
 
 class AdminController extends Controller
 {
@@ -14,20 +16,33 @@ class AdminController extends Controller
     protected $redirectTo = '/admin/dashboard';
 
 
+    public function updateProfile(Request $request)
+    {
+        // dd($request->all());
+        $admin = Auth::guard('admin')->user();
+
+        // dd(Has($admin->password));
+
+        // Check if the current password is correct
+        if (!Hash::check($request->current_password, $admin->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
+
+        // // Update the admin's email and password
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = Hash::make($request->password);
+        $admin->save();
+
+        return redirect()->back()->with('status', 'Profile updated successfully!');
+    }
+
     public function markAsActive(Request $request, $assetId)
     {
         $asset = Asset::findOrFail($assetId);
-
-        // Check if the user is an admin (Assuming you have a method to check if the user is an admin)
-        // if (auth()->user()::a) {
-        // Mark the asset as active
         $asset->active = true;
         $asset->save();
-
         return redirect()->back()->with('success', 'Asset is now active.');
-        // } else {
-        //     return redirect()->back()->with('error', 'You are not authorized to perform this action.');
-        // }
     }
 
 

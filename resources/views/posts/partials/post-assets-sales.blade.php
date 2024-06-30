@@ -125,16 +125,16 @@
         </div>
 
         <div class="flex items-center">
-            <input id="gold-plan" name="plan" type="radio" value="diamond" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-            <label for="gold-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
+            <input id="diamond-plan" name="plan" type="radio" value="diamond" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="diamond-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
                 Diamond Plan
             </label>
         </div>
 
 
         <div class="flex items-center">
-            <input id="gold-plan" name="plan" type="radio" value="platinum" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-            <label for="gold-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
+            <input id="platinum-plan" name="plan" type="radio" value="platinum" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+            <label for="platinum-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
                 Platinum Plan
             </label>
         </div>
@@ -173,8 +173,8 @@
         </div>
 
         <div class="mb-4 relative">
-        <x-input-label for="asset_type" :value="__('Asset Name')" />
-        <x-text-input id="asset_type" name="asset_name" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_name')" autofocus />
+        <x-input-label for="asset_name" :value="__('Asset Name')" />
+        <x-text-input id="asset_name" name="asset_name" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('asset_name')" autofocus />
         <x-input-error class="mt-2" :messages="$errors->get('asset_name')" />
         </div>
     </div>
@@ -311,7 +311,7 @@
 <div class="mb-1 mt-4 w-full relative flex flex-col gap-y-10 lg:gap-y-5">
 
 
-<div>
+<div>   
 <x-input-label for="mineral_details" :value="__('Duration')" />
 <div x-data="{ open: false, selectedDurationType: '', }"
 class=" relative min-w-24  md:min-w-32" x-data="{ open: false }">
@@ -352,22 +352,20 @@ class=" relative min-w-24  md:min-w-32" x-data="{ open: false }">
 
 
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
-        <div class="mb-1 w-full relative">
 
+        <div class="mb-1 w-full relative">
         <input type="file" multiple  name="video"  accept="video/*"/>
         <x-input-error class="mt-2" :messages="$errors->get('video')" />
-
         </div>
+
       {{-- <div x-data="videoUploader()" class="p-5 bg-white dark:bg-slate-900 rounded-lg shadow-md">
         <x-input-label for="pictures" :value="__('Upload your assets video(s)')" class="mb-5"/>
 
     
-        <!-- Popup Messages -->
         <div x-show="successMessage" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-green-100 text-green-700 rounded shadow-md" x-text="successMessage" x-transition x-init="setTimeout(() => { successMessage = '' }, 5000)"></div>
         <div x-show="errorMessage" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-red-100 text-red-700 rounded shadow-md" x-text="errorMessage" x-transition x-init="setTimeout(() => { errorMessage = '' }, 5000)"></div>
         <div x-show="warningMessage" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 p-4 bg-yellow-100 text-yellow-700 rounded shadow-md" x-text="warningMessage" x-transition x-init="setTimeout(() => { warningMessage = '' }, 5000)"></div>
-    
-        <div @submit.prevent="submitForm" class="space-y-5">
+        <div  class="space-y-5">
             <div
                 x-ref="dropArea"
                 @dragover.prevent="dragOver"
@@ -416,6 +414,7 @@ class=" relative min-w-24  md:min-w-32" x-data="{ open: false }">
     
 
     </div>
+
     {{-- <div x-data="imageUploader()" class="max-w-2xl mx-auto p-5 bg-white dark:bg-slate-900 rounded-lg shadow-md">
       <x-input-label for="pictures" :value="__('Upload your assets images')" class="mb-5"/>
       
@@ -479,3 +478,5 @@ class=" relative min-w-24  md:min-w-32" x-data="{ open: false }">
 
 
     </div>
+
+  

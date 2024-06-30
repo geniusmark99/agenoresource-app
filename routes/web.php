@@ -8,12 +8,13 @@ use Doctrine\DBAL\Schema\View;
 
 Route::controller(GuestController::class)->group(function () {
     Route::get('/', 'home')->name('home');
-    Route::get('/test-image-video', 'testImage');
-    Route::post('/test-upload-image-video', 'testUpload');
+    Route::view('/test', 'test');
+    // Route::get('/test-image-video', 'testImage');    
+    // Route::post('/test-upload-image-video', 'testUpload');
 
     // Route::get('/test-filter', 'testFilter');
-    Route::post('/test-upload-images', 'uploadImages')->name('upload.images');
-    Route::post('/test-upload-video', 'uploadVideo')->name('upload.videos');
+    // Route::post('/test-upload-images', 'uploadImages')->name('upload.images');
+    // Route::post('/test-upload-video', 'uploadVideo')->name('upload.videos');
     Route::get('/services', 'services')->name('services');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');

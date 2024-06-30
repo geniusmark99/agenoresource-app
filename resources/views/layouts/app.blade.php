@@ -88,7 +88,7 @@
                 });
 
                 try {
-                    const response = await fetch('{{ route('upload.images') }}', {
+                    const response = await fetch('{{ route('post.sale.assets') }}', {
                         method: 'POST',
                         body: formData,
                         headers: {
@@ -115,6 +115,30 @@
 <script>
     function videoUploader() {
         return {
+            videos: [],
+            dropHandler(event) {
+                const files = Array.from(event.dataTransfer.files);
+                this.processFiles(files);
+            },
+            fileHandler(event) {
+                const files = Array.from(event.target.files);
+                this.processFiles(files);
+            },
+            processFiles(files) {
+                files.forEach(file => {
+                    if (file.type.startsWith('video/')) {
+                        const url = URL.createObjectURL(file);
+                        this.videos.push({ name: file.name, url: url, file: file });
+                    }
+                });
+            },
+        };
+    }
+    </script>
+
+ {{-- <script>
+    function videoUploader() {
+        return {
             files: [],
             isDragging: false,
             successMessage: '',
@@ -136,6 +160,7 @@
                 this.addFiles(files);
             },
             addFiles(files) {
+                const formData = new FormData();
                 if (this.files.length + files.length > 2) {
                     this.errorMessage = 'You can only upload a maximum of 2 videos.';
                     setTimeout(() => { this.errorMessage = ''; }, 5000); // Remove error message after 5 seconds
@@ -150,8 +175,13 @@
                     } else {
                         const url = URL.createObjectURL(file);
                         this.files.push({ file, url });
+                        this.files.forEach((fileObj, index) => {
+                    formData.append('videos[]', fileObj.file);
+                });
                     }
                 });
+                
+
                 this.updateFileInput();
             },
             removeFile(index) {
@@ -172,7 +202,7 @@
                 });
 
                 try {
-                    const response = await fetch('{{ route('upload.videos') }}', {
+                    const response = await fetch('{{ route('post.sale.assets') }}', {
                         method: 'POST',
                         body: formData,
                         headers: {
@@ -197,7 +227,7 @@
             }
         }
     }
-</script>
+</script> --}}
 
 {{-- 
 <script>

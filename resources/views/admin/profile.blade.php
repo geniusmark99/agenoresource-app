@@ -1,6 +1,20 @@
-@extends('admin.layout')
+@extends('admin.app')
+@section('admin-title','Profile')
 @section('admin-content')
 <section class="mx-4">
+
+@if (session('status'))
+<div 
+x-data="{ show: true }" 
+x-init="setTimeout(() => { show = false }, 5000)" 
+x-show="show" 
+class="fixed bottom-4 right-4 bg-ageno-2 text-white px-4 py-2 rounded shadow-md"
+>
+{{ session('status') }}
+</div>
+@endif
+
+
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
@@ -10,25 +24,24 @@
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
+    
 
-    {{-- <form  method="post" action="#">
-        @csrf
-    </form> --}}
-
-    <form action="#" class="mt-6 space-y-6 w-full">
-        {{-- @csrf --}}
-        {{-- @method('patch') --}}
+    <div class="mt-6 space-y-6 w-full">
+     
 <div class="grid grid-cols-1 lg:grid-cols-2 w-full lg:w-[1000px] gap-y-4 lg:gap-x-10">
-<div class="w-full flex flex-col gap-y-4">
+<form class="w-full flex flex-col gap-y-4" action="{{ route('admin.updateProfile') }}" method="POST">
 
-        <div>
+  @csrf
+  @method('PUT')
+
+        <div class="relative">
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
 
-        <div>
+        <div class="relative">
           <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" /> 
@@ -36,21 +49,44 @@
         </div>
 
         
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" name="password" type="password" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('password', $user->password)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('password')" />
+        <div class="relative">
+            <x-input-label for="current_password" :value="__('Current Password')" />
+            <x-text-input id="current_password" name="current_password" type="password" 
+            class="dark:bg-neutral-800 mt-1 block w-full" autofocus/>
+            <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
         </div>
 
 
         
-        <div>
-            <x-input-label for="password" :value="__('Confirm Password')" />
-            <x-text-input id="password" name="password" type="password" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('password', $user->password)" required autofocus autocomplete="name" />
+        <div class="relative">
+            <x-input-label for="password" :value="__('New password')" />
+            <x-text-input id="password" name="password" type="password" 
+            class="dark:bg-neutral-800 mt-1 block w-full" autofocus />
             <x-input-error class="mt-2" :messages="$errors->get('password')" />
         </div>
 
-</div>
+
+        <div class="relative">
+          <x-input-label for="password_confirmation" :value="__('Confirm new password')" />
+          <x-text-input id="password_confirmation" name="password_confirmation" type="password" 
+          class="dark:bg-neutral-800 mt-1 block w-full" autofocus />
+          <x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
+      </div>
+
+        <button type='submit' class='text-center py-3 px-2 bg-ageno mt-4
+         dark:bg-ageno-2 border border-transparent rounded-md font-semibold text-xs
+          text-white dark:text-gray-200 hover:dark:text-gray-100 uppercase tracking-widest hover:bg-ageno-2
+           dark:hover:bg-ageno focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900
+           focus:outline-none focus:ring-2 focus:ring-indigo-500
+             focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'>
+  Update
+         </button>
+      
+
+
+        
+
+</form>
 
 <div class="rounded-sm border border-gray-300 bg-white shadow-default dark:border-gray-700 dark:bg-neutral-800">
     <div class="border-b border-gray-300 py-4 px-7 dark:border-gray-700">
@@ -140,7 +176,7 @@
 </div>
 
 
-        <div class="flex items-center gap-4">
+        {{-- <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
@@ -152,8 +188,8 @@
                     class="text-sm text-gray-600 dark:text-gray-400"
                 >{{ __('Saved.') }}</p>
             @endif
-        </div>
-    </form>
+        </div> --}}
+      </div>
 </section>
 
 @endsection

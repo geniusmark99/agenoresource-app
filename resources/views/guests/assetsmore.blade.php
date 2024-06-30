@@ -3,74 +3,171 @@
 
 @section('app-content')
 
-{{-- <div class="flex flex-col mt-4">
-<h3 class=" px-4 sm:px-6 lg:px-28 text-left text-ageno lg:text-3xl font-bold dark:text-white">Top Latest assets</h3>
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    <div class="container">
-        <h1>{{ $asset->asset_name }}</h1>
-        <p><strong>UID:</strong> {{ $asset->uid }}</p>
-        <p><strong>Project ID:</strong> {{ $asset->project_id }}</p>
-        <p><strong>Asset Type:</strong> {{ $asset->asset_type }}</p>
-        <p><strong>Location:</strong> {{ $asset->asset_location_details }}</p>
-        <p><strong>Information:</strong> {{ $asset->asset_information }}</p>
-        @if($asset->pictures)
-            <div>
-                <strong>Pictures:</strong>
-                <div>{!! $asset->pictures !!}</div>
-            </div>
-        @endif
-        @if($asset->video)
-            <div>
-                <strong>Video:</strong>
-                <div>{!! $asset->video !!}</div>
-            </div>
-        @endif
-        @if($asset->technical_report)
-            <div>
-                <strong>Technical Report:</strong>
-                <div>{!! $asset->technical_report !!}</div>
-            </div>
-        @endif
-        <p><strong>Price:</strong> {{ $asset->price }}</p>
-        @if($asset->coordinates)
-            <p><strong>Coordinates:</strong> {{ $asset->coordinates }}</p>
-        @endif
-        @if($asset->land_size)
-            <p><strong>Land Size:</strong> {{ $asset->land_size }}</p>
-        @endif
-        @if($asset->mineral_details)
-            <p><strong>Mineral Details:</strong> {{ $asset->mineral_details }}</p>
-        @endif
-        @if($asset->reserve_deposit)
-            <p><strong>Reserve Deposit:</strong> {{ $asset->reserve_deposit }}</p>
-        @endif
-        @if($asset->jorc_report)
-            <p><strong>JORC Report:</strong> {{ $asset->jorc_report }}</p>
-        @endif
-        <p><strong>Opportunity Type:</strong> {{ $asset->opportunity_type }}</p>
-        @if($asset->geological_location)
-            <p><strong>Geological Location:</strong> {{ $asset->geological_location }}</p>
-        @endif
-        @if($asset->contact_information)
-            <p><strong>Contact Information:</strong> {{ $asset->contact_information }}</p>
-        @endif
-        <p><strong>Date Added:</strong> {{ $asset->date_added }}</p>
-        <p><strong>Times Viewed:</strong> {{ $asset->times_viewed }}</p>
-        <p><strong>Paid:</strong> {{ $asset->paid ? 'Yes' : 'No' }}</p>
-        <p><strong>Duration Date:</strong> {{ $asset->duration_date }}</p>
-        <p><strong>Active:</strong> {{ $asset->active ? 'Active' : 'Inactive' }}</p>
-        <p><strong>User Name:</strong> {{ $asset->user->name }}</p>
+@livewire('asset-filter')
+
+
+<div class="px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto bg-white flex justify-center items-center">
+  <div class="max-w-7xl grid grid-cols-1 gap-y-4 md:gap-x-4 md:grid-cols-12 w-full">
+<div class="md:col-span-8 flex flex-col gap-y-10">
+
+  <h1 class="font-bold text-indigo-950 md:text-2xl">
+    {{ $asset->asset_name }}
+  </h1>
+
+
+  <img class="w-full object-cover rounded-xl" src="https://images.unsplash.com/photo-1670272498380-eb330b61f3cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Image Description">
+
+
+  <div class="flex flex-col md:flex-row justify-between border-b border-gray-500/40 pb-6">
+ <h2 class="text-2xl text-indigo-950 md:text-4xl font-semibold">
+  &#8358; {{ $asset->price }}
+
+
+ </h2>
+
+ <div class="hidden md:block w-[1px] h-full bg-gray-500/40"></div>
+ <div class="flex justify-between mt-2 md:mt-0 md:justify-around md:gap-x-10">
+<div class="flex gap-x-2 items-center">
+<div>one</div>
+<div>two</div>
+</div>
+
+<div class="flex gap-x-2 items-center">
+<div>one</div>
+<div>two</div>
+</div>
+
+ </div>
+  </div>
+
+<div class="border-b border-gray-500/40 pb-10">
+<h1 class="text-xl md:text-2xl font-bold text-indigo-950 mb-5">Asset Address</h1>
+<p class="flex gap-x-3">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="size-6 fill-indigo-950">
+<path d="M25 1C16.179688 1 9 8.179688 9 17C9 31.113281 23.628906 47.945313 24.25 48.65625C24.441406 48.875 24.710938 49 25 49C25.308594 48.980469 25.558594 48.875 25.75 48.65625C26.371094 47.933594 41 30.8125 41 17C41 8.179688 33.820313 1 25 1 Z M 25 12C28.3125 12 31 14.6875 31 18C31 21.3125 28.3125 24 25 24C21.6875 24 19 21.3125 19 18C19 14.6875 21.6875 12 25 12Z"/>
+</svg>
+<span class="font-semibold text-indigo-900">
+{{ $asset->asset_location_details }}
+</span>
+</p>
+</div>
+
+  <div class="border-b border-gray-500/40 bg-blue-200/20 rounded-md shadow-sm p-3">
+<h2 class="flex items-center gap-x-1 mb-5">
+  <span class="text-2xl text-indigo-950 font-bold">
+    Safety Tips  
+  </span>
+  <svg class="size-5 fill-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <path d="M7.5 1C3.917969 1 1 3.917969 1 7.5C1 11.082031 3.917969 14 7.5 14C11.082031 14 14 11.082031 14 7.5C14 3.917969 11.082031 1 7.5 1 Z M 7.5 2C10.542969 2 13 4.457031 13 7.5C13 10.542969 10.542969 13 7.5 13C4.457031 13 2 10.542969 2 7.5C2 4.457031 4.457031 2 7.5 2 Z M 7.558594 4C6.347656 4.070313 5.359375 5.085938 5.359375 6.320313L6.359375 6.320313C6.359375 5.507813 7.0625 4.871094 7.921875 5.019531C8.535156 5.125 9.019531 5.726563 9 6.359375C8.984375 6.914063 8.660156 7.265625 8.183594 7.476563C7.886719 7.609375 7.605469 7.734375 7.367188 7.984375C7.128906 8.234375 7 8.605469 7 9L8 9C8 8.773438 8.03125 8.738281 8.09375 8.671875C8.152344 8.609375 8.316406 8.511719 8.585938 8.390625C9.332031 8.066406 9.972656 7.351563 10 6.390625C10.035156 5.253906 9.21875 4.226563 8.089844 4.03125C7.910156 4.003906 7.730469 3.992188 7.558594 4 Z M 7 10L7 11L8 11L8 10Z"  />
+  </svg>
+
+</h2>
+
+<ul class="px-4 font-normal text-xl text-indigo-900 gap-y-2 flex flex-col">
+  <li class="list-decimal">
+    Do not make any inspection fee without seeing the agent and property.
+  </li>
+
+  <li class="list-decimal">
+    Ensure you meet the Agent in an open location.
+  </li>
+
+  
+  <li class="list-decimal">
+  The Agent does not represent Agenoresources and Agenoresources are not liable for any monetary transaction between you and the Agent.
+
+  </li>
+
+
+
+</ul>
+  </div>
+
+
+  <div class="border-b border-gray-500/20 pb-10">
+    <h1 class="text-xl md:text-2xl font-bold text-indigo-950 mb-5">Description</h1>
+    <p class="flex gap-x-3 text-indigo-950 text-xl">
+   {{ $asset->mineral_details }}
+    </p>
     </div>
 
 </div>
-</div> --}}
 
 
-<!-- Blog Article -->
-<div class="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
-    <div class="max-w-2xl">
+<div class="md:col-span-4 flex flex-col gap-y-8">
+
+
+
+<div class="flex flex-col gap-x-4 px-3 md:mt-16 shadow-md  rounded-lg p-2">
+  <div class="flex gap-x-4">
+  <div class="flex flex-col  gap-y-2 justify-center items-center">
+  <div class="size-14 bg-red-600"></div>
+  <img src="{{ asset('images/agent-icon.svg') }}"  class="w-20" alt="">
+  </div>
+  <div class="flex flex-col">
+  <h1 class="font-semibold text-slate-800">
+  {{ $asset->user->firstname }} {{ $asset->user->lastname }}
+  </h1>
+
+  <p class="text-blue-500 font-semibold text-sm">View more assets from this <a href="#" class="underline">agent</a></p>
+  </div>
+  </div>
+  <div class="flex md:flex-col gap-x-2 gap-y-2 mt-6 w-full">
+  <a class="w-6/12 md:w-full text-xs sm:text-sm text-center block rounded-md bg-blue-500 hover:bg-blue-600 text-white py-2.5 font-semibold" href="#">
+  {{ $asset->user->phone_number }}
+  </a>
+  <a class="w-6/12 md:w-full text-xs sm:text-sm text-center inline-flex items-center justify-center gap-x-2 rounded-md bg-green-500 hover:bg-green-600 text-white py-2.5 font-semibold" href="#">
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="size-6 fill-white">
+  <path d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z" />
+  </svg>
+  Whatsapp
+  </a>
+  </div>
+</div>
+
+<div class="flex flex-col gap-x-4 px-3 shadow-md  rounded-lg p-2 w-full">
+  <form action="#" method="post" class="w-full px-2 flex flex-col gap-y-3.5">
+
+<input type="text" name="name" class=" w-full flex py-3 rounded-md border shadow-sm border-gray-200 ring-0 focus:outline-none focus:ring-0 outline-none" placeholder="Name">
+
+<input type="text" name="phone_number" class=" w-full flex py-3 rounded-md border shadow-sm border-gray-200 ring-0 focus:outline-none focus:ring-0 outline-none" placeholder="Phone number">
+
+<input type="email" name="email" 
+class="w-full flex py-3 rounded-md border shadow-sm border-gray-200 ring-0 focus:outline-none focus:ring-0 outline-none" placeholder="Email">
+
+<textarea name="message" id="additional_message" cols="30" rows="5" 
+class="w-full flex py-3 rounded-md border shadow-sm border-gray-200 ring-0 focus:outline-none focus:ring-0 outline-none" placeholder="Additional message">
+Hello {{ $asset->user->firstname }} {{ $asset->user->lastname }}, I will like to check your assets, for your price &#8358;{{ $asset->price }}
+</textarea>
+
+
+<div class="flex gap-x-2 gap-y-2 mt-6 w-full">
+  <a class="w-6/12 md:w-full text-xs sm:text-sm text-center block rounded-md bg-blue-500 hover:bg-blue-600 text-white py-2.5 font-semibold" href="#">
+Enquiry
+  </a>
+  <a class="w-6/12 md:w-full text-xs sm:text-sm text-center inline-flex items-center justify-center gap-x-2 rounded-md bg-green-500 hover:bg-green-600 text-white py-2.5 font-semibold" href="#">
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="size-6 fill-white">
+  <path d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z" />
+  </svg>
+  Whatsapp
+  </a>
+  </div>
+</form>
+
+</div>
+
+<div>
+
+
+</div>
+
+</div>
+ 
+</div>
       <!-- Avatar Media -->
-      <div class="flex justify-between items-center mb-6">
+    {{--     <div class="flex justify-between items-center mb-6">
         <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
           <div class="flex-shrink-0">
             <img class="size-12 rounded-full" 
@@ -82,7 +179,6 @@
           <div class="grow">
             <div class="flex justify-between items-center gap-x-2">
               <div>
-                <!-- Tooltip -->
                 <div class="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
                   <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
                     <span class="font-semibold text-gray-800 dark:text-neutral-200">
@@ -90,9 +186,7 @@
                       {{ $asset->user->lastname }}
                     </span>
   
-                    <!-- Dropdown Card -->
                     <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-neutral-950 dark:divide-neutral-700" role="tooltip">
-                      <!-- Body -->
                       <div class="p-4 sm:p-5">
                         <div class="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
                           <div class="flex-shrink-0">
@@ -111,9 +205,7 @@
                           Leyla is a Customer Success Specialist at Preline and spends her time speaking to in-house recruiters all over the world.
                         </p>
                       </div>
-                      <!-- End Body -->
-  
-                      <!-- Footer -->
+                  
                       <div class="flex justify-between items-center px-4 py-3 sm:px-5">
                         <ul class="text-xs space-x-3">
                           <li class="inline-block">
@@ -136,12 +228,9 @@
                           </button>
                         </div>
                       </div>
-                      <!-- End Footer -->
                     </div>
-                    <!-- End Dropdown Card -->
                   </div>
                 </div>
-                <!-- End Tooltip -->
   
                 <ul class="text-xs text-gray-500 dark:text-neutral-500">
                   <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
@@ -154,7 +243,6 @@
                 </ul>
               </div>
   
-              <!-- Button Group -->
               <div>
                 <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-ageno dark:border-neutral-700 dark:text-white dark:hover:bg-ageno-2">
                     <svg class="size-4 fill-black dark:fill-neutral-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -163,14 +251,11 @@
                   {{ $asset->user->account_type }}
                 </button>
               </div>
-              <!-- End Button Group -->
             </div>
           </div>
         </div>
       </div>
-      <!-- End Avatar Media -->
   
-      <!-- Content -->
       <div class="space-y-5 md:space-y-8">
         <div class="space-y-3">
           <h2 class="text-2xl font-bold md:text-3xl dark:text-white">
@@ -199,7 +284,6 @@
           @endforelse
           
           <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-            {{-- A woman sitting at a table. --}}
           </figcaption>
         </figure>
   
@@ -251,10 +335,9 @@
           </a>
         </div>
       </div>
-      <!-- End Content -->
     </div>
+     --}}
   </div>
-  <!-- End Blog Article -->
   
   <!-- Sticky Share Group -->
   <div class="sticky bottom-6 inset-x-0 text-center">
@@ -288,11 +371,10 @@
   
         <div class="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
   
-        <!-- Button -->
         <div class="hs-dropdown relative inline-flex">
           <button type="button" id="blog-article-share-dropdown" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200">
             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
-            Share
+            Buy
           </button>
           <div class="hs-dropdown-menu w-56 transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mb-1 z-10 bg-gray-900 shadow-md rounded-xl p-2 dark:bg-neutral-950" aria-labelledby="blog-article-share-dropdown">
             <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:ring-neutral-400" href="#">
@@ -320,10 +402,13 @@
             </a>
           </div>
         </div>
-        <!-- Button -->
+
       </div>
     </div>
   </div>
   <!-- End Sticky Share Group -->
 
-@endsection
+
+
+
+  @endsection

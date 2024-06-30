@@ -3,16 +3,28 @@
 
 @section('app-content')
 
- <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
-    <div class="flex justify-center items-center">
-        <h1 class="text-center flex items-center animate-ping delay-[2000ms]  md:text-6xl text-4xl font-extrabold font-mono bg-gradient-to-r from-green-500 via-indigo-400 to-indigo-600  text-transparent bg-clip-text">
-           
-      Coming soon
-        </h1>
+<div class="h-screen w-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+  <div
+    class="absolute animate-[cbounce_4s_ease-in-out_infinite] z-10 w-full h-[50%] flex flex-col justify-end items-center bg-gray-50 dark:bg-gray-900">
+    <h1
+      class="sm:text-9xl text-7xl font-extrabold font-mono bg-gradient-to-r from-green-500 via-indigo-400 to-indigo-600 inline-block text-transparent bg-clip-text">
+      Coming</h1>
+  </div>
+  <div class="absolute w-full h-[50%] flex flex-col items-center justify-end bg-gray-50 dark:bg-gray-900">
+    <h1
+      class="sm:text-7xl text-6xl text-center font-mono font-extrabold bg-gradient-to-r from-green-500 via-indigo-400 to-indigo-600 inline-block text-transparent bg-clip-text">
+      Soon</h1>
+    <div id="countdown" class="flex items-center justify-center text-gray-500 dark:text-white text-2xl font-extrabold">
+      <span id="days" class="px-2"></span>
+      <span id="hours" class="px-2"></span>
+      <span id="minutes" class="px-2"></span>
+      <span id="seconds" class="px-2"></span>
     </div>
-   
+  </div>
 
-          
+</div>
+
+{{-- <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
   <div class="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
     <div class="lg:col-span-2">
       <div class="py-8 lg:pe-8">
@@ -247,6 +259,39 @@
       </div>
     </div>
   </div>
-</div> 
+</div> --}}
 @endsection
 
+@section('app-script')
+<script>
+  // Set the date we're counting down to (adjust the date and time)
+  const countDownDate = new Date("Sep 30, 2024 00:00:00").getTime();
+
+  // Update the countdown every 1 second
+  const x = setInterval(function () {
+    // Get the current date and time
+    const now = new Date().getTime();
+
+    // Calculate the time remaining
+    const distance = countDownDate - now;
+
+    // Calculate days, hours, minutes, and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the countdown in the HTML
+    document.getElementById("days").innerHTML = days + " D";
+    document.getElementById("hours").innerHTML = hours + " H"
+    document.getElementById("minutes").innerHTML = minutes + " M";
+    document.getElementById("seconds").innerHTML = seconds + " S";
+
+    // If the countdown is over, display a message
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+</script>
+@endsection

@@ -1,5 +1,5 @@
 <!-- ========== HEADER ========== -->
-<header class="flex flex-wrap sm:justify-start border-b border-gray-200/50 sm:flex-nowrap z-50 w-full bg-gradient-to-tr from-ageno to-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0">
+<header class="flex diamond-pattern flex-wrap sm:justify-start border-b border-gray-200/50 sm:flex-nowrap z-50 w-full bg-blue-600 dark:bg-ageno-dark shadow-sm text-sm sm:py-4 lg:py-0">
   
   <nav class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
       <div class="flex items-center justify-between">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div  :class="sidebarOpen ? 'block' : 'hidden' " class="overflow-hidden transition-all duration-300 basis-full grow sm:block">
-        <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
+        <div x-cloak class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
             <x-general-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-general-nav-link>
@@ -34,7 +34,7 @@
             </x-general-nav-link>
 
             <x-general-nav-link :href="route('about')" :active="request()->routeIs('about')">
-                {{ __('about') }}
+                {{ __('About') }}
             </x-general-nav-link>
 
             <x-general-nav-link :href="route('blog')" :active="request()->routeIs('blog')">
@@ -47,7 +47,7 @@
             </x-general-nav-link>
 
             <x-general-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
-                {{ __('contact') }}
+                {{ __('Contact') }}
             </x-general-nav-link>
 
             {{-- <x-general-nav-link :href="route('pricing')" :active="request()->routeIs('pricing')">
@@ -93,7 +93,7 @@
 
         </div>
 
-<x-dark-mode-toggle-widget/>
+{{-- <x-dark-mode-toggle-widget/> --}}
 
           </div>
         </div>

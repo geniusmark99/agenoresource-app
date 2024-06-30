@@ -87,7 +87,7 @@ class GuestController extends Controller
             $query->where('asset_name', 'like', '%' . $request->search . '%');
         }
 
-        $assets = $query->get();
+        $assets = $query->paginate(15);
 
         return view('assets.index', compact('assets'));
     }
@@ -145,13 +145,14 @@ class GuestController extends Controller
 
     public function home()
     {
-        $assets = Asset::latest()->get();
+        // $assets = Asset::latest()->get();
+        $assets = Asset::latest()->where('active', 1)->limit(10)->get();
         return view('guests.home', ['assets' => $assets]);
     }
 
     public function assets()
     {
-        $assets = Asset::with('user')->where('active', 1)->paginate(15);
+        $assets = Asset::with('user')->where('active', 1)->get();
         return view('guests.assets', compact('assets'));
     }
 

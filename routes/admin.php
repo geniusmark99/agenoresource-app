@@ -52,6 +52,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/profile', [AdminController::class, 'profile'])
             ->name('admin.profile');
 
+        Route::put('/update-profile', [AdminController::class, 'updateProfile'])
+            ->name('admin.updateProfile');
+
 
         Route::get('/users', [AdminController::class, 'users'])
             ->name('admin.users');

@@ -16,8 +16,14 @@
 
   <!-- Announcement Banner -->
   <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto  absolute top-2">
-    <h1 class="text-2xl lg:text-5xl font-extrabold text-center"><span class="text-transparent bg-gradient-to-br bg-clip-text from-gray-300 via-slate-300 to-white dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500"> Coming </span><span class="text-transparent bg-gradient-to-tr bg-clip-text from-white to-gray-400"> Soon... </span></h1>
-  </div>
+    {{-- <h1 class="text-2xl lg:text-5xl font-extrabold text-center"><span class="text-transparent bg-gradient-to-br bg-clip-text from-gray-300 via-slate-300 to-white dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500"> Coming </span><span class="text-transparent bg-gradient-to-tr bg-clip-text from-white to-gray-400"> Soon... </span></h1> --}}
+    {{-- <div class="flex justify-center items-center">
+        <h1 class="text-center flex items-center animate-ping delay-[2000ms]  md:text-6xl text-4xl font-extrabold font-mono bg-gradient-to-r from-green-500 via-indigo-400 to-indigo-600  text-transparent bg-clip-text">
+           
+      Coming soon
+        </h1>
+    </div> --}}
+</div>
   <!-- End Announcement Banner -->
 <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24">
 <div class="text-center">
@@ -93,7 +99,7 @@ class="flex justify-center items-center "
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 <!-- Title -->
 <div class="w-full sm:w-1/2 lg:w-full mx-auto text-center mb-6">
-<h2 class="text-black dark:text-gray-400 font-semibold text-xl lg:text-2xl">Trusted by top Mining Brand and enterprise</h2>
+<h2 class="text-black dark:text-gray-400 font-bold text-xl lg:text-2xl">Trusted by top Mining Brand and enterprise</h2>
 
 <div class="grid grid-cols-1 mt-10 gap-4 lg:flex justify-center lg:justify-between">
 <div class="w-full h-28 flex justify-center items-center border dark:border-gray-700 shadow-md shadow-green-600/20 dark:shadow-ageno/10 rounded-md py-4">
@@ -118,9 +124,8 @@ class="flex justify-center items-center "
 
 
 
-
 <div class="flex flex-col mt-4">
-<h3 class=" px-4 sm:px-6 lg:px-28 text-left text-ageno lg:text-3xl font-bold dark:text-white">Featured Latest assets</h3>
+<h3 class=" px-4 sm:px-6 lg:px-48 text-left text-ageno lg:text-3xl font-bold dark:text-white">Featured Latest assets</h3>
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 <!-- Grid -->
 {{-- grid lg:grid-cols-2 gap-4 sm:gap-6 --}}
@@ -129,6 +134,10 @@ class="flex justify-center items-center "
         <x-widgets.asset-widget :assets="$assets"/>
 
 </div>
+<div class="w-full flex justify-center items-center mt-10">
+    <a href="{{ route('assets') }}" class="py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">View more assets</a>
+</div>
+
 <!-- End Grid -->
 </div>
 <!-- End Card Blog -->
