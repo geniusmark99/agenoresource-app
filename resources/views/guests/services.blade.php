@@ -1,5 +1,5 @@
 @extends('layouts.general')
-@section('app-title','Home')
+@section('app-title','Services')
 @section('app-content')
 <!-- Hero -->
 <div class="relative overflow-hidden">
@@ -9,7 +9,7 @@
         Ageno resources
       </h1>
 
-      <p class="mt-3 text-gray-600 dark:text-gray-400">
+      <p class="mt-3 text-lg font-semibold md:text-2xl text-gray-900 dark:text-gray-400">
         Post mining assets and get insights from industry experts.
       </p>
 
@@ -48,8 +48,9 @@
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Mineral Supply Chain</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-indigo-500 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">A decentralized application (dapp) is an application built on a
-                            decentralized network that combines a smart contract and a frontend user interface.</p>
+                        <p class="mb-2 text-gray-600">
+                            At Agenoresource, we streamline the mineral supply chain to ensure the efficient and timely delivery of precious stones and minerals. Our robust network and logistics capabilities guarantee that our customers receive high-quality minerals, such as gold, cobalt, silver, and diamonds, from reliable sources around the globe.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -61,8 +62,9 @@
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Mining Assets For Sale</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-purple-500 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">Web 3.0 is the third generation of Internet services that will
-                            focus on understanding and analyzing data to provide a semantic web.</p>
+                        <p class="mb-2 text-gray-600">
+                            Explore our extensive inventory of mining assets for sale. From high-yield mineral deposits to fully operational mines, we offer a range of assets that cater to both small and large-scale mining operations. Invest with confidence and secure valuable resources to meet your business needs.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -76,8 +78,9 @@
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Mining Assets For Lease</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-blue-400 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">A Project Audit is a formal review of a project, which is intended
-                            to assess the extent up to which project management standards are being upheld.</p>
+                        <p class="mb-2 text-gray-600">
+                            We provide flexible leasing options for mining assets, allowing you to access essential resources without the upfront investment. Whether you need short-term access to a mining site or long-term leasing solutions, our tailored plans are designed to support your operational requirements and maximize your productivity.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -89,8 +92,10 @@
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Manpower Deployment/Supply</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-yellow-400 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">A security hacker is someone who explores methods for breaching
-                            defenses and exploiting weaknesses in a computer system or network.</p>
+                        <p class="mb-2 text-gray-600">
+                            Our comprehensive manpower deployment services ensure that you have the skilled workforce necessary to execute your mining projects efficiently. We supply experienced professionals, from engineers to technicians, who are well-versed in industry best practices and safety standards, ensuring smooth and successful operations.
+
+                        </p>
                     </div>
                 </div>
             </div>
@@ -102,8 +107,10 @@
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Equipment Lease and Sales</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-green-500 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">Bot development frameworks were created as advanced software tools
-                            that eliminate a large amount of manual work and accelerate the development process.</p>
+                        <p class="mb-2 text-gray-600">
+
+                            Equip your mining operations with top-of-the-line machinery and tools through our equipment lease and sales services. We offer a wide range of equipment, from heavy-duty mining trucks to precision drilling machines, available for both purchase and lease. Our flexible terms and high-quality inventory ensure you have the right tools to achieve optimal performance.
+                        </p>
                     </div>
                 </div>
             </div>

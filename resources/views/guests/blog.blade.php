@@ -1,15 +1,15 @@
 @extends('layouts.general')
-@section('app-title','Agenoresource Blog')
+@section('app-title','Blog')
 
 @section('app-content')
 
  <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
-    <div class="flex justify-center items-center">
+    {{-- <div class="flex justify-center items-center">
         <h1 class="text-center flex items-center animate-ping delay-[2000ms]  md:text-6xl text-4xl font-extrabold font-mono bg-gradient-to-r from-green-500 via-indigo-400 to-indigo-600  text-transparent bg-clip-text">
            
       Coming soon
         </h1>
-    </div>
+    </div> --}}
    
 
           

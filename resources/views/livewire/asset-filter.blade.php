@@ -6,7 +6,7 @@ x-init="window.pageYOffset > 50 ? scrolled = true : scrolled = false"
 :class="scrolled ? 'bg-white shadow-lg top-0 fixed transition-all duration-300' : 'bg-transparent relative'"
 
 >
-<div class="flex justify-center item-center  dark:bg-ageno-dark shadow-lg w-full" :class="scrolled ? 'bg-blue-600' : 'bg-white'">
+<div class="flex justify-center item-center   dark:bg-ageno-dark shadow-lg w-full" :class="scrolled ? 'bg-blue-600' : 'bg-white'">
 
 
    
@@ -21,12 +21,23 @@ x-init="window.pageYOffset > 50 ? scrolled = true : scrolled = false"
                   </svg>
             </button>
             <div x-cloak x-show="open" @click.away="open = false" class="absolute mt-1 w-full bg-white border dark:text-gray-400 dark:bg-gray-900 dark:border-gray-600 border-gray-300 rounded-md shadow-lg">
-                <ul class="text-xs md:text-base">
+                <ul class="text-xs md:text-base max-h-[350px] overflow-x-hidden overflow-y-auto">
                     <li @click="selectedAssetType = ''; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">All</li>
-                    <li @click="selectedAssetType = 'sale'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Sale</li>
-                    <li @click="selectedAssetType = 'lease'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Lease</li>
-                    <li @click="selectedAssetType = 'partner'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Partner</li>
-                    <li @click="selectedAssetType = 'equipment'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Equipment</li>
+                    <li @click="selectedAssetType = 'gold'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Gold</li>
+                    <li @click="selectedAssetType = 'silver'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Silver</li>
+                    <li @click="selectedAssetType = 'diamond'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Diamond</li>
+                    <li @click="selectedAssetType = 'cobalt'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Cobalt</li>
+                    <li @click="selectedAssetType = 'lithium'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Lithium</li>
+                    <li @click="selectedAssetType = 'tantalite'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Tantalite</li>
+                    <li @click="selectedAssetType = 'columbite'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Columbite</li>
+                    <li @click="selectedAssetType = 'zinc'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Zinc</li>
+                    <li @click="selectedAssetType = 'tourmaline'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Tourmaline</li>
+                    <li @click="selectedAssetType = 'tin'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Tin</li>
+                    <li @click="selectedAssetType = 'tungsten'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Tungsten</li>
+                    <li @click="selectedAssetType = 'nickel'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Nickel</li>
+                    <li @click="selectedAssetType = 'manganese'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Manganese</li>
+                    <li @click="selectedAssetType = 'lead'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Lead</li>
+                    <li @click="selectedAssetType = 'beryl'; open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-gray-300">Beryl</li>
                 </ul>
             </div>
             <input type="hidden" name="assetType" x-model="selectedAssetType">

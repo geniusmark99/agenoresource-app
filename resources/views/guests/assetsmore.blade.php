@@ -14,29 +14,33 @@
     {{ $asset->asset_name }}
   </h1>
 
+  <div class="w-full overflow-hidden rounded-md">
+    @if ($asset->pictures)
+    @if (count($asset->pictures) > 1)
+    <x-asset-swiper :pictures="$asset->pictures" class="w-full"/>
+    @else
+    @foreach ($asset->pictures as $picture) 
+    <img src="{{ asset($picture) }}" alt="" 
+    class="w-full h-[230px] object-cover transition-all transform hover:filter rounded-md group-hover:scale-105" draggable="false">
+    @endforeach 
+    @endif
+    @endif 
+</div>  
 
-  <img class="w-full object-cover rounded-xl" src="https://images.unsplash.com/photo-1670272498380-eb330b61f3cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Image Description">
 
 
-  <div class="flex flex-col md:flex-row justify-between border-b border-gray-500/40 pb-6">
+
+  <div class="flex bg-gray-300/5 py-4 lg:items-center md:flex-row justify-between shadow-sm border-gray-500/40 px-2 rounded-md">
  <h2 class="text-2xl text-indigo-950 md:text-4xl font-semibold">
   &#8358; {{ $asset->price }}
-
-
  </h2>
 
  <div class="hidden md:block w-[1px] h-full bg-gray-500/40"></div>
  <div class="flex justify-between mt-2 md:mt-0 md:justify-around md:gap-x-10">
-<div class="flex gap-x-2 items-center">
-<div>one</div>
-<div>two</div>
-</div>
+  <button class="outset-none py-2 px-3 bg-ageno-2 rounded-md shadow-sm hover:shadow-md text-white text-sm md:text-base hover:bg-ageno">
+    View Video
 
-<div class="flex gap-x-2 items-center">
-<div>one</div>
-<div>two</div>
-</div>
-
+  </button>
  </div>
   </div>
 
@@ -101,7 +105,8 @@
 <div class="flex flex-col gap-x-4 px-3 md:mt-16 shadow-md  rounded-lg p-2">
   <div class="flex gap-x-4">
   <div class="flex flex-col  gap-y-2 justify-center items-center">
-  <div class="size-14 bg-red-600"></div>
+  <x-agent-avatar fname="{{$asset->user->firstname}}" lname="{{$asset->user->lastname}}"/>
+
   <img src="{{ asset('images/agent-icon.svg') }}"  class="w-20" alt="">
   </div>
   <div class="flex flex-col">
@@ -166,177 +171,7 @@ Enquiry
 </div>
  
 </div>
-      <!-- Avatar Media -->
-    {{--     <div class="flex justify-between items-center mb-6">
-        <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-          <div class="flex-shrink-0">
-            <img class="size-12 rounded-full" 
-            src="{{ $asset->user->profile_pics }}"            
-            alt="Image Description">
-       
-        </div>
-  
-          <div class="grow">
-            <div class="flex justify-between items-center gap-x-2">
-              <div>
-                <div class="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
-                  <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
-                    <span class="font-semibold text-gray-800 dark:text-neutral-200">
-                      {{ $asset->user->firstname }}
-                      {{ $asset->user->lastname }}
-                    </span>
-  
-                    <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-neutral-950 dark:divide-neutral-700" role="tooltip">
-                      <div class="p-4 sm:p-5">
-                        <div class="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-                          <div class="flex-shrink-0">
-                            <img class="size-8 rounded-full" 
-                            src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                            alt="Image Description">
-                          </div>
-  
-                          <div class="grow">
-                            <p class="text-lg font-semibold text-gray-200 dark:text-neutral-200">
-                              Leyla Ludic
-                            </p>
-                          </div>
-                        </div>
-                        <p class="text-sm text-gray-400 dark:text-neutral-400">
-                          Leyla is a Customer Success Specialist at Preline and spends her time speaking to in-house recruiters all over the world.
-                        </p>
-                      </div>
-                  
-                      <div class="flex justify-between items-center px-4 py-3 sm:px-5">
-                        <ul class="text-xs space-x-3">
-                          <li class="inline-block">
-                            <span class="font-semibold text-gray-200 dark:text-neutral-200">56</span>
-                            <span class="text-gray-400 dark:text-neutral-400">articles</span>
-                          </li>
-                          <li class="inline-block">
-                            <span class="font-semibold text-gray-200 dark:text-neutral-200">1k+</span>
-                            <span class="text-gray-400 dark:text-neutral-400">followers</span>
-                          </li>
-                        </ul>
-  
-                        <div>
-                          <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                            <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                            </svg>
-                            Follow
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-  
-                <ul class="text-xs text-gray-500 dark:text-neutral-500">
-                  <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                    Date posted:
-                  </li>
-                  <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                    {{ $asset->date_added }}
-                    
-                  </li>
-                </ul>
-              </div>
-  
-              <div>
-                <button type="button" class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-ageno dark:border-neutral-700 dark:text-white dark:hover:bg-ageno-2">
-                    <svg class="size-4 fill-black dark:fill-neutral-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                        <path d="M24 4C18.494917 4 14 8.494921 14 14C14 19.505079 18.494917 24 24 24C29.505083 24 34 19.505079 34 14C34 8.494921 29.505083 4 24 4 z M 24 7C27.883764 7 31 10.116238 31 14C31 17.883762 27.883764 21 24 21C20.116236 21 17 17.883762 17 14C17 10.116238 20.116236 7 24 7 z M 11.978516 28C9.7987044 28 8 29.798705 8 31.978516L8 33.5C8 37.104167 10.27927 39.892227 13.306641 41.5625C16.334011 43.232773 20.168103 44 24 44C27.831897 44 31.665989 43.232773 34.693359 41.5625C37.274641 40.138345 39.217335 37.862616 39.761719 35L40.001953 35L40.001953 31.978516C40.001953 29.798705 38.201295 28 36.021484 28L11.978516 28 z M 11.978516 31L36.021484 31C36.579674 31 37.001953 31.420326 37.001953 31.978516L37.001953 32L37 32L37 33.5C37 35.895833 35.65427 37.607773 33.244141 38.9375C30.834011 40.267227 27.418103 41 24 41C20.581897 41 17.165989 40.267227 14.755859 38.9375C12.34573 37.607773 11 35.895833 11 33.5L11 31.978516C11 31.420326 11.420326 31 11.978516 31 z"/>
-                      </svg>
-                  {{ $asset->user->account_type }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <div class="space-y-5 md:space-y-8">
-        <div class="space-y-3">
-          <h2 class="text-2xl font-bold md:text-3xl dark:text-white">
-            {{ $asset->asset_information }}
-          </h2>
-  
-          <p class="text-lg text-gray-800 dark:text-neutral-200">At preline, our mission has always been focused on bringing openness and transparency to the design process. We've always believed that by providing a space where designers can share ongoing work not only empowers them to make better products, it also helps them grow.</p>
-        </div>
-  
-        <p class="text-lg text-gray-800 dark:text-neutral-200">We're proud to be a part of creating a more open culture and to continue building a product that supports this vision.</p>
-  
-        <figure>
-        
 
-          @forelse ($asset->pictures as $picture)
-          <img class="w-full object-cover rounded-xl"  src="{{ $picture }}" alt="{{ $asset->slug }}" draggable="false">
-     @empty
-     @guest
-     <p  class="w-full block object-cover rounded-xl text-gray-600/90 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 shadow-md px-3 text-center py-4">Agent didn't Upload Image</a>
-       
-     @endguest
-     @auth
-     <a href="{{ route('user.asset') }}" class="w-full block object-cover rounded-xl text-gray-600/90 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 shadow-md px-3 text-center py-4">Please Kindly upload your asset image(s)</a>
-       
-     @endauth
-          @endforelse
-          
-          <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-          </figcaption>
-        </figure>
-  
-        <p class="text-lg text-gray-800 dark:text-neutral-200">As we've grown, we've seen how Preline has helped companies such as Spotify, Microsoft, Airbnb, Facebook, and Intercom bring their designers closer together to create amazing things. We've also learned that when the culture of sharing is brought in earlier, the better teams adapt and communicate with one another.</p>
-  
-        <p class="text-lg text-gray-800 dark:text-neutral-200">That's why we are excited to share that we now have a <a class="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href="#">free version of Preline</a>, which will allow individual designers, startups and other small teams a chance to create a culture of openness early on.</p>
-  
-        <blockquote class="text-center p-4 sm:px-7">
-          <p class="text-xl font-medium text-gray-800 md:text-2xl md:leading-normal xl:text-2xl xl:leading-normal dark:text-neutral-200">
-            To say that switching to Preline has been life-changing is an understatement. My business has tripled and I got my life back.
-          </p>
-          <p class="mt-5 text-gray-800 dark:text-neutral-200">
-            Nicole Grazioso
-          </p>
-        </blockquote>
-  
-        <figure>
-          <img class="w-full object-cover rounded-xl" src="https://images.unsplash.com/photo-1670272498380-eb330b61f3cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Image Description">
-          <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-            A man and a woman looking at a cell phone.
-          </figcaption>
-        </figure>
-  
-        <div class="space-y-3">
-          <h3 class="text-2xl font-semibold dark:text-white">Bringing the culture of sharing to everyone</h3>
-  
-          <p class="text-lg text-gray-800 dark:text-neutral-200">We know the power of sharing is real, and we want to create an opportunity for everyone to try Preline and explore how transformative open communication can be. Now you can have a team of one or two designers and unlimited spectators (think PMs, management, marketing, etc.) share work and explore the design process earlier.</p>
-        </div>
-  
-        <ul class="list-disc list-outside space-y-5 ps-5 text-lg text-gray-800 dark:text-neutral-200">
-          <li class="ps-2">Preline allows us to collaborate in real time and is a really great way for leadership on the team to stay up-to-date with what everybody is working on," <a class="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href="#">said</a> Stewart Scott-Curran, Intercom's Director of Brand Design.</li>
-          <li class="ps-2">Preline opened a new way of sharing. It's a persistent way for everyone to see and absorb each other's work," said David Scott, Creative Director at <a class="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500" href="#">Eventbrite</a>.</li>
-        </ul>
-  
-        <p class="text-lg text-gray-800 dark:text-neutral-200">Small teams and individual designers need a space where they can watch the design process unfold, both for themselves and for the people they work with – no matter if it's a fellow designer, product manager, developer or client. Preline allows you to invite more people into the process, creating a central place for conversation around design. As those teams grow, transparency and collaboration becomes integrated in how they communicate and work together.</p>
-  
-        <div>
-          <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" href="#">
-            Plan
-          </a>
-          <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" href="#">
-            Web development
-          </a>
-          <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" href="#">
-            Free
-          </a>
-          <a class="m-1 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" href="#">
-            Team
-          </a>
-        </div>
-      </div>
-    </div>
-     --}}
   </div>
   
   <!-- Sticky Share Group -->
@@ -374,7 +209,7 @@ Enquiry
         <div class="hs-dropdown relative inline-flex">
           <button type="button" id="blog-article-share-dropdown" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200">
             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
-            Buy
+            Buy now
           </button>
           <div class="hs-dropdown-menu w-56 transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mb-1 z-10 bg-gray-900 shadow-md rounded-xl p-2 dark:bg-neutral-950" aria-labelledby="blog-article-share-dropdown">
             <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-400 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:ring-neutral-400" href="#">

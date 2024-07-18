@@ -104,8 +104,29 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
         {{ $user->firstname}}'s  Profile
     </button>
 
-    <button  @click="activeTab = 'tab2'" 
-    :class="isActive('tab2') ?  'after:bg-neutral-600 after:w-full dark:bg-neutral-700' : 'after:bg-transparent' "
+    <button   @click="activeTab = 'tab2'"
+    :class="isActive('tab2') ? ' after:bg-neutral-600 after:w-full dark:bg-neutral-700' : 'after:bg-transparent' "
+    class="relative flex after:content-['']  after:absolute after:h-0.5 after:-bottom-2 items-center justify-center rounded-lg gap-x-2 py-1 px-2  dark:hover:text-neutral-300 
+    hover:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700  dark:bg-neutral-800 dark:text-white 
+    dark:after:bg-neutral-200 active whitespace-nowrap">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="15" r="3"></circle>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M10 15H6a4 4 0 0 0-4 4v2"></path>
+        <path d="m21.7 16.4-.9-.3"></path>
+        <path d="m15.2 13.9-.9-.3"></path>
+        <path d="m16.6 18.7.3-.9"></path>
+        <path d="m19.1 12.2.3-.9"></path>
+        <path d="m19.6 18.7-.4-1"></path>
+        <path d="m16.8 12.3-.4-1"></path>
+        <path d="m14.3 16.6 1-.4"></path>
+        <path d="m20.7 13.8 1-.4"></path>
+        </svg>
+        {{ $user->firstname}}'s  Documents
+    </button>
+
+    <button  @click="activeTab = 'tab3'" 
+    :class="isActive('tab3') ?  'after:bg-neutral-600 after:w-full dark:bg-neutral-700' : 'after:bg-transparent' "
     
     class="relative flex after:content-['']  after:absolute after:h-0.5 after:-bottom-2 items-center justify-center rounded-lg gap-x-2 py-1 px-2  dark:hover:text-neutral-300 
     hover:bg-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700  dark:bg-neutral-800 dark:text-white 
@@ -146,8 +167,14 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
 
         <div class="flex items-center gap-x-2">
         <div>ID:</div>
-        <div>{{ $user->uuid }}</div>
+        <div>{{ $user->id }}</div>
         </div>
+
+        <div class="flex items-center gap-x-2">
+            <div>USER ID:</div>
+            <div>{{ $user->uuid }}</div>
+            </div>
+    
 
 
         <div class="flex items-center gap-x-2">
@@ -186,7 +213,77 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
 
         </div>
     </div>
-    <div x-cloak="" x-show="isActive('tab2')">
+
+<div x-cloak="" x-show="isActive('tab2')">
+
+    <!-- Masonry Cards -->
+<div class="max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <!-- Grid -->
+    <div class="grid sm:grid-cols-12 gap-6">
+      <div class="sm:self-end col-span-12 sm:col-span-7 md:col-span-8 lg:col-span-5 lg:col-start-3">
+        <!-- Card -->
+        <div class="group relative block rounded-xl overflow-hidden shadow-md outset-none">
+          <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
+            <img class="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl 
+            w-full object-cover" src="{{Storage::url($user->govt_id)}}"
+            alt="Image Description">
+          </div>
+          <div class="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
+            <div class="text-sm font-bold text-gray-800 rounded-lg bg-white p-4 md:text-xl dark:bg-neutral-800 dark:text-neutral-200">
+                {{$user->firstname}} {{$user->lastname}} Govertment.
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+      <!-- End Col -->
+  
+      <div class="sm:self-end col-span-12 sm:col-span-5 md:col-span-4 lg:col-span-3">
+        <!-- Card -->
+     @if ($user->govt_id)
+
+        <div class="group relative block rounded-xl overflow-hidden">
+          <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
+            <img class="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover" 
+            src="{{Storage::url($user->govt_id)}}" alt="{{$user->firstlast}} {{$user->lastname}} Govt ID">
+          </div>
+       
+        </div>
+        @else
+
+        @endif
+
+        <!-- End Card -->
+      </div>
+      <!-- End Col -->
+  
+    
+  
+
+  
+    
+    </div>
+    <!-- End Grid -->
+  </div>
+  <!-- End Masonry Cards -->
+    {{-- @if ($user->govt_id)
+    USER DOCUMENT
+    <img src="{{ Storage::url($user->govt_id) }}" alt="{{$user->firstlast}} {{$user->lastname}} Govt ID" 
+    class="h-[200px] rounded-lg object-cover w-[200px] lg:w-full"/>
+    @else      
+    {{ $user->firstname }} {{ $user->lastname }} have not uploaded his/her Govt ID card.
+    @endif
+
+    @if ($user->cac_document)
+    USER DOCUMENT
+    <img src="{{ Storage::url($user->cac_document) }}" alt="{{$user->firstlast}} {{$user->lastname}} CAC Document" 
+    class="h-[200px] rounded-lg object-cover w-[200px] lg:w-full"/>
+    @else      
+    {{ $user->firstname }} {{ $user->lastname }} have not uploaded his/her CAC Document card.
+    @endif --}}
+</div>
+
+    <div x-cloak="" x-show="isActive('tab3')">
         <h1 class="text-center text-sm md:text-xl font-semibold dark:text-neutral-200">{{$user->firstname}}'s Assets</h1>
         @forelse ($user->assets as $asset)
         <div class="relative">

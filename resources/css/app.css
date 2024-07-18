@@ -1,16 +1,104 @@
 @tailwind base;
 @tailwind components;
 
+
+
 [x-cloak] { display: none !important; }
 @layer components {
 
 
-    .custom-scroller{
-        scrollbar-width: none;
-        scrollbar-color:#635BFF rgba(255, 255, 255, 1);
-        scroll-margin: 20px;
-        scroll-behavior: smooth;
-    }
+.custom-scroller{
+scrollbar-width: none;
+scrollbar-color:#635BFF rgba(255, 255, 255, 1);
+scroll-margin: 20px;
+scroll-behavior: smooth;
+}
+
+
+.outset-none {
+@apply outline-none border-none ring-0 focus:outline-none focus:border-none focus:ring-0
+}
+
+.outset-border {
+@apply outline-none ring-0 focus:outline-none focus:ring-0
+}
+
+.asset-1.active {
+@apply border-amber-300 shadow-amber-500/30 before:block text-amber-500 transition-all shadow-lg scale-100 -rotate-6
+}
+
+.asset-1.active > *{
+@apply text-amber-500 fill-amber-500
+}
+
+.asset-2.active {
+@apply border-ageno-2 shadow-ageno/30 before:block text-ageno-2 transition-all shadow-lg scale-100 rotate-6
+}
+
+.asset-2.active > *{
+@apply text-ageno-2 fill-ageno-2
+}
+
+.asset-3.active {
+@apply border-ageno-2 shadow-ageno/30 before:block text-ageno-2 transition-all shadow-lg scale-100 -rotate-6
+}
+
+.asset-3.active > *{
+@apply text-ageno-2 fill-ageno-2
+}
+
+.asset-4.active {
+@apply border-amber-900 shadow-amber-900/30 before:block text-amber-900 transition-all shadow-lg scale-100 rotate-6
+}
+
+.asset-4.active > *{
+@apply text-amber-900 fill-amber-900
+}
+    
+
+.asset-5.active {
+@apply border-slate-500 shadow-slate-500/30 before:block text-slate-500 transition-all shadow-lg scale-100 -rotate-6
+}
+
+.asset-5.active > *{
+@apply text-slate-500 fill-slate-500
+}
+
+.asset-6.active {
+@apply border-slate-500 shadow-zinc-500/30 before:block text-zinc-500 transition-all shadow-lg scale-100 rotate-6
+}
+
+.asset-6.active > *{
+@apply text-zinc-500 fill-zinc-500
+}
+
+.asset-7.active {
+@apply border-slate-500 shadow-zinc-500/30 before:block text-zinc-500 transition-all shadow-lg scale-100 -rotate-6
+}
+
+.asset-7.active > *{
+@apply text-zinc-500 fill-zinc-500
+}
+
+.asset-8.active {
+@apply border-slate-500 shadow-zinc-500/30 before:block text-zinc-500 transition-all shadow-lg scale-100 rotate-6
+}
+
+.asset-8.active > *{
+@apply text-zinc-500 fill-zinc-500
+}
+
+.asset-9.active {
+@apply border-slate-500 shadow-zinc-500/30 before:block text-zinc-500 transition-all shadow-lg scale-100 -rotate-6
+}
+
+.asset-9.active > *{
+@apply text-zinc-500 fill-zinc-500
+}
+
+    
+
+
 
 
 .hero-bg {

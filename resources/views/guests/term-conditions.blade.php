@@ -1,4 +1,6 @@
 @extends('layouts.general')
+@section('app-title','Terms and Conditions')
+
 
 @section('app-content')
 <main class="content mx-5 mt-10">

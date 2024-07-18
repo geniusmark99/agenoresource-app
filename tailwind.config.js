@@ -20,10 +20,16 @@ export default {
         // 'ageno':'#330066',
         // 'ageno-2':'#4458AC',
         // 'ageno-3':'#53287E'
-         'ageno':'rgb(59 130 246)',
-         'ageno-dark': 'rgb(23 37 84)',
+        'ageno':'rgb(59 130 246)',
         'ageno-2':'rgb(37 99 235)',
-        'ageno-3':'rgb(29 78 216)'
+        // 'ageno': '#8B4513',
+        // 'ageno-2': '#CC7722',
+        'ageno-dark': 'rgb(23 37 84)',
+        'ageno-3':'rgb(29 78 216)',
+        'ageno-deep-green': '#006400',
+        'ageno-deep-brown': '#8B4513',
+        'ageno-deep-ochre': '#CC7722'
+
             }
         },
     },

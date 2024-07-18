@@ -24,10 +24,37 @@ class User extends Authenticatable implements MustVerifyEmail
         'lastname',
         'account_type',
         'phone_number',
+        'successful_sales',
+        'govt_id',
+        'cac_document',
+        'business_address',
+        'business_state',
+        'is_active',
+        'badge',
         'email',
         'password',
         'email_verified_at'
     ];
+
+
+    public function updateBadge()
+    {
+        $badges = [
+            10 => 'Bronze',
+            20 => 'Silver',
+            30 => 'Gold',
+            50 => 'Diamond',
+            100 => 'Platinum',
+        ];
+
+        foreach ($badges as $sales => $badge) {
+            if ($this->successful_sales >= $sales) {
+                $this->badge = $badge;
+            }
+        }
+
+        $this->save();
+    }
 
     protected static function boot()
     {

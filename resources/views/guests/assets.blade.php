@@ -1,6 +1,5 @@
 @extends('layouts.general')
-@section('app-title','Contact us')
-
+@section('app-title','Assets')
 @section('app-content')
 
 @livewire('asset-filter')
@@ -28,22 +27,27 @@
         <div class="group relative flex flex-col justify-between gap-y-1 bg-white border overflow-hidden border-gray-300/50 rounded-xl dark:bg-gray-800 dark:border-gray-700">
     <span class="absolute inset-x-0 top-[-0.5px] h-2 bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-blue-500 group-hover:to-purple-600"></span>
          
-            <!-- Header -->
             <div class="p-2 md:p-2.5  flex justify-between items-center">
             <a class="text-sm hover:text-blue-600 cursor-pointer font-semibold md:text-base text-gray-800 dark:text-gray-300 truncate w-[250px] lg:w-[350px]">
                {{ $asset->technical_report }}
-             {{-- Agent: <a class="text-blue-600" href="#">{{ $asset->user->firstname }}</a> --}}
             </a>
             </div>
-            <!-- End Header -->
         
             <div class="p-2 md:p-2.5 flex gap-x-3 flex-col lg:flex-row w-full">
-            <div class="w-full lg:w-5/12">
-        
-            <img src="{{ asset('./images/placeholder.jpg') }}" alt="" class="w-full h-[230px] rounded-md">
-        
-            {{-- <img src="{{ asset('./images/placeholder.jpg') }}" alt="" class="w-full h-[230px] rounded-md"> --}}
-            </div>
+           
+            <div class="w-full lg:w-5/12 overflow-hidden rounded-md">
+                @if ($asset->pictures)
+                @if (count($asset->pictures) > 1)
+                <x-swiper-gallery :pictures="$asset->pictures" />
+                @else
+                @foreach ($asset->pictures as $picture) 
+                <img src="{{ asset($picture) }}" alt="" 
+                class="w-full h-[230px] object-cover transition-all transform hover:filter rounded-md group-hover:scale-105" draggable="false">
+                @endforeach 
+                @endif
+               
+                @endif 
+            </div>  
         
             <div class="w-full lg:w-7/12 flex flex-col gap-y-3">
             <h2 class="text-base lg:text-2xl font-bold text-blue-600">{{ $asset->asset_information }}</h2>
@@ -80,3 +84,4 @@
 
 </div>
 @endsection
+

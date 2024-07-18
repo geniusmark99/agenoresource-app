@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mt-6 mx-2 mb-20 px-6 py-4 bg-white border border-ageno/30 dark:bg-gray-800 shadow-sm overflow-y-auto rounded-lg">
+    <div class="nanum-gothic-extrabold mt-6 mx-2 mb-20 px-6 py-4 bg-white border border-ageno/30 dark:bg-gray-800 shadow-sm overflow-y-auto rounded-lg">
 
 
     <div class="mb-10">
@@ -39,6 +39,7 @@
                 <option value="seller">Seller</option>
                 <option value="leaser">Leaser</option>
                 <option value="partner">Partner</option>
+                <option value="buyer">Buyer</option>
             </select>
             <x-input-error :messages="$errors->get('account_type')" class="mt-2" />
 

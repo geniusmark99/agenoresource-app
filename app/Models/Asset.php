@@ -32,7 +32,10 @@ class Asset extends Model
 
     public function getPicturesAttribute($value)
     {
-        return json_decode($value, true) ?? [];
+        // return json_decode($value, true) ?? [];
+
+        $pictures = json_decode($value, true);
+        return is_array($pictures) && count($pictures) > 0 ? $pictures[0] : null;
     }
 
     protected function getActiveAttribute($value)
@@ -40,6 +43,8 @@ class Asset extends Model
         // return $this->user ? $this->user->active : false;
         return (bool) $value;
     }
+
+
 
     // protected function casts(): array
     // {
@@ -49,12 +54,10 @@ class Asset extends Model
     // }
 
 
-    // protected function price(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn (string $value) => number_format($value, 2, '.', '')
-    //     );
-    // }
+    protected function getPriceAttribute($value)
+    {
+        return number_format($value, 0, '.', '');
+    }
 
 
     public static function boot()

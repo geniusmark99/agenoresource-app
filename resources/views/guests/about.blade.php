@@ -1,16 +1,16 @@
 @extends('layouts.general')
-@section('app-title','Contact us')
+@section('app-title','About us')
 
 @section('app-content')
 
-<section class="py-14 lg:py-24 relative z-0 bg-gray-50 dark:bg-gray-800">
+<section class="py-14 lg:py-24 relative z-0 bg-gray-50 dark:bg-gray-800 nanum-gothic-extrabold ">
     <div class="mx-3 md:mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative text-center shadow-md dark:shadow-sm shadow-ageno-2/20 py-2 rounded-lg">
         <h2 class="uppercase text-base md:text-xl font-semibold mb-5 dark:text-gray-200">Our mission</h2>
         <h1
             class="dark:text-gray-300 max-w-[900px] mx-auto text-center font-manrope font-bold text-3xl md:text-4xl  text-gray-900 mb-5 lg:text-5xl md:leading-normal">
            To be the <span class="text-ageno"> largest</span> and most <span class="text-ageno">Trusted</span> mining asset marketplace in Africa
         </h1>
-        <p class="max-w-[400px] mx-auto text-center text-base font-semibold leading-7 text-gray-500 dark:text-gray-400 mb-9">Invest
+        <p class="max-w-[400px] mx-auto text-center text-base leading-7 text-gray-500 dark:text-gray-400 mb-9">Invest
             intelligently
             and discover a better way to get mining assets from our trusted agents and partners.</p>
 
@@ -19,7 +19,7 @@
 </section>
 
 
-<section class="py-14 lg:py-24 relative">
+<section class="py-14 lg:py-24 relative nanum-gothic-extrabold ">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative ">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-9">
             <div class="img-box">
@@ -29,7 +29,7 @@
             <div class="lg:pl-[100px] flex items-center">
                 <div class="data w-full">
                     <h2
-                        class="font-manrope font-bold text-4xl lg:text-5xl dark:text-gray-200 text-black mb-9 max-lg:text-center relative">
+                        class="font-bold text-4xl lg:text-5xl dark:text-gray-200 text-black mb-9 max-lg:text-center relative">
                         About
                         Us </h2>
                     <p class="dark:text-gray-400 font-normal text-xl leading-8 text-gray-500 max-lg:text-center max-w-2xl mx-auto">
@@ -44,7 +44,7 @@
 
 
 
-<section class="py-14 lg:py-24 relative">
+<section class="py-14 lg:py-24 relative nanum-gothic-extrabold">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative ">
         <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-9 ">
 

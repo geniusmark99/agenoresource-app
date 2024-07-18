@@ -1,4 +1,6 @@
 @extends('layouts.general')
+@section('app-title','Privacy')
+
 @section('app-content')
 <main class="content mx-5 mt-10">
     <!-- Heading -->

@@ -1,6 +1,6 @@
 <div class="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
     <div class="h-52 flex flex-col justify-center items-center rounded-t-xl overflow-hidden hover:bg-red-800">
-     <img src="{{ asset('images/hero-one.jpg') }}" class="bg-no-repeat bg-contain"/>
+     <img src="{{ asset($asset->image) }}" class="bg-no-repeat bg-contain"/>
     </div>
     <div class="p-4 md:p-6">
       <span class="block mb-1 text-xs font-semibold uppercase text-ageno-2">

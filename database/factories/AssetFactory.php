@@ -27,6 +27,20 @@ class AssetFactory extends Factory
             'Platinum' => 9000
         ];
 
+        $aassetimagePaths = [
+            'images/bronze-image.jpg',
+            'images/cobalt-image.webp',
+            'images/copper-image.jpg',
+            'images/diamond-image.jpg',
+            'images/gold-image.jpg',
+            'images/silver-image.jpg',
+            'images/tungsten-image.jpg',
+            'images/zinc-image.jpg',
+            'images/iron-image.jpg',
+        ];
+
+        $randomImagePath = $this->faker->randomElements($aassetimagePaths, rand(2, 5));
+
         $assetName = $this->faker->word;
         $plan = $this->faker->randomElement($plans);
         $plan_price = $planPrices[$plan];
@@ -38,9 +52,9 @@ class AssetFactory extends Factory
             'uid' => $this->faker->unique()->uuid,
             'project_id' =>  $user->uuid . '-' . $user->id,
             'asset_name' => $this->faker->word,
-            'asset_type' => $this->faker->randomElement(['Sale', 'Lease', 'Partner', 'Equipment']),
+            'asset_type' => $this->faker->randomElement(['diamond', 'silver', 'lithium', 'tantalite', 'columbite', 'tungsten', 'tin', 'nickel', 'cobalt', 'manganese', 'lead', 'beryl', 'tourmaline', 'amethyst', 'citrine', 'zinc', 'gold']),
             'slug' => Str::slug($assetName . '-' . Str::random(6)),
-            'pictures' => $this->faker->imageUrl(200, 200),
+            'pictures' => json_encode($randomImagePath),
             'video' => $this->faker->text,
             'asset_location_details' => $this->faker->address,
             'asset_information' => $this->faker->randomElement(['greenfield', 'brownfield']),

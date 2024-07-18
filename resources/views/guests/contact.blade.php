@@ -2,7 +2,7 @@
 @section('app-title','Contact us')
 
 @section('app-content')
-<section class="bg-white dark:bg-gray-900 relative lg:px-20">
+<section class="bg-white dark:bg-gray-900 relative lg:px-20 nanum-gothic-extrabold ">
 
      <div class="flex justify-center items-center mt-10">
            
