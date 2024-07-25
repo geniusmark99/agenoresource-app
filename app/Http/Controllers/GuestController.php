@@ -147,6 +147,8 @@ class GuestController extends Controller
     {
         // $assets = Asset::latest()->get();
         $assets = Asset::latest()->where('active', 1)->limit(10)->get();
+        // $asset->pictures
+        // dd(count($assets));
         return view('guests.home', ['assets' => $assets]);
     }
 

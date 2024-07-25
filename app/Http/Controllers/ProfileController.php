@@ -65,31 +65,31 @@ class ProfileController extends Controller
 
     public function postSaleAsset(Request $request)
     {
-        $request->validate([
-            'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'video' => 'mimes:mp4,mov,ogg,qt|max:20000',
-            'asset_name' => 'required|string|max:255',
-            'asset_type' => 'required|string',
-            'asset_location_details' => 'nullable|string',
-            'asset_information' => 'required|string',
-            'technical_report' => 'required|string',
-            'price' => 'nullable|numeric',
-            'coordinates' => 'nullable|string',
-            'land_size' => 'nullable|numeric',
-            'mineral_details' => 'required|string',
-            'reserve_deposit' => 'required|string',
-            'plan' => 'required',
-            'active' => 'nullable|boolean',
-            'duration' => 'required|string',
-            'contact_information' => 'required|string',
-            'jorc_report' => 'required|string',
-            'opportunity_type' => 'required|string',
-            'geological_location' => 'required|string',
-        ]);
+
+        // $request->validate([
+        //     'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'video' => 'mimes:mp4,mov,ogg,qt|max:20000',
+        //     'asset_name' => 'required|string|max:255',
+        //     'asset_type' => 'required|string',
+        //     'asset_location_details' => 'nullable|string',
+        //     'asset_information' => 'required|string',
+        //     'technical_report' => 'required|string',
+        //     'price' => 'nullable|numeric',
+        //     'coordinates' => 'nullable|string',
+        //     'land_size' => 'nullable|numeric',
+        //     'mineral_details' => 'required|string',
+        //     'reserve_deposit' => 'required|string',
+        //     'plan' => 'required',
+        //     'active' => 'nullable|boolean',
+        //     'duration' => 'required|string',
+        //     'contact_information' => 'required|string',
+        //     'jorc_report' => 'required|string',
+        //     'opportunity_type' => 'required|string',
+        //     'geological_location' => 'required|string',
+        // ]);
+
 
         if ($request->isMethod('post')) {
-
-
             $user = auth()->user();
             $userFolder = $user->first_name . '_' . $user->last_name . '_' . $user->uuid;
 
@@ -102,14 +102,6 @@ class ProfileController extends Controller
                 }
             }
 
-            $videoPath = null;
-            if ($request->hasFile('video')) {
-                $video = $request->file('video');
-                $videoName = $userFolder .  '_' . $video->getClientOriginalName();
-                $path = $video->storeAs('public/assets/' . $userFolder, $videoName);
-                $videoPath = Storage::url($path);
-            }
-
             try {
                 $asset = Asset::create([
                     'user_id' => $user->id,
@@ -118,7 +110,7 @@ class ProfileController extends Controller
                     'asset_name' => $request->asset_name,
                     'asset_type' => $request->asset_type,
                     'pictures' => json_encode($picturePaths),
-                    'video' => $videoPath,
+                    'video' => $request->video,
                     'asset_location_details' => $request->asset_location_details,
                     'asset_information' => $request->asset_information,
                     'technical_report' => $request->technical_report,
@@ -143,9 +135,70 @@ class ProfileController extends Controller
                 return redirect()->route('post.assets')->with('success', 'Asset uploaded successfully.');
             } catch (\Exception $e) {
                 Log::error('Error uploading asset: ' . $e->getMessage(), ['exception' => $e]);
-                return redirect()->route('test.view')->with('error', 'Error uploading asset.');
+                return redirect()->route('post.assets')->with('error', 'Error uploading asset.');
             }
         }
+    }
+
+    public function postSaleAssetEdit($id)
+    {
+        $asset = Asset::findOrFail($id);
+        if ($asset->user_id !== Auth::id()) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to edit this asset.');
+        }
+
+        return view('users.post-assets-edit', compact('asset'));
+    }
+
+    public function postSaleAssetUpdate(Request $request, $id)
+    {
+        $asset = Asset::findOrFail($id);
+
+        if ($asset->user_id !== Auth::id()) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to update this asset.');
+        }
+
+        $validatedData = $request->validate([
+            'plan' => 'required|string',
+            'asset_type' => 'required|string|max:255',
+            'asset_name' => 'required|string|max:255',
+            'technical_report' => 'required|string|max:255',
+            'asset_information' => 'required|string|max:255',
+            'asset_location_details' => 'required|string|max:255',
+            'geological_location' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'coordinates' => 'nullable|string|max:255',
+            'reserve_deposit' => 'required|string|max:255',
+            'jorc_report' => 'nullable|string|max:255',
+            'opportunity_type' => 'nullable|string|max:255',
+            'land_size' => 'nullable|string|max:255',
+            'mineral_details' => 'required|string|max:255',
+            'duration' => 'required|string|max:255',
+            'contact_information' => 'required|string|min:12|max:15',
+            'pictures' => 'nullable|array',
+            'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $asset->update($validatedData);
+
+        $user = auth()->user();
+        $userFolder = $user->first_name . '_' . $user->last_name . '_' . $user->uuid;
+
+
+        if ($request->hasFile('pictures')) {
+            $picturePaths = [];
+            foreach ($request->file('pictures') as $picture) {
+                $pictureName = $userFolder . '_' . $picture->getClientOriginalName();
+                $path = $picture->storeAs('public/assets/' . $userFolder, $pictureName);
+                $picturePaths[] = Storage::url($path);
+            }
+            $asset->pictures = json_encode($picturePaths);
+            $asset->save();
+        }
+
+        return redirect()->route('post.assets.edit', $id)->with('success', 'Asset updated successfully.');
+
+        // dd($request);
     }
 
     public function notification()

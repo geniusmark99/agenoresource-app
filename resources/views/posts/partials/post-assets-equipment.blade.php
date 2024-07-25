@@ -15,6 +15,7 @@
     </div>
 
 
+
     <div class="flex flex-col justify-start">
     <div class="flex gap-10">
     <div class="inline-flex items-center">
@@ -65,8 +66,10 @@
 
     </header>
 
-    <form  class="mt-6 space-y-6" action="#" method="post">
-    {{-- @csrf --}}
+    <form  class="mt-6 space-y-6" action="#"
+      action="{{ route('assets.update', $asset->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
    
     <div class="grid md:grid-cols-2 w-full md:gap-x-3 lg:gap-x-5">
         <div  class="mb-4">
@@ -264,7 +267,15 @@
 
 
  
+    <div class="flex justify-end items-center">
+      {{-- <button type="submit" class="outset-none bg-transparent rounded-lg p-2 hover:bg-blue-200 text-blue-500 font-semibold">
+          Agree
+      </button> --}}
 
+      <button type="submit" class="outset-none bg-transparent rounded-lg p-2 hover:bg-blue-200 text-blue-500 font-semibold">
+      Update
+      </button>
+   </div>
 
 
     </form>

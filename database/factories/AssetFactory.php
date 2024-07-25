@@ -6,7 +6,6 @@ use App\Models\Asset;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 class AssetFactory extends Factory
 {
@@ -15,16 +14,14 @@ class AssetFactory extends Factory
     public function definition()
     {
 
-        $user = User::factory()->create();
-        // $durationDate = Carbon::now()->addDays(rand(7, 90));
-        $plans = ['Free', 'Bronze', 'Silver', 'Gold', 'Diamond', 'Platinum'];
+        // $user = User::factory()->create();
+        $plans = ['bronze', 'silver', 'gold', 'diamond', 'platinum'];
         $planPrices = [
-            'Free' => 0,
-            'Bronze' => 5000,
-            'Silver' => 6000,
-            'Gold' => 7000,
-            'Diamond' => 8000,
-            'Platinum' => 9000
+            'bronze' => 5000,
+            'silver' => 6000,
+            'gold' => 7000,
+            'diamond' => 8000,
+            'platinum' => 9000
         ];
 
         $aassetimagePaths = [
@@ -39,20 +36,20 @@ class AssetFactory extends Factory
             'images/iron-image.jpg',
         ];
 
-        $randomImagePath = $this->faker->randomElements($aassetimagePaths, rand(2, 5));
+        $randomImagePath = fake()->randomElements($aassetimagePaths, rand(2, 5));
 
-        $assetName = $this->faker->word;
-        $plan = $this->faker->randomElement($plans);
+        $assetName = fake()->word;
+        $plan = fake()->randomElement($plans);
         $plan_price = $planPrices[$plan];
         $durations = ['1 week', '2 weeks', '3 weeks', '4 weeks'];
-        $duration = $this->faker->randomElement($durations);
+        $duration = fake()->randomElement($durations);
 
         return [
-            'user_id' => \App\Models\User::factory(),
+            'user_id' => $this->faker->numberBetween(1, 100),
             'uid' => $this->faker->unique()->uuid,
-            'project_id' =>  $user->uuid . '-' . $user->id,
-            'asset_name' => $this->faker->word,
+            'project_id' => $this->faker->unique()->uuid,
             'asset_type' => $this->faker->randomElement(['diamond', 'silver', 'lithium', 'tantalite', 'columbite', 'tungsten', 'tin', 'nickel', 'cobalt', 'manganese', 'lead', 'beryl', 'tourmaline', 'amethyst', 'citrine', 'zinc', 'gold']),
+            'asset_name' => $assetName,
             'slug' => Str::slug($assetName . '-' . Str::random(6)),
             'pictures' => json_encode($randomImagePath),
             'video' => $this->faker->text,

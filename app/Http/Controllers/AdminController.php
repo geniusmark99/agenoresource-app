@@ -18,22 +18,15 @@ class AdminController extends Controller
 
     public function updateProfile(Request $request)
     {
-        // dd($request->all());
         $admin = Auth::guard('admin')->user();
-
-        // dd(Has($admin->password));
-
-        // Check if the current password is correct
         if (!Hash::check($request->current_password, $admin->password)) {
             return back()->withErrors(['current_password' => 'Current password is incorrect']);
         }
-
-        // // Update the admin's email and password
-        $admin->name = $request->name;
+        $admin->firstname = $request->firstname;
+        $admin->lastname = $request->lastname;
         $admin->email = $request->email;
         $admin->password = Hash::make($request->password);
         $admin->save();
-
         return redirect()->back()->with('status', 'Profile updated successfully!');
     }
 

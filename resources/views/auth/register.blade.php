@@ -34,29 +34,43 @@
 
         <!-- Account Type -->
         <div class="mt-4 lg:mt-2 relative">
-            <label for="account_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Account Type</label>
-            <select id="account_type" name="account_type" class="mt-1 block w-full py-3 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm dark:focus:border-indigo-600  dark:focus:ring-ageno focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <option value="seller">Seller</option>
-                <option value="leaser">Leaser</option>
-                <option value="partner">Partner</option>
-                <option value="buyer">Buyer</option>
+            <label for="account_user_type" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Account User Type</label>
+            <select id="account_user_type" name="account_user_type" class="mt-1 block w-full py-3 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm dark:focus:border-indigo-600  dark:focus:ring-ageno focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="individual">Individual</option>
+                <option value="cooperate">Cooperate</option>
             </select>
-            <x-input-error :messages="$errors->get('account_type')" class="mt-2" />
+            <x-input-error :messages="$errors->get('account_user_type')" class="mt-2" />
 
         </div>
 
-            <!-- Email Address -->
+               <!-- Account Type -->
+               <div class="mt-4 lg:mt-2 relative">
+                <label for="user_type" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">User Type</label>
+                <select id="user_type" name="user_type" class="mt-1 block w-full py-3 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm dark:focus:border-indigo-600  dark:focus:ring-ageno focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="seller">Seller</option>
+                    <option value="buyer">Buyer</option>
+                    <option value="leaser">Leaser</option>
+                    <option value="investor">Investor</option>
+                </select>
+                <x-input-error :messages="$errors->get('user_type')" class="mt-2" />
+    
+            </div>
+
+          
+    
+</div>
+
+
+  <!-- Email Address -->
             <div class="mt-4 lg:mt-2 relative">
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" class="dark:bg-gray-900 block mt-1 w-full" type="email" name="email" :value="old('email')" autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
-    
-</div>
 
         <!-- Phone number-->
         <div x-data="phoneInput()" class="flex flex-col mt-4 gap-y-2">
-            <label for="account_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone number</label>
+            <label for="account_type" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Phone number</label>
 <div class="flex items-center space-x-2">
             <div class="relative w-3/12">
                 <select x-model="selectedCountry" @change="updatePhoneCode" class="dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-3 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">

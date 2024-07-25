@@ -33,11 +33,14 @@ Route::controller(GuestController::class)->group(function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/post-assets', [ProfileController::class, 'postAsset'])->name('post.assets');
     Route::get('/assets/{slug}', [GuestController::class, 'showAsset'])->name('assets.show');
     Route::post('/post-sale-assets', [ProfileController::class, 'postSaleAsset'])->name('post.sale.assets');
+    Route::get('/assets/{id}/edit', [ProfileController::class, 'postSaleAssetEdit'])->name('post.assets.edit');
+    Route::post('/assets/{id}/update', [ProfileController::class, 'postSaleAssetUpdate'])->name('post.assets.update');
+
+
     Route::get('/choose-plan', [ProfileController::class, 'choosePlan'])->name('user.plan');
     Route::get('/my-assets', [ProfileController::class, 'myAsset'])->name('user.asset');
     Route::get('/notification', [ProfileController::class, 'notification'])->name('user.notification');

@@ -18,14 +18,14 @@
         @csrf
 
         <!-- Email Address -->
-        <div>
+        <div class="relative">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="dark:bg-gray-900 block mt-1 w-full placeholder:text-sm" type="email" name="email" placeholder="hello@ageno@gmail.com" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-8 relative">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="dark:bg-gray-900 block mt-1 w-full placeholder:text-sm"

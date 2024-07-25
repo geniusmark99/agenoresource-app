@@ -48,8 +48,12 @@
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Mineral Supply Chain</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-indigo-500 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">
+                        {{-- <p class="mb-2 text-gray-600">
                             At Agenoresource, we streamline the mineral supply chain to ensure the efficient and timely delivery of precious stones and minerals. Our robust network and logistics capabilities guarantee that our customers receive high-quality minerals, such as gold, cobalt, silver, and diamonds, from reliable sources around the globe.
+                        </p> --}}
+                        <p class="mb-2 text-gray-600">
+                            At Agenoresource, We create the link between the buyer and seller of mineral assets whether locally or globally. We have strong partnership with renowned logistics companies locally and globally that aid the safe, seamless and smooth movement of minerals from one location to another.
+The types of minerals acceptable or that can be listed are: Lithium, tantalite, columbite, tin, tungsten (wolframite), nickel, cobalt, manganese, lead, beryl, tourmaline, rose quartz, amethyst, citrine,  zinc, gold, etc.
                         </p>
                     </div>
                 </div>
@@ -62,9 +66,21 @@
                             <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Mining Assets For Sale</h3>
                         </div>
                         <p class="mt-3 mb-1 text-xs font-medium text-purple-500 uppercase">------------</p>
-                        <p class="mb-2 text-gray-600">
+                        {{-- <p class="mb-2 text-gray-600">
                             Explore our extensive inventory of mining assets for sale. From high-yield mineral deposits to fully operational mines, we offer a range of assets that cater to both small and large-scale mining operations. Invest with confidence and secure valuable resources to meet your business needs.
-                        </p>
+                        </p> --}}
+                        <ul class="flex flex-col justify-start items-start">
+                            <li class="flex flex-col justify-start items-start">
+                                <h1 class="font-semibold">
+                                    Mining asset (for sale):
+                                </h1>
+                                <p class="mb-2 text-gray-600">
+                                    Here asset operators or owners can list their assets for outright purchase. You can add some good images that will appeal to viewers.
+                                </p>
+                            </li>
+
+                            
+                        </ul>
                     </div>
                 </div>
             </div>

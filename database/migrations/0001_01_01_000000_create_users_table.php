@@ -16,8 +16,12 @@ return new class extends Migration
             $table->string('uuid')->unique();
             $table->string('firstname');
             $table->string('lastname');
-            $table->enum('account_type', ['seller', 'leaser', 'partner', 'buyer', 'investor']);
+            $table->string('company_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_phone_number')->nullable();
             $table->string('email')->unique();
+            $table->enum('account_user_type', ['individual', 'cooperate']);
+            $table->enum('user_type', ['seller', 'leaser', 'buyer', 'investor']);
             $table->integer('successful_sales')->default(0);
             $table->string('badge')->nullable();
             $table->string('phone_number')->unique();
@@ -27,7 +31,7 @@ return new class extends Migration
             $table->string('business_address')->nullable();
             $table->string('business_state')->nullable();
             $table->text('business_description')->nullable();
-            $table->boolean('is_active')->default(TRUE);
+            $table->boolean('is_active')->default(FALSE);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

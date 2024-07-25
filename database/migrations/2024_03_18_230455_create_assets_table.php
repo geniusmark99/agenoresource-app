@@ -6,18 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('assets', function (Blueprint $table) {
-            $table->id(); //ok
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('uid')->unique();
             $table->string('project_id');
-            $table->string('asset_name');
             $table->string('asset_type');
+            $table->string('asset_name');
             $table->string('slug')->unique();
             $table->text('pictures')->nullable();
             $table->text('video')->nullable();
@@ -29,14 +27,14 @@ return new class extends Migration
             $table->double('land_size')->nullable();
             $table->text('mineral_details');
             $table->text('reserve_deposit')->nullable();
-            $table->string('plan');
-            $table->boolean('active')->default(false);
+            $table->enum('plan', ['bronze', 'silver', 'gold', 'diamond', 'platinum']);
             $table->string('duration');
-            $table->text('contact_information');
             $table->text('jorc_report')->nullable();
             $table->string('opportunity_type')->nullable();
             $table->text('geological_location');
+            $table->text('contact_information');
             $table->timestamp('date_added')->useCurrent();
+            $table->boolean('active')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

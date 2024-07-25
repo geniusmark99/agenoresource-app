@@ -30,15 +30,23 @@ class="fixed bottom-4 right-4 bg-ageno-2 text-white px-4 py-2 rounded shadow-md"
      
 <div class="grid grid-cols-1 lg:grid-cols-2 w-full lg:w-[1000px] gap-y-4 lg:gap-x-10">
 <form class="w-full flex flex-col gap-y-4" action="{{ route('admin.updateProfile') }}" method="POST">
-
   @csrf
   @method('PUT')
 
         <div class="relative">
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="firstname" :value="__('Firstname')" />
+            <x-text-input id="firstname" name="firstname" type="text" class="dark:bg-neutral-800 mt-1 block w-full" :value="old('firstname', $user->firstname)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('firstname')" />
         </div>
+
+
+        <div class="relative">
+          <x-input-label for="lastname" :value="__('Lastname')" />
+          <x-text-input id="lastname" name="firstname" type="text" class="dark:bg-neutral-800 mt-1 block w-full" 
+          :value="old('lastname', $user->lastname)" required autofocus autocomplete="name" />
+          <x-input-error class="mt-2" :messages="$errors->get('lastname')" />
+      </div>
+
 
 
         <div class="relative">

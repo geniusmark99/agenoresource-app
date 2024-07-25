@@ -6,12 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 use App\Models\Asset;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'uuid',
         'firstname',
         'lastname',
-        'account_type',
+        'account_user_type',
+        'user_type',
         'phone_number',
         'successful_sales',
         'govt_id',
@@ -35,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'email_verified_at'
     ];
+
 
 
     public function updateBadge()
@@ -75,6 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Asset::class);
     }
+
 
 
     /**

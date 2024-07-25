@@ -8,11 +8,9 @@ use App\Models\Asset;
 
 class AssetSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
     {
-        Asset::factory()->count(100)->create();
+        Asset::factory()->count(10)->create();
     }
 }

@@ -5,7 +5,19 @@
 
 <style>
 
+    /* 
+    
+      'ageno':'rgb(59 130 246)',
+        'ageno-2':'rgb(37 99 235)',
+    */
 
+.home-hero-section {
+/* background: linear-gradient(rgb(59 130 246) 28.84%, rgb(255, 128, 128) 102.45%); */
+/* height: 100vh; */
+padding-top: 20px;
+padding-bottom: 20px;
+/* min-height: 600px; */
+}
 
 
 
@@ -152,8 +164,9 @@
 
 <!-- Hero -->
 
-<div class="flex justify-center items-center">
-<div class="relative w-full  bg-image-gradient  shadow-lg shadow-ageno/50 lg:mx-20 lg:max-w-[1300px] lg:rounded-2xl lg:mt-10 bg-no-repeat  bg-cover bg-center h-[70vh] flex justify-center items-center" >
+<div class="flex justify-center items-center home-hero-section">
+    {{-- shadow-lg shadow-ageno/50 --}}
+<div class="relative w-full  bg-image-gradient  lg:mx-20 lg:max-w-[1300px] lg:rounded-2xl lg:mt-10 bg-no-repeat  bg-cover bg-center h-[70vh] flex justify-center items-center" >
 
 <div class="absolute rounded-lg bg-image-hero size-12 lg:size-28 left-2 top-4 bg-no-repeat bg-cover shadow-inner shadow-ageno/60">
 </div>
@@ -172,7 +185,7 @@
 
   <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto  absolute top-2">
 </div>
-<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24">
+<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24 ">
 <div class="text-center">
     <div class="">
 
