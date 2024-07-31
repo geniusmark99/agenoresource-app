@@ -16,7 +16,12 @@ copied: false }"
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nanum+Gothic&display=swap" rel="stylesheet">      
+<link rel="stylesheet" href="{{ asset('css/swiper.css') }}"/>
+{{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
+{{-- <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nanum+Gothic&display=swap" rel="stylesheet">       --}}
+<link href="https://fonts.bunny.net/css?family=abeezee:400" rel="stylesheet" />
+
+
 <style>
 
 .hidden { display: none; }
@@ -32,7 +37,7 @@ background-color: #3b82f6; /* Tailwind blue-500 */
 transition: width 0.3s ease;
 }
 
-.nanum-gothic-regular {
+/* .nanum-gothic-regular {
 font-family: "Nanum Gothic", sans-serif;
 font-weight: 400;
 font-style: normal;
@@ -49,14 +54,18 @@ font-style: normal;
 font-family: "Nanum Gothic", sans-serif;
 font-weight: 800;
 font-style: normal;
-}
+} */
 
+
+.ageno-font {
+    font-family: 'ABeeZee', sans-serif;
+}
 </style>
 
 @livewireStyles
-@vite(['resources/css/app.css','resources/css/swiper.css'])
+@vite(['resources/css/app.css'])
 </head>
-<body class="font-sans antialiased overflow-x-hidden" 
+<body class="ageno-font antialiased overflow-x-hidden" 
 :class="deleteModal || previewModal ? 'overflow-hidden' :  '' "  @keydown.escape="deleteModal = false; previewModal = false">
 
 @if (session('success'))
@@ -202,6 +211,7 @@ this.videos.push({ name: file.name, url: url, file: file });
 </body>
 
 <script src="{{asset('js/swiper.js')}}"></script>
+<script src="{{asset('js/context_lock.js')}}"></script>
 <script>
 // localStorage.removeItem('darkMode');
 document.addEventListener('DOMContentLoaded', function () {

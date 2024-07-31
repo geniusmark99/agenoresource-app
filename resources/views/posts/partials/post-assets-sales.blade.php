@@ -407,7 +407,7 @@
 
                     <label for="video">
                     <p>Video</p>
-        <x-text-input id="video" name="video" type="url" placeholder="https://example.com/video" class="mt-1 block w-full dark:bg-gray-900" :value="old('video')"  autofocus />
+        <x-text-input id="video" name="video" type="url" placeholder="Your asset video URL" class="mt-1 block w-full dark:bg-gray-900" :value="old('video')"  autofocus />
                    
                     {{-- <input type="file" name="video" id="video" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> --}}
                     </label>

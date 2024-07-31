@@ -34,12 +34,37 @@ return window.location.pathname === route;
         </div>
 
         <div class="hidden sm:block">
-        <label for="icon" class="sr-only">Search</label>
-        <div class="relative min-w-72 md:min-w-80">
+        {{-- <label for="icon" class="sr-only">Search</label> --}}
+        <div class="relative min-w-72 md:min-w-80" x-data="searchComponent()">
         <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
         <svg class="flex-shrink-0 size-4 text-gray-400 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </div>
-        <input type="text" id="icon" name="icon" class="py-2 px-4 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Search">
+  
+          <input type="text" 
+          class="py-2 px-4 ps-11 block w-full 
+        border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 
+        disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 
+        dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="search either user uuid or email"
+
+          x-model="query" 
+          @input="filterUsers" @keydown.arrow-down="highlightNext"
+           @keydown.arrow-up="highlightPrev">
+          <div class="absolute bg-white
+           dark:text-white p-2 shadow-md w-full max-h-80 z-[2000] overflow-y-auto border-none outline-none rounded-md mt-1" 
+          x-show="filteredUsers.length > 0" x-cloak>
+              <ul role="listbox" aria-activedescendant="" class="py-4 space-y-2">
+                  <template x-for="(user, index) in filteredUsers" :key="user.id">
+                      <li :class="{'bg-ageno text-white': index === highlightedIndex}" 
+                      role="option" tabindex="-1"
+                      class="px-4 py-2 hover:bg-ageno hover:text-white rounded-md cursor-pointer text-left  border-b border-gray-200 dark:border-slate-600 last:border-b-0" 
+                      @click="selectUser(user)" @mouseover="highlightIndex(index)">
+                      <span x-text="user.email"></span>:  <span x-text="user.uuid"></span>
+                      </li>
+                  </template>
+              </ul>
+          </div>
+
+      
         </div>
         </div>
 
@@ -202,6 +227,67 @@ toggle() {
 }
 }
 }
+</script>
+
+
+<script>
+ function searchComponent() {
+      return {
+          query: '',
+          users: @json($allUsers),
+          path: window.location.pathname.startsWith('/admin/user'),
+          filteredUsers: [],
+          highlightedIndex: -1,
+          filterUsers() {
+              if (this.query.length > 0) {
+                  this.filteredUsers = this.users.filter(user => 
+                      user.uuid.toLowerCase().includes(this.query.toLowerCase()) || 
+                      user.email.toLowerCase().includes(this.query.toLowerCase())
+                  );
+              } else {
+                  this.filteredUsers = [];
+              }
+              this.highlightedIndex = -1;
+          },
+          highlightNext() {
+              if (this.highlightedIndex < this.filteredUsers.length - 1) {
+                  this.highlightedIndex++;
+                  this.query = this.filteredUsers[this.highlightedIndex].uuid;
+
+              }
+          },
+          highlightPrev() {
+              if (this.highlightedIndex > 0) {
+                  this.highlightedIndex--;
+                  this.query = this.filteredUsers[this.highlightedIndex].uuid;
+
+              }
+          },
+          highlightIndex(index) {
+              this.highlightedIndex = index;
+              this.query = this.filteredUsers[index].uuid;
+              this.query = this.filteredUsers[index].email;
+
+          },
+          selectHighlighted() {
+              if (this.highlightedIndex >= 0 && this.highlightedIndex < this.filteredUsers.length) {
+                  this.selectUser(this.filteredUsers[this.highlightedIndex]);
+              }
+          },
+          selectUser(user) {
+              this.query = user.uuid;
+              this.filteredUsers = [];
+              if(this.path){
+                window.location.href = `${user.uuid}`;
+              }else{
+                window.location.href = `user/${user.uuid}`;
+              }
+          },
+          search() {
+              // Search functionality can be enhanced if needed
+          }
+      }
+  }
 </script>
 @yield('admin-script')
 </body>

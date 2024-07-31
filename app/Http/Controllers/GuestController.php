@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
-use App\Models\UserAsset;
+use App\Models\ContactUs;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
@@ -16,41 +15,41 @@ class GuestController extends Controller
         return view('test-image-video');
     }
 
-    public function testUpload(Request $request)
-    {
-        $request->validate([
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
-            'videos.*' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime|max:50240',
-        ]);
+    // public function testUpload(Request $request)
+    // {
+    //     $request->validate([
+    //         'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+    //         'videos.*' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime|max:50240',
+    //     ]);
 
-        $uploadedFiles = [];
+    //     $uploadedFiles = [];
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('public/images');
-                $uploadedFiles[] = [
-                    'user_id' => auth()->id(),
-                    'file_path' => $path,
-                    'file_type' => 'image',
-                ];
-            }
-        }
+    //     if ($request->hasFile('images')) {
+    //         foreach ($request->file('images') as $image) {
+    //             $path = $image->store('public/images');
+    //             $uploadedFiles[] = [
+    //                 'user_id' => auth()->id(),
+    //                 'file_path' => $path,
+    //                 'file_type' => 'image',
+    //             ];
+    //         }
+    //     }
 
-        if ($request->hasFile('videos')) {
-            foreach ($request->file('videos') as $video) {
-                $path = $video->store('public/videos');
-                $uploadedFiles[] = [
-                    'user_id' => auth()->id(),
-                    'file_path' => $path,
-                    'file_type' => 'video',
-                ];
-            }
-        }
+    //     if ($request->hasFile('videos')) {
+    //         foreach ($request->file('videos') as $video) {
+    //             $path = $video->store('public/videos');
+    //             $uploadedFiles[] = [
+    //                 'user_id' => auth()->id(),
+    //                 'file_path' => $path,
+    //                 'file_type' => 'video',
+    //             ];
+    //         }
+    //     }
 
-        UserAsset::insert($uploadedFiles);
+    //     UserAsset::insert($uploadedFiles);
 
-        return response()->json(['message' => 'Files uploaded successfully!']);
-    }
+    //     return response()->json(['message' => 'Files uploaded successfully!']);
+    // }
 
     public function testFilter()
     {
@@ -118,38 +117,22 @@ class GuestController extends Controller
             'videos.*' => 'required|mimes:mp4,mov,avi,wmv|max:50000', // Adjust the mime types and max file size as needed
         ]);
 
-        // Process the uploaded videos
         $uploadedVideos = [];
         foreach ($request->file('videos') as $video) {
             $path = $video->store('videos', 'public');
             $uploadedVideos[] = $path;
         }
 
-        // Optionally, perform additional actions like storing video metadata in the database
 
         return response()->json(['message' => 'Videos uploaded successfully'], 200);
     }
 
 
-    public function test()
-    {
-        return view('test');
-    }
-
-    public function testVideo()
-    {
-        return view('testVideo');
-    }
-
-
-
     public function home()
     {
-        // $assets = Asset::latest()->get();
         $assets = Asset::latest()->where('active', 1)->limit(10)->get();
-        // $asset->pictures
-        // dd(count($assets));
-        return view('guests.home', ['assets' => $assets]);
+        $assetAll = Asset::latest()->where('active', 1)->get();
+        return view('guests.home', ['assets' => $assets, 'assetAll' => $assetAll]);
     }
 
     public function assets()
@@ -172,6 +155,27 @@ class GuestController extends Controller
     public function contact()
     {
         return view('guests.contact');
+    }
+
+    public function contactUs(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'firstname' => 'required|string',
+                'lastname' => 'required|string',
+                'email' => 'required|string|max:255',
+                'message' => 'required|string|max:255',
+            ]);
+            // dd($request);
+            ContactUs::create([
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'message' => $request->message,
+            ]);
+
+            return redirect()->route('contact.us')->with('success', 'Your message have been sent successfully.');
+        }
     }
 
     public function services()

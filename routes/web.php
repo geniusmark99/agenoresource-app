@@ -9,20 +9,10 @@ use Illuminate\Support\Facades\Mail;
 
 Route::controller(GuestController::class)->group(function () {
     Route::get('/', 'home')->name('home');
-    Route::view('/test', 'test');
-
-    Route::get('/test-email', function () {
-        Mail::raw('This is a test email.', function ($message) {
-            $message->to('geniusmark99@gmail.com')
-                ->subject('Test Email');
-        });
-
-        return 'Email sent successfully';
-    });
-
     Route::get('/services', 'services')->name('services');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
+    Route::post('/contact', 'contactUs')->name('contact.us');
     Route::get('/assets', 'assets')->name('assets');
     Route::get('/assets/search', 'searchAsset')->name('assets.search');
     Route::get('/blog', 'blog')->name('blog');

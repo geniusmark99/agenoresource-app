@@ -13,9 +13,26 @@
 @csrf
 </form>
 
-<form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6 w-full">
+
+
+
+@if (session('status') === 'profile-updated')
+<div 
+x-data="{ show: true }" 
+x-init="setTimeout(() => { show = false }, 5000)" 
+x-show="show" 
+class="shadow-md">
+<p class="text-sm p-1 fixed right-2 bottom-10 bg-emerald-500 rounded-lg text-white">{{ __('Profile updated successfully.') }}</p>
+</div>
+@endif
+
+
+
+<form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6 w-full relative">
 @csrf
 @method('patch')
+
+
 <div class="grid grid-cols-1 lg:grid-cols-2 w-full lg:w-[1000px] gap-y-4 lg:gap-x-10">
 <div class="w-full flex flex-col gap-y-4">
 <div>
@@ -65,9 +82,9 @@
 dark:border-gray-700 dark:focus:border-indigo-600  dark:focus:ring-ageno 
 dark:text-gray-300 py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-<option value="{{$user->account_type}}">{{ $user->account_type }}</option>
+<option value="{{$user->user_type}}">{{ $user->user_type }}</option>
 </select>
-<x-input-error :messages="$errors->get('account_type')" class="mt-2" />
+<x-input-error :messages="$errors->get('user_type')" class="mt-2" />
 
 </div>
 </div>
@@ -163,15 +180,10 @@ Save
 <div class="flex items-center gap-4">
 <x-primary-button>{{ __('Save') }}</x-primary-button>
 
-@if (session('status') === 'profile-updated')
-<p
-x-data="{ show: true }"
-x-show="show"
-x-transition
-x-init="setTimeout(() => show = false, 2000)"
-class="text-sm text-gray-600 dark:text-gray-400"
->{{ __('Saved.') }}</p>
-@endif
+
+
+
+
 </div>
 </form>
 </section>

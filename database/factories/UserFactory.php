@@ -28,6 +28,7 @@ class UserFactory extends Factory
         return [
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
+            'status' => fake()->randomElement(['active','blocked']),
             'uuid' => 'E' . substr(str_shuffle('0123456789'), 0, 6),
             'email' => fake()->unique()->safeEmail(),
             'account_user_type' => fake()->randomElement(['individual', 'cooperate']),

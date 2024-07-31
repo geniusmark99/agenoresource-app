@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Asset;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'uuid',
         'firstname',
         'lastname',
+        'status',
         'account_user_type',
         'user_type',
         'phone_number',
@@ -88,6 +90,36 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+
+
+    public function isBlocked()
+    {
+    return $this->status === 'blocked';
+    }
+
+    public function block()
+    {
+    $this->status = 'blocked';
+    $this->save();
+    }
+
+    public function unblock()
+    {
+    $this->status = 'active';
+    $this->save();
+    }
+
+    protected function firstName(): Attribute{
+        return Attribute::make(
+        get: fn(string $value) => ucfirst($value),
+        )->withoutObjectCaching();
+    }
+
+    protected function lastName(): Attribute{
+        return Attribute::make(
+        get: fn(string $value) => ucfirst($value),
+        )->withoutObjectCaching();
+    }
 
     /**
      * Get the attributes that should be cast.

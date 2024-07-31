@@ -40,6 +40,17 @@ Route::prefix('admin')->group(function () {
         Route::get('/user/activated', [AdminController::class, 'activatedUser'])
             ->name('admin.activated.users');
 
+        Route::post('/user/{id}/activate', [AdminController::class, 'activate'])
+            ->name('admin.activate');
+
+        Route::post('/user/{id}/deactivate', [AdminController::class, 'deactivate'])
+        ->name('admin.deactivate');
+
+
+        Route::delete('/user/delete/{id}', [AdminController::class, 'deleteUser'])
+        ->name('admin.deleteUser');
+
+    
         Route::post('/activate-asset/{assetId}', [AdminController::class, 'markAsActive'])
             ->name('admin.activate-asset');
 

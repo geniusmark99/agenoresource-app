@@ -145,37 +145,37 @@ showStep(currentStep);
 });
 
 
-document.addEventListener('DOMContentLoaded',function(){
+// document.addEventListener('DOMContentLoaded',function(){
 
-    const formElements = document.querySelectorAll('#progressForm input');
-    const form = document.getElementById('progressForm');
+//     const formElements = document.querySelectorAll('#progressForm input');
+//     const form = document.getElementById('progressForm');
 
-    for (let i = 0; i < form.elements.length; i++) {
-            const element = form.elements[i];
-            const savedValue = localStorage.getItem(element.name);
-            if (savedValue !== null) {
+//     for (let i = 0; i < form.elements.length; i++) {
+//             const element = form.elements[i];
+//             const savedValue = localStorage.getItem(element.name);
+//             if (savedValue !== null) {
 
-                if (element.type === 'checkbox' || element.type === 'radio') {
-                    element.checked = (element.value === savedValue);
-                } else {
-                if (element.type !== 'file') {
-                    element.value = savedValue;
-                }
-                }
-            }
-        }
+//                 if (element.type === 'checkbox' || element.type === 'radio') {
+//                     element.checked = (element.value === savedValue);
+//                 } else {
+//                 if (element.type !== 'file') {
+//                     element.value = savedValue;
+//                 }
+//                 }
+//             }
+//         }
 
-        form.addEventListener('input', function (event) {
-            const element = event.target;
-            if (element.type === 'checkbox' || element.type === 'radio') {
-                if (element.checked) {
-                    localStorage.setItem(element.name, element.value);
-                }
-            } else {
-                if (element.type !== 'file') {
-                localStorage.setItem(element.name, element.value);
-                }
-            }
-        });
-});
+//         form.addEventListener('input', function (event) {
+//             const element = event.target;
+//             if (element.type === 'checkbox' || element.type === 'radio') {
+//                 if (element.checked) {
+//                     localStorage.setItem(element.name, element.value);
+//                 }
+//             } else {
+//                 if (element.type !== 'file') {
+//                 localStorage.setItem(element.name, element.value);
+//                 }
+//             }
+//         });
+// });
 

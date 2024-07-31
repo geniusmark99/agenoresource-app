@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('uuid')->unique();
             $table->string('firstname');
             $table->string('lastname');
+            $table->enum('status', ['active', 'blocked'])->default('blocked');
             $table->string('company_name')->nullable();
             $table->string('company_address')->nullable();
             $table->string('company_phone_number')->nullable();
             $table->string('email')->unique();
             $table->enum('account_user_type', ['individual', 'cooperate']);
-            $table->enum('user_type', ['seller', 'leaser', 'buyer', 'investor']);
+            $table->enum('user_type', ['seller', 'buyer', 'leaser', 'investor']);
             $table->integer('successful_sales')->default(0);
             $table->string('badge')->nullable();
             $table->string('phone_number')->unique();

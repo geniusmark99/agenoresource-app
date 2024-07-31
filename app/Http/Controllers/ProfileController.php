@@ -128,8 +128,6 @@ class ProfileController extends Controller
                     'slug' => Str::slug($request->asset_name . '-' . time())
                 ]);
 
-
-
                 Log::info('Asset uploaded successfully.', ['asset' => $asset]);
 
                 return redirect()->route('post.assets')->with('success', 'Asset uploaded successfully.');

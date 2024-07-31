@@ -153,159 +153,13 @@
                     <a href="{{ route('admin.all.users') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">                     
                       View all
                     </a>
-  
-                    <button @click="modalOpen = true" class="border-none outlin-none ring-0 appearance-none py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" >
-                      <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                      Add user
-                    </button>
                   </div>
                 </div>
               </div>
               <!-- End Header -->
 
-              {{-- Modal Popup --}}
 
-              <div  @keydown.escape="modalOpen = false" x-cloak x-show="modalOpen" 
-              class="fixed inset-0 flex items-center justify-center z-[1000]">
-             <div class="fixed inset-0 bg-black opacity-50" @click="modalpen = false"></div>
-             <div x-show="modalOpen" 
-                  x-transition:enter="transition ease-out duration-300 transform" 
-                  x-transition:enter-start="scale-95 opacity-0" 
-                  x-transition:enter-end="scale-100 opacity-100" 
-                  x-transition:leave="transition ease-in duration-200 transform" 
-                  x-transition:leave-start="scale-100 opacity-100" 
-                  x-transition:leave-end="scale-95 opacity-0"
-                  class="bg-white dark:bg-neutral-900 rounded-lg shadow-lg w-full max-w-[600px] lg:mx-auto mt-20 lg:mt-0 absolute border dark:border-neutral-700">
-                  
-                  <div class="flex justify-between border-b dark:border-neutral-700 shadow-sm p-2">
-                    <h2 class="text-xl font-bold dark:text-neutral-300">Create new user</h2>
-<button @click="modalOpen = false" class="text-xl hover:bg-gray-300 dark:hover:bg-neutral-800 dark:text-neutral-500 rounded-full size-10 flex justify-center items-center">&times;</button>
-                  </div>
-                 <div class="mb-4 p-2">
-
-                  <div class="mt-6 mx-2 mb-20 px-6 py-4 bg-white border border-ageno/30 dark:border-transparent dark:bg-neutral-800 shadow-sm overflow-y-auto rounded-lg">
-
-
-                    <div class="mb-10">
-                        <h1 class="text-center text-2xl lg:text-3l font-semibold text-slate-900 dark:text-neutral-300">Register</h1>
-                        <p class="text-xs md:text-sm lg:text-base font-semibold dark:text-neutral-200 text-center">
-                        Register a new user
-                        </p>
-                        </div>
-                    
-                <div class="lg:mx-0">
-                
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-                <div class="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-x-4 lg:my-4">
-                        <!-- Firstame -->
-                        <div class="relative">
-                            <x-input-label for="firstname" :value="__('Firstname')" />
-                            <x-text-input id="firstname" class="block mt-1 w-full dark:bg-neutral-900" type="text" name="firstname" :value="old('firstname')" autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('firstname')" class="mt-2" />
-                        </div>
-                
-                        <!-- Lastname -->
-                        <div class="mt-4 lg:mt-0 relative">
-                            <x-input-label for="lastname" :value="__('Lastname')" />
-                            <x-text-input id="lastname" class="block mt-1 w-full dark:bg-neutral-900" type="text" name="lastname" :value="old('lastname')" autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
-                        </div>
-                
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-x-4 lg:my-4">
-                
-                        <!-- Account Type -->
-                        <div class="mt-4 lg:mt-2 relative">
-                            <label for="account_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Account Type</label>
-                            <select id="account_type" name="account_type" class="mt-1 block w-full py-3 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-neutral-900 dark:text-gray-300 rounded-md shadow-sm dark:focus:border-indigo-600  dark:focus:ring-ageno focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="seller">Seller</option>
-                                <option value="leaser">Leaser</option>
-                                <option value="partner">Partner</option>
-                            </select>
-                            <x-input-error :messages="$errors->get('account_type')" class="mt-2" />
-                
-                        </div>
-                
-                            <!-- Email Address -->
-                            <div class="mt-4 lg:mt-2 relative">
-                                <x-input-label for="email" :value="__('Email')" />
-                                <x-text-input id="email" class="block mt-1 w-full dark:bg-neutral-900" type="email" name="email" :value="old('email')" autocomplete="username" />
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                            </div>
-                    
-                </div>
-                
-                        <!-- Phone number-->
-                        <div x-data="phoneInput()" class="flex flex-col mt-4 gap-y-2">
-                            <label for="account_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone number</label>
-                <div class="flex items-center space-x-2">
-                            <div class="relative w-3/12">
-                                <select x-model="selectedCountry" @change="updatePhoneCode" class="dark:border-gray-700 dark:bg-neutral-900 dark:text-gray-300 block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-3 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                    <template x-for="country in countries" :key="country.code">
-                                      <option :value="country.code" x-text="`${country.name} (${country.dialCode})`"></option>
-                                    </template>
-                                  </select>
-                            
-                            </div>
-                            <div class="flex flex-col gap-y-2 relative w-9/12">
-                                <input x-model="phoneNumber" pattern="[0-9]*" name="phone_number" @input="filterNonNumeric" value="{{ old('phone_number')}}" type="tel" 
-                                class="w-full border-gray-300 dark:border-gray-700 dark:bg-neutral-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-ageno dark:focus:ring-ageno rounded-md shadow-sm" placeholder="Phone number">
-                                <span x-show="showError" class="text-red-500 absolute -bottom-[22px] text-sm right-0">*Please enter numbers only.</span>
-                                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
-                           
-                            </div>
-                       
-                        </div>
-                        </div>
-                
-                
-                    
-                <div class="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-x-4 lg:my-4">
-                
-                        <!-- Password -->
-                                <div class="mt-4 relative">
-                                    <x-input-label for="password" :value="__('Password')" />
-                
-                            <x-text-input id="password" class="block mt-1 w-full dark:bg-neutral-900"
-                                            type="password"
-                                            name="password"
-                                            autocomplete="new-password" />
-                
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
-                
-                        <!-- Confirm Password -->
-                        <div class="mt-4 relative">
-                            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                
-                            <x-text-input id="password_confirmation" class="block mt-1 w-full dark:bg-neutral-900"
-                                            type="password"
-                                            name="password_confirmation" autocomplete="new-password" />
-                
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 right-0" />
-                        </div>
-                </div>
-                
-                        <div class="flex items-center justify-end mt-4">
-                          
-                
-                            <x-primary-button class="ms-4">
-                                {{ __('Add') }}
-                            </x-primary-button>
-                        </div>
-                    </form>
-                
-                </div>
-                
-                
-                    </div>
-                 
-                 </div>
-               
-             </div>
-         </div>
+  
   
               <!-- Table -->
               <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
@@ -388,12 +242,14 @@
                     <td class="h-px w-72 whitespace-nowrap">
                       <div class="px-6 py-3">
                         <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $user->account_type }}</span>
-                        <span class="block text-sm text-gray-500 dark:text-neutral-500"></span>
+                        <span class="block text-sm text-gray-500 dark:text-neutral-500">
+                          {{ $user->account_user_type }}
+                        </span>
                       </div>
                     </td>
                     <td class="size-px whitespace-nowrap">
                       <div class="px-6 py-3">
-                        @if($user->active)  
+                        @if($user->status === "active")  
                         
                         <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
                           <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

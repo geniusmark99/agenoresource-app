@@ -14,8 +14,8 @@ return [
     |
     */
 
-    // 'default' => env('MAIL_MAILER', 'failover'),
-    'default' => 'ses',
+    'default' => env('MAIL_MAILER', 'failover'),
+    // 'default' => 'ses',
 
 
     /*

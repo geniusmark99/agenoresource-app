@@ -112,7 +112,6 @@ class AdminController extends Controller
         $totalUsers = User::count();
         $totalAmountPaid = Asset::where('price', true)->sum('price');
         $users = User::with('assets')->paginate(10);
-
         return view('admin.dashboard', compact('users', 'totalUsers', 'totalAmountPaid'));
     }
 
@@ -125,6 +124,26 @@ class AdminController extends Controller
     public function  activeUsers()
     {
         return view('admin.active-user');
+    }
+
+    public function activate($id){
+        $user = User::findOrFail($id);
+        $user->unblock();
+        return redirect()->back()->with('status', 'User activated successfully.');
+    }
+
+    public function deactivate($id){
+        $user = User::findOrFail($id);
+        $user->block();
+        return redirect()->back()->with('status', 'User deactivated successfully.');
+    }
+
+    public function deleteUser($id)
+    {
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->route('admin.dashboard')->with('status', 'User deleted successfully.');
     }
 
     public function activatedUser()

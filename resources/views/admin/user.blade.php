@@ -62,7 +62,10 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
 
 <div class="-mt-24">
     <div class="relative flex size-[120px] border-4 rounded-full mx-auto dark:border-neutral-800">
-    <img src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80" alt="User Profile" class="object-cover rounded-full size-full max-w-full block ">
+  
+<x-admin-user-avatar :fname="$user->firstname" :lname="$user->lastname" class="object-cover text-xl rounded-full 
+  size-full max-w-full block "/>
+    
     <div class="absolute bottom-0 -end-2">
     <button class="shadow-md font-base bg-rose-600 rounded-full p-2">
     <svg class="size-4 stroke-white dark:stroke-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -146,12 +149,12 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
     <div class="">
       <button 
         @click="deletemodalOpen = true"
-        class="whitespace-nowrap py-2 px-3 gap-x-1 transition-all hover:bg-rose-500 hover:text-rose-100 *:hover:fill-rose-100 flex items-center rounded-lg border shadow-sm dark:border-neutral-800 dark:bg-neutral-700 dark:hover:bg-rose-500 dark:hover:text-rose-100 dark:*:hover:fill-rose-100">
+        class="outset-none whitespace-nowrap py-2 px-3 gap-x-1 transition-all hover:bg-rose-500 hover:text-rose-100 *:hover:fill-rose-100 flex items-center rounded-lg border shadow-sm dark:border-neutral-800 dark:bg-neutral-700 dark:hover:bg-rose-500 dark:hover:text-rose-100 dark:*:hover:fill-rose-100">
         <svg class="size-5 fill-neutral-600 dark:fill-neutral-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
         <path d="M24 4C20.704135 4 18 6.7041348 18 10L11.746094 10 A 1.50015 1.50015 0 0 0 11.476562 9.9785156 A 1.50015 1.50015 0 0 0 11.259766 10L7.5 10 A 1.50015 1.50015 0 1 0 7.5 13L10 13L10 38.5C10 41.519774 12.480226 44 15.5 44L32.5 44C35.519774 44 38 41.519774 38 38.5L38 13L40.5 13 A 1.50015 1.50015 0 1 0 40.5 10L36.746094 10 A 1.50015 1.50015 0 0 0 36.259766 10L30 10C30 6.7041348 27.295865 4 24 4 z M 24 7C25.674135 7 27 8.3258652 27 10L21 10C21 8.3258652 22.325865 7 24 7 z M 13 13L35 13L35 38.5C35 39.898226 33.898226 41 32.5 41L15.5 41C14.101774 41 13 39.898226 13 38.5L13 13 z M 20.476562 17.978516 A 1.50015 1.50015 0 0 0 19 19.5L19 34.5 A 1.50015 1.50015 0 1 0 22 34.5L22 19.5 A 1.50015 1.50015 0 0 0 20.476562 17.978516 z M 27.476562 17.978516 A 1.50015 1.50015 0 0 0 26 19.5L26 34.5 A 1.50015 1.50015 0 1 0 29 34.5L29 19.5 A 1.50015 1.50015 0 0 0 27.476562 17.978516 z" />
         </svg>
         <span class="relative xym5l x4lvl r0qgj dark:text-white">
-        Delete user
+        Delete {{ $user->firstname }}
         </span>
       </button>
 
@@ -188,11 +191,86 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
         </div>
 
 
+        <div class="flex items-center gap-x-2">
+          <div>Status:</div>
+          <div>
+            <div class="flex items-center gap-x-10">
+
+            
+
+          <div class="flex items-center">
+      @if($user->status === "active")  
+      <div>
+      Active
+      </div>
+
+      @else
+      <div>
+      Unactive
+      </div>
+      @endif
+          </div>
+
+
+          @if($user->status === "active")  
+          <form action="{{route('admin.deactivate',[$user->id])}}" method="POST">
+            @csrf
+            <button type="submit" class="outset-none py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500">
+              <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg>
+              Deactive
+              </button>
+          </form>
+
+          @else
+
+          <form action="{{route('admin.activate',[$user->id])}}" method="POST">
+            @csrf
+            <button type="submit" class="outset-none py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+              <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg>
+              Activate
+              </button>
+          </form>
+
+          @endif
+          {{-- <form action="{{route('admin.activate',[$user->id])}}" method="POST">
+            @csrf
+
+            @if($user->status === "active")  
+
+            <button type="button" class="outset-none py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+            <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </svg>
+            Deactivate
+            </button>
+            @else
+            <button type="submit" class="outset-none py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500">
+            <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            Activate
+            </button>
+  
+            @endif
+
+          </form> --}}
+
+            </div>
+
+      
+        </div>
+
+          </div>
+
 
 
         <div class="flex items-center gap-x-2">
         <div>Account Type:</div>
-        <div>{{ $user->account_type }}</div>
+        <div>{{ $user->account_user_type }}</div>
         </div>
 
         <div class="flex items-center gap-x-2">
@@ -444,11 +522,11 @@ class="bg-white dark:bg-neutral-900 rounded-lg shadow-lg w-full max-w-[400px] lg
 <div class="flex flex-col justify-between shadow-sm px-4 py-4 mx-4">
     <div class="flex justify-between items-center my-2">
 <h1 class="text-xl font-semibold text-neutral-600 dark:text-neutral-200">Are you sure?</h1>
-<button @click="deletemodalOpen = false" class="flex justify-center items-center rounded-full size-7 p-1.5 bg-gray-200 dark:bg-neutral-700 hover:bg-rose-500 *:fill-gray-300 *:dark:fill-rose-200 *:hover:fill-rose-300 dark:hover:bg-rose-500 *:dark:hover:fill-rose-300">
+<button @click="deletemodalOpen = false" class="flex justify-center items-center rounded-full size-7 p-1.5 bg-gray-200 text-black hover:text-white dark:bg-neutral-700 hover:bg-rose-500 *:fill-gray-300 *:dark:fill-rose-200 *:hover:fill-rose-300 dark:hover:bg-rose-500 *:dark:hover:fill-rose-300">
 <svg class="size-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
 </button>
     </div>
-<p class="dark:text-neutral-300">Are you sure want to delete this user? </p>
+<p class="dark:text-neutral-300">Are you sure want to delete <span class="italic font-semibold"> {{ $user->firstname }}</span> from the database? </p>
 <div class="mt-2">
    <span class="font-bold">Note:</span>  
    <span class="italic text-sm">
@@ -459,7 +537,12 @@ class="bg-white dark:bg-neutral-900 rounded-lg shadow-lg w-full max-w-[400px] lg
 
 <div class="mt-5 flex justify-end items-center gap-x-2">
 <button @click="deletemodalOpen = false" class="py-1 md:py-1.5 px-2 text-xs md:text-sm rounded-lg border shadow-sm dark:border-neutral-700">Cancel</button>
-<button class="py-1 md:py-1.5 px-2 text-xs md:text-sm rounded-lg bg-rose-500 text-rose-200">Yes, I'm sure</button>
+
+<form action="{{ route('admin.deleteUser',[$user->id]) }}" method="POST">
+@csrf
+@method('DELETE')
+<button type="submit" class="py-1 md:py-1.5 px-2 text-xs md:text-sm rounded-lg bg-rose-500 text-rose-200">Yes, I'm sure</button>
+</form>
 </div>
 </div>
 </div>

@@ -110,7 +110,8 @@ scroll-behavior: smooth;
 }
 
 .ageno-btn.active {
-@apply bg-ageno text-white dark:bg-slate-900
+@apply  text-white bg-gradient-to-tr from-ageno-2 to-emerald-400 shadow-sm hover:shadow-md shadow-emerald-500/50 
+
 }
 
 .ageno-btn.active::after {
