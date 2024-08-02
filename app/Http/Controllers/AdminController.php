@@ -30,11 +30,14 @@ class AdminController extends Controller
         return redirect()->back()->with('status', 'Profile updated successfully!');
     }
 
-    public function markAsActive(Request $request, $assetId)
+    public function markAsActive($assetId)
     {
         $asset = Asset::findOrFail($assetId);
-        $asset->active = true;
-        $asset->save();
+        if ($asset) {
+            $asset->active = true;
+            $asset->date_activated = now();
+            $asset->save();
+        }
         return redirect()->back()->with('success', 'Asset is now active.');
     }
 
@@ -42,17 +45,9 @@ class AdminController extends Controller
     public function unmarkAsActive(Request $request, $assetId)
     {
         $asset = Asset::findOrFail($assetId);
-
-        // Check if the user is an admin (Assuming you have a method to check if the user is an admin)
-        // if (auth()->user()::a) {
-        // Mark the asset as active
         $asset->active = false;
         $asset->save();
-
         return redirect()->back()->with('success', 'Asset has been deactived.');
-        // } else {
-        //     return redirect()->back()->with('error', 'You are not authorized to perform this action.');
-        // }
     }
 
     public function showAllUser()
@@ -65,7 +60,6 @@ class AdminController extends Controller
     public function showUser($uuid)
     {
 
-        // dd($uuid);
         $user = User::all()->where('uuid', $uuid)->firstOrFail();
         return view('admin.user', compact('user'));
     }
@@ -126,13 +120,15 @@ class AdminController extends Controller
         return view('admin.active-user');
     }
 
-    public function activate($id){
+    public function activate($id)
+    {
         $user = User::findOrFail($id);
         $user->unblock();
         return redirect()->back()->with('status', 'User activated successfully.');
     }
 
-    public function deactivate($id){
+    public function deactivate($id)
+    {
         $user = User::findOrFail($id);
         $user->block();
         return redirect()->back()->with('status', 'User deactivated successfully.');
@@ -140,10 +136,10 @@ class AdminController extends Controller
 
     public function deleteUser($id)
     {
-    $user = User::findOrFail($id);
-    $user->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
-    return redirect()->route('admin.dashboard')->with('status', 'User deleted successfully.');
+        return redirect()->route('admin.dashboard')->with('status', 'User deleted successfully.');
     }
 
     public function activatedUser()
@@ -162,14 +158,9 @@ class AdminController extends Controller
         return view('admin.unactive-user');
     }
 
-
-
-
     public function profile()
     {
-
         $user = Auth::guard('admin')->user();
-
         return view('admin.profile', compact('user'));
     }
 

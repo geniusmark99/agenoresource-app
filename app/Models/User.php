@@ -109,6 +109,8 @@ class User extends Authenticatable implements MustVerifyEmail
     $this->save();
     }
 
+    
+
     protected function firstName(): Attribute{
         return Attribute::make(
         get: fn(string $value) => ucfirst($value),

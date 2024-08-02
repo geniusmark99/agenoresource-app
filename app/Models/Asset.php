@@ -20,6 +20,7 @@ class Asset extends Model
         'land_size', 'mineral_details', 'reserve_deposit',
         'jorc_report', 'opportunity_type', 'geological_location',
         'contact_information',  'active', 'plan', 'duration',
+        'view_count','click_rate','date_activated'
     ];
 
 
@@ -27,6 +28,16 @@ class Asset extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getDateActivatedAttribute($value)
+    {
+        return $value ? \Carbon\Carbon::parse($value)->format('F d, Y H:i A') : null;
+    }
+
+    public function getDateAddedAttribute($value)
+    {
+        return $value ? \Carbon\Carbon::parse($value)->format('F d, Y H:i A') : null;
     }
 
     // protected function pictures(): Attribute

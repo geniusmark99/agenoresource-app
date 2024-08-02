@@ -34,12 +34,15 @@ return new class extends Migration
             $table->text('geological_location');
             $table->text('contact_information');
             $table->timestamp('date_added')->useCurrent();
+            $table->integer('view_count')->default(0);
+            $table->float('click_rate')->default(0);
+            $table->timestamp('date_activated')->nullable();
             $table->boolean('active')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */

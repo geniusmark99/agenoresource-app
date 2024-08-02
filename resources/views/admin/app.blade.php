@@ -49,14 +49,17 @@ return window.location.pathname === route;
           x-model="query" 
           @input="filterUsers" @keydown.arrow-down="highlightNext"
            @keydown.arrow-up="highlightPrev">
-          <div class="absolute bg-white
-           dark:text-white p-2 shadow-md w-full max-h-80 z-[2000] overflow-y-auto border-none outline-none rounded-md mt-1" 
+          <div class="absolute bg-white dark:bg-neutral-800 dark:border-neutral-700
+           dark:text-white p-2 shadow-md w-full max-h-80 z-[2000] 
+           overflow-y-auto border-none outline-none rounded-md mt-1" 
           x-show="filteredUsers.length > 0" x-cloak>
               <ul role="listbox" aria-activedescendant="" class="py-4 space-y-2">
                   <template x-for="(user, index) in filteredUsers" :key="user.id">
                       <li :class="{'bg-ageno text-white': index === highlightedIndex}" 
                       role="option" tabindex="-1"
-                      class="px-4 py-2 hover:bg-ageno hover:text-white rounded-md cursor-pointer text-left  border-b border-gray-200 dark:border-slate-600 last:border-b-0" 
+                      class="px-4 py-2 hover:bg-ageno hover:text-white rounded-md 
+                      cursor-pointer text-left  border-b border-gray-200 dark:border-neutral-600 
+                      last:border-b-0" 
                       @click="selectUser(user)" @mouseover="highlightIndex(index)">
                       <span x-text="user.email"></span>:  <span x-text="user.uuid"></span>
                       </li>

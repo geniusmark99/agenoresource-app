@@ -57,12 +57,40 @@ class GuestController extends Controller
         return view('test-filter-search', compact('assets'));
     }
 
-    public function showAsset($slug)
+    public function showAsset(Request $request, $slug)
     {
 
         $asset = Asset::with('user')->where('slug', $slug)->firstOrFail();
+
+        if ($asset && (!auth()->check() || auth()->id() !== $asset->user_id)) {
+            $asset->increment('view_count');
+            $asset->click_rate = $asset->view_count / max($asset->view_count, 1);
+            $asset->save();
+        }
         return view('guests.assetsmore', compact('asset'));
     }
+
+    public function partner()
+    {
+        return view('guests.partner');
+    }
+
+    public function partnerLogin()
+    {
+        return view('guests.partnerLogin');
+    }
+
+    public function partnerPricing()
+    {
+        return view('guests.partnerPricing');
+    }
+
+
+    public function partnerForget()
+    {
+        return view('guests.partnerForget');
+    }
+
 
 
     public function searchAsset(Request $request)

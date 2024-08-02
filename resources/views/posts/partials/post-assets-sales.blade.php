@@ -117,7 +117,12 @@
                 <div class="flex items-center">
                 <input id="bronze-plan" name="plan" type="radio" 
                 @click="selectedPlan = 'bronze'; 
-                planContent = ['Bronze plan',5000,[]];
+                planContent = ['Bronze plan',5000,`Why choose Bronze`,
+                `This is a standard plan. The number of assets that can be published on this plan are highly limited to 65. Assets published here get limited views as they are usually pushed to the bottom of the page due to high influx of assets that are being published each seconds. On this plan, boost is not allowed and the number of weeks are fixed.`,
+                `10 assets`,
+                `1 week duration`,
+                `can't be boosted`,
+                ];
                 showPopup = true
                 " 
                 value="bronze" 
@@ -130,7 +135,10 @@
                 <div class="flex items-center">
                 <input id="silver-plan" name="plan" type="radio" 
                 @click="selectedPlan = 'silver'; 
-                planContent = ['Silver plan',7000,[]];
+                planContent = ['Silver plan',7000,`Why choose Silver?`,`This is a premium plan. The number of assets that can be published on this plan are slightly flexible  and the maximum number of assets that can be published is 78. Assets published here get more views as they can be boosted to bring them to the top of the page if they get pushed to the bottom of the page due to high influx of assets that are being published each seconds. In addition, on this plan, boost is allowed.`,
+                `20 assets`,
+                `2 weeks duration`,
+                `can be boosted`,];
                 showPopup = true"
 
                 value="silver" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
@@ -142,7 +150,12 @@
                 <div class="flex items-center"> 
                 <input id="gold-plan" name="plan" type="radio" 
                 @click="selectedPlan = 'gold'; 
-                planContent = ['Gold plan',8000,[]];
+                planContent = ['Gold plan',8000,`Why choose Gold?`,`This is also a premium plan. The number of assets that can be published on this plan are flexible  and the maximum number of assets that can be published is 91. Assets published here get more views as they can be boosted to bring them to the top of the page if they get pushed to the bottom of the page due to high influx of assets that are being published each seconds. In addition, on this plan boost is allowed.`,
+                `30 assets`,
+                `3 weeks duration`,
+                `can be boosted`,
+                ];
+              
                 showPopup = true"
 
                 value="gold" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
@@ -154,7 +167,11 @@
                 <div class="flex items-center">
                 <input id="diamond-plan" name="plan" type="radio" 
                 @click="selectedPlan = 'diamond'; 
-                planContent = ['Diamond plan',9000,[]];
+                planContent = ['Diamond plan',9000,`Why choose Diamond?`,`This is also a premium plan. The number of assets that can be published on this plan are flexible  and the maximum number of assets that can be published per time is 104. Assets published here get more views as they can be boosted to bring them to the top of the page if they get pushed to the bottom of the page due to high influx of assets that are being published each seconds. In addition, on this plan boost is allowed. There is self boost on this plan. Self boost is when the published assets are automatically boosted after some time so they appear at the top of the page. The maximum number of time assets can self boost here is one.`,
+                `40 assets`,
+                `3 weeks duration`,
+                `can be boosted`,
+                ];
                 showPopup = true"
                 value="diamond" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
                 <label for="diamond-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
@@ -166,7 +183,11 @@
                 <div class="flex items-center">
                 <input id="platinum-plan" name="plan" type="radio" 
                 @click="selectedPlan = 'platinum'; 
-                planContent = ['Platinum plan',10000,[]];
+                planContent = ['Platinum plan',10000,`Why choose Platinum?`,`This is also a premium plan. The number of assets that can be published on this plan are flexible  and the maximum number of assets that can be published per time is 117. Assets published here get great number views as they can be boosted to bring them to the top of the page if they get pushed to the bottom of the page due to high influx of assets that are being published each seconds. There is also self boost on this plan. Self boost is when the published assets are automatically boosted after some time so they appear at the top of the page. The maximum number of times assets can self boost here is two.`,
+                `50 assets`,
+                `4 weeks duration`,
+                `can be boosted`,
+                ];
                 showPopup = true"
                 value="platinum" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
                 <label for="platinum-plan" class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-400">
@@ -496,7 +517,7 @@
 &#x2715;
 </button>
 
-    <div class="flex flex-col bg-white border-2 border-blue-900 text-center shadow-xl rounded-2xl p-4 md:p-8 dark:bg-slate-900 dark:border-blue-700">
+    <div class="flex w-[260px] md:w-[300px] flex-col bg-white border-2 border-blue-900 text-center shadow-xl rounded-2xl p-4 md:p-8 dark:bg-slate-900 dark:border-blue-700">
      
         <p class="mb-3"><span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-xs uppercase font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-white">Most popular</span></p>
         <h4 class="font-medium text-lg text-gray-800 dark:text-gray-200" x-text="planContent[0]"></h4>
@@ -504,31 +525,31 @@
           &#8358; <span x-text="planContent[1]"></span>
         </span>
         <div class="mt-2 font-semibold dark:text-gray-300" >
-          &#8358;<span x-text="planContent[1]"></span> per week
+            
+          {{-- &#8358;<span x-text="planContent[1]"></span> per week --}}
+          <span x-text="planContent[4]"></span>
         </div>
-        <p class="mt-2 text-sm text-gray-500">All the basics for posting all your assets</p>
+        {{-- <p class="mt-2 text-sm text-gray-500" x-text="planContent[4]"></p> --}}
 
         <ul class="mt-7 space-y-2.5 text-sm">
           <li class="flex space-x-2">
             <svg class="flex-shrink-0 mt-0.5 size-4 text-blue-900" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span class="text-gray-800 dark:text-gray-400">
-              2 users
+            <span class="text-gray-800 dark:text-gray-400" x-text="planContent[5]">
+              
             </span>
           </li>
 
           <li class="flex space-x-2">
             <svg class="flex-shrink-0 mt-0.5 size-4 text-blue-900" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span class="text-gray-800 dark:text-gray-400">
-              Plan features
+            <span class="text-gray-800 dark:text-gray-400" x-text="planContent[6]">
             </span>
           </li>
 
-          <li class="flex space-x-2">
+          {{-- <li class="flex space-x-2">
             <svg class="flex-shrink-0 mt-0.5 size-4 text-blue-900" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span class="text-gray-800 dark:text-gray-400">
-              Product support
+            <span class="text-gray-800 dark:text-gray-400" x-text="planContent[7]">
             </span>
-          </li>
+          </li> --}}
         </ul>
 
         <button @click="showMore = true; showPopup = false" class="mt-5 py-3 px-4 w-full inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
@@ -555,15 +576,15 @@ x-transition:leave-start="opacity-100 transform scale-100"
 x-transition:leave-end="opacity-0 transform scale-95" class="fixed inset-0 flex h-screen items-center justify-center z-50">
 <div class="w-full flex justify-center items-center">
 
-<div class="flex w-full relative lg:max-w-lg mx-4 flex-col h-[60vh] bg-white border-2 border-blue-900 text-center shadow-xl rounded-2xl p-4 md:p-8 
+<div class="flex w-full relative lg:max-w-lg mx-4 flex-col h-[65vh] bg-white diamond-pattern-2 border shadow-sm text-center rounded-2xl p-4 md:p-8 
 dark:bg-slate-900 dark:border-blue-700">
 <button @click="showMore = false;" class=" absolute top-0 right-2 mt-2 size-10 rounded-full bg-blue-500 hover:bg-blue-700 
 text-white font-bold">
 &#x2715;
 </button>
 <h4 class="font-medium text-lg text-gray-800 dark:text-gray-200" x-text="planContent[0]"></h4>
-
-{{-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus, corrupti cupiditate. Dolor, cupiditate voluptas aliquid rerum architecto nam fuga iure delectus praesentium non ex facere facilis dicta maiores ad soluta! --}}
+<h1 x-text="planContent[2]" class="font-bold text-2xl text-ageno"></h1>
+<p  x-text="planContent[3]" class="my-10 text-slate-700 leading-7"></p>
 </div>
 </div>
 </div>

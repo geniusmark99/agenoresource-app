@@ -5,52 +5,40 @@
 
 <style>
 
-    /* 
-    
-      'ageno':'rgb(59 130 246)',
-        'ageno-2':'rgb(37 99 235)',
-    */
-
 .home-hero-section {
 /* background: linear-gradient(rgb(59 130 246) 28.84%, rgb(255, 128, 128) 102.45%); */
-/* height: 100vh; */
 padding-top: 20px;
 padding-bottom: 20px;
-/* min-height: 600px; */
 }
 
+.bg-image-hero{
+background-image: url('./images/hero-one.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
+}
 
+.bg-image-hero-2{
+background-image: url('./images/tongon-mine.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
+}
 
-    .bg-image-hero{
-        background-image: url('./images/hero-one.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
-    }
-    
-    .bg-image-hero-2{
-        background-image: url('./images/tongon-mine.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
-    }
-    
-    .bg-image-hero-3{
-        background-image: url('./images/Big-Bear-project.webp'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
-    }
-    
-    .bg-image-hero-4{
-        background-image: url('./images/ity-mine.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
-    }
-    
-    .bg-image-hero-5{
-        background-image: url('./images/lithium-trayller.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
-    }
-    
-    .bg-image-gradient {
-        background-blend-mode: hard-light;
-          background-image: url('./images/hero-one.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
-          width: 100%;
-        }
-    
-    
-    
-    
-    </style>
+.bg-image-hero-3{
+background-image: url('./images/Big-Bear-project.webp'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
+}
+
+.bg-image-hero-4{
+background-image: url('./images/ity-mine.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
+}
+
+.bg-image-hero-5{
+background-image: url('./images/lithium-trayller.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
+}
+
+.bg-image-gradient {
+background-blend-mode: hard-light;
+background-image: url('./images/hero-one.jpg'), linear-gradient(to right, rgba(59, 130, 246,0.5), rgba(37, 99, 235,0.5));
+width: 100%;
+}
+
+</style>
+
 @endsection
 @section('app-content')
 <main  x-data="{ showLoginPopup: false, showAssetModal: false, assetModalContent: '', assetModalTitle: '',assetImageUrl:''}" 
@@ -210,7 +198,7 @@ class="flex justify-center items-center Cabin-font-700 mb-32"
   <button @click="handleClick('buy-search', 'buy')" :class="{ 'active': activeElement === 'buy-search' }" class="ageno-btn"><a>Buy</a></button>
   <button @click="handleClick('sale-search', 'sell')" :class="{ 'active': activeElement === 'sale-search' }"  class="ageno-btn"><a>Sale</a></button>
   <button @click="handleClick('lease-search', 'lease')" :class="{ 'active': activeElement === 'lease-search' }" class="ageno-btn"><a>Lease</a></button>
-  <a  class="ageno-btn text-sm">Partners</a>
+  <a href="{{ route('partner') }}" class="btn bg-white text-ageno hover:text-white hover:bg-gradient-to-tr from-ageno-2 to-emerald-400 shadow-sm hover:shadow-md shadow-emerald-500/50 text-xs whitespace-nowrap flex font-semibold">Become a Partners</a>
 
   </div>
 
@@ -378,7 +366,7 @@ class="flex justify-center items-center Cabin-font-700 mb-32"
 
 <div class="flex flex-col mt-4">
 <div class="flex justify-between items-center px-4 sm:px-6 lg:px-28">
-<h3 class="  text-left text-ageno lg:text-3xl font-bold dark:text-white nanum-gothic-extrabold">Featured Latest assets</h3>
+<h3 class="  text-left text-ageno lg:text-3xl dark:text-white nanum-gothic-extrabold">Featured Latest assets</h3>
     
 <a href="{{ route('assets') }}" class="py-1 md:py-1.5 lg:py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">See all</a>
 </div>

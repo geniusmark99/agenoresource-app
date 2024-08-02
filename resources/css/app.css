@@ -109,6 +109,11 @@ scroll-behavior: smooth;
 @apply px-4 py-1.5 md:py-2 md:px-6 text-xs sm:text-sm font-medium rounded-md tracking-wide w-full text-ageno dark:text-white capitalize transition-colors duration-300 transform bg-white dark:bg-ageno hover:bg-ageno hover:text-white
 }
 
+
+.btn {
+    @apply px-4 py-1.5 md:py-2 md:px-6 text-xs sm:text-sm font-medium rounded-md tracking-wide w-full capitalize transition-colors duration-300 transform
+    }
+
 .ageno-btn.active {
 @apply  text-white bg-gradient-to-tr from-ageno-2 to-emerald-400 shadow-sm hover:shadow-md shadow-emerald-500/50 
 

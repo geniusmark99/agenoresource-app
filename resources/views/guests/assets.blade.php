@@ -27,11 +27,11 @@
         <div class="group relative flex flex-col justify-between gap-y-1 bg-white border overflow-hidden border-gray-300/50 rounded-xl dark:bg-gray-800 dark:border-gray-700">
     <span class="absolute inset-x-0 top-[-0.5px] h-2 bg-gradient-to-r group-hover:from-indigo-500 group-hover:via-blue-500 group-hover:to-purple-600"></span>
          
-            <div class="p-2 md:p-2.5  flex justify-between items-center">
-            <a class="text-sm hover:text-blue-600 cursor-pointer font-semibold md:text-base text-gray-800 dark:text-gray-300 truncate w-[250px] lg:w-[350px]">
-               {{ $asset->technical_report }}
-            </a>
-            </div>
+             
+    <div class="p-2 md:p-2.5 items-center text-center border-b font-semibold bg-ageno/5 text-ageno">
+        {{ $asset->asset_type }} asset
+     </div>
+ 
         
             <div class="p-2 md:p-2.5 flex gap-x-3 flex-col lg:flex-row w-full">
            
@@ -50,7 +50,7 @@
             </div>  
         
             <div class="w-full lg:w-7/12 flex flex-col gap-y-3">
-            <h2 class="text-base lg:text-2xl font-bold text-blue-600">{{ $asset->asset_information }}</h2>
+            {{-- <h2 class="text-base lg:text-2xl font-bold text-blue-600">{{ $asset->asset_information }}</h2> --}}
             <p class="text-gray-500 dark:text-gray-200 relative min-h-[150px] before:absolute before:content-[''] before:w-full before:h-[0.1px] before:bg-gray-200 dark:before:bg-gray-600 before:-bottom-1">
         {{ $asset->mineral_details }}
             <div class="flex gap-x-3 items-center">

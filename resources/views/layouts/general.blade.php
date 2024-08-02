@@ -10,7 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="{{ asset('css/swiper.css') }}"/>
   <title>Ageno resource: @yield('app-title','Home')</title>
-  {{-- <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nanum+Gothic&display=swap" rel="stylesheet"> --}}
 <link href="https://fonts.bunny.net/css?family=abeezee:400" rel="stylesheet" />
   
   @vite(['resources/css/app.css','resources/js/app.js'])
