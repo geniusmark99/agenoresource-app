@@ -1,12 +1,17 @@
-<x-app-layout>
-    <x-slot name="header">
+
+@extends('layouts.app')
+
+      @section('app-header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight md:ml-16 lg:ml-24">
     {{ __('Choose a plan') }}
     </h2>
     <x-menu-desc-widget>
     Choose a plan, that suites you
     </x-menu-desc-widget>
-    </x-slot>
+    @endsection
+
+
+    @section('app-content')
     
     <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -1827,5 +1832,5 @@
     </div>
     </div>
     </div>
-    </x-app-layout>
     
+    @endsection

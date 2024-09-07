@@ -9,14 +9,9 @@ Govt Issued ID:
 </div>
 <div class="p-7">  
 <div class="relative mb-5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-blue-600 bg-gray py-4 px-4 bg-blue-400/5 dark:bg-blue-500/5 sm:py-7.5">
-{{-- <img src="{{ asset('storage/user_govt_id/mitchel-conn-govt_id.png') }}" alt="Government ID" class="w-full  h-[200px] rounded-lg object-cover"> --}}
 <img src="{{  asset(Storage::url($user->govt_id)) }}" alt="Government ID" class="w-full  h-[200px] rounded-lg object-cover">
 </div> 
-{{-- {{ Storage::url($user->govt_id) }} 
 
-
-<img src="http://127.0.0.1:8000/public/" alt="Government ID" class="w-full  h-[200px] rounded-lg object-cover">
---}}
 
 <div class="mt-2 flex gap-x-10">
 <form method="post" action="{{ route('destroy.govtid') }}" class="">

@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('admin.*', function ($view) {
-            $view->with('allUsers',User::all());
-        }); 
+            $view->with('allUsers', User::all());
+        });
     }
 }

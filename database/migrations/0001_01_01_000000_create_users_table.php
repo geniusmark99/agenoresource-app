@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('cac_document')->nullable();
             $table->string('business_address')->nullable();
             $table->string('business_state')->nullable();
+            $table->string('location_details')->nullable();
             $table->text('business_description')->nullable();
             $table->boolean('is_active')->default(FALSE);
             $table->timestamp('email_verified_at')->nullable();

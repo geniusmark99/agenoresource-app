@@ -70,28 +70,6 @@ class GuestController extends Controller
         return view('guests.assetsmore', compact('asset'));
     }
 
-    public function partner()
-    {
-        return view('guests.partner');
-    }
-
-    public function partnerLogin()
-    {
-        return view('guests.partnerLogin');
-    }
-
-    public function partnerPricing()
-    {
-        return view('guests.partnerPricing');
-    }
-
-
-    public function partnerForget()
-    {
-        return view('guests.partnerForget');
-    }
-
-
 
     public function searchAsset(Request $request)
     {

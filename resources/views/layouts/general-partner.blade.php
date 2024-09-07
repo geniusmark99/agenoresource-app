@@ -1,6 +1,6 @@
 <!doctype html>
 <html x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', sidebarOpen: false }" 
-x-init="if(window.location.pathname === '/partner-login' || window.location.pathname === '/partner/forget-password') {document.body.classList.add('diamond-pattern');}"
+x-init="if(window.location.pathname === '/partner/login' || window.location.pathname === '/partner/register' || window.location.pathname === '/partner/forget-password') {document.body.classList.add('diamond-pattern');}"
 >
 <head>
 <meta charset="utf-8">
@@ -21,8 +21,44 @@ x-init="if(window.location.pathname === '/partner-login' || window.location.path
 @vite(['resources/css/app.css','resources/js/app.js'])
 
 <body 
-x-data 
+x-data="formHandler()"
 >
  @yield('app-content')
+
+ <script>
+  function formHandler() {
+            return {
+                form: {
+                    firstname: '',
+                    lastname: '',
+                    companyName: '',
+                    email: '',
+                    password: '',
+                },
+                errors: {
+                  firstname: false,
+                    lastname: false,
+                    companyName: false,
+                    email:false,
+                    password: false,
+                },
+                validateForm() {
+                    this.errors = {
+                        firstname: !this.form.firstname,
+                        lastname: !this.form.lastname,
+                        companyName: !this.form.companyName,
+                        password: !this.form.password,
+                        email: !this.form.email,
+                    };
+
+                    if (!this.errors. && !this.errors.lastname && !this.errors.companyName && 
+                    !this.errors.email && !this.errors.password) {
+                        alert('Form submitted successfully!');
+                        // Proceed with form submission (e.g., via AJAX)
+                    }
+                }
+            };
+        }
+ </script>
 </body>
 </html>

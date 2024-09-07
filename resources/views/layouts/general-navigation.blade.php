@@ -2,13 +2,14 @@
 {{-- diamond-pattern 
 bg-gradient-to-tr from-ageno-2 to-emerald-400 
 --}}
-<header class="z-[1001] flex font-semibold fixed bg-gradient-to-tr diamond-pattern bg-ageno flex-wrap sm:justify-start border-b
+<header class="z-[1001] flex font-semibold fixed bg-gradient-to-tr diamond-pattern bg-ageno flex-wrap 
+sm:justify-start border-b
  border-gray-200/50 sm:flex-nowrap w-full shadow-sm hover:shadow-md shadow-emerald-500/50
 text-sm sm:py-4 lg:py-0">
-  
+    
   <nav class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
       <div class="flex items-center justify-between">
-        <a class="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">
+        <a class="flex-none text-xl font-semibold dark:text-white" href="/" aria-label="Brand">
             <x-application-logo class="size-16"/>
         </a>
         <div class="sm:hidden">

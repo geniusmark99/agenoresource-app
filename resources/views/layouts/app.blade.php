@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" 
+x-data="
 {show:true, 
 deleteModal: false, 
 previewModal: false,
@@ -13,15 +14,11 @@ copied: false }"
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ config('app.name', 'Agenoresource') }}</title>
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{{ asset('css/swiper.css') }}"/>
-{{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
-{{-- <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nanum+Gothic&display=swap" rel="stylesheet">       --}}
 <link href="https://fonts.bunny.net/css?family=abeezee:400" rel="stylesheet" />
-
-
+@yield('app-style')
 <style>
 
 .hidden { display: none; }
@@ -36,27 +33,6 @@ width: 100%;
 background-color: #3b82f6; /* Tailwind blue-500 */
 transition: width 0.3s ease;
 }
-
-/* .nanum-gothic-regular {
-font-family: "Nanum Gothic", sans-serif;
-font-weight: 400;
-font-style: normal;
-}
-
-.nanum-gothic-bold {
-font-family: "Nanum Gothic", sans-serif;
-font-weight: 700;
-font-style: normal;
-}
-
-
-.nanum-gothic-extrabold {
-font-family: "Nanum Gothic", sans-serif;
-font-weight: 800;
-font-style: normal;
-} */
-
-
 .ageno-font {
     font-family: 'ABeeZee', sans-serif;
 }
@@ -89,25 +65,18 @@ class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-m
 @endif
 
 
-
-
 <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 @include('layouts.navigation')
 
-<!-- Page Heading -->
-@if (isset($header))
 <header class="bg-white dark:bg-gray-800 shadow">
 <div class="max-w-7xl mx-auto py-2 px-2 sm:px-6 lg:px-8 flex justify-between items-center">
-{{ $header }}
+@yield('app-header')
 </div>
 </header>
-@endif
 
-<!-- Page Content -->
 <main>
 <x-verify-document-widget/>
-
-{{ $slot }}
+@yield('app-content')
 </main>
 </div>
 
@@ -236,4 +205,6 @@ prevEl: '.swiper-button-prev',
 });
 });
 </script>
+
+@yield('app-script')
 </html>

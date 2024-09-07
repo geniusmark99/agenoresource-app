@@ -94,34 +94,36 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isBlocked()
     {
-    return $this->status === 'blocked';
+        return $this->status === 'blocked';
     }
 
     public function block()
     {
-    $this->status = 'blocked';
-    $this->save();
+        $this->status = 'blocked';
+        $this->save();
     }
 
     public function unblock()
     {
-    $this->status = 'active';
-    $this->save();
+        $this->status = 'active';
+        $this->save();
     }
 
-    
 
-    protected function firstName(): Attribute{
-        return Attribute::make(
-        get: fn(string $value) => ucfirst($value),
-        )->withoutObjectCaching();
-    }
 
-    protected function lastName(): Attribute{
-        return Attribute::make(
-        get: fn(string $value) => ucfirst($value),
-        )->withoutObjectCaching();
-    }
+    // protected function firstName(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn(string $value) => ucfirst($value),
+    //     );
+    // }
+
+    // protected function lastName(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn(string $value) => ucfirst($value),
+    //     );
+    // }
 
     /**
      * Get the attributes that should be cast.

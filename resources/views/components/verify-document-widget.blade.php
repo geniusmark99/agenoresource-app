@@ -3,7 +3,7 @@
 
   <div class="bg-rose-500 fixed z-[3000] text-white  text-center items-center border border-transparent transition-[border-color] hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-md dark:border-gray-700  dark:text-gray-400 shadow-sm dark:bg-gray-800 flex justify-between w-10/12 md:w-5/12 lg:w-6/12   rounded-md py-3 px-3">
   <div class="text-sm">
-    Please upload your @if (!Auth::user()->govt_id) Govt issued ID and @endif @if (!Auth::user()->cac_document) CAC @endif for Verification
+    Please upload your @if (!Auth::user()->govt_id) Govt issued ID and @endif @if (!Auth::user()->cac_document) CAC @endif for Verification before you can upload assets
 
   </div>
    <a href="{{ route('profile.edit') }}#verified-documents" class="hover:bg-white group bg-rose-600 hover:text-rose-500 hover:shadow-lg transition-all flex gap-x-2 px-2 py-1 rounded-md items-center justify-center">

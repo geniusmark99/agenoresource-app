@@ -6,7 +6,6 @@
             <div class="swiper-slide">
                 <img src="{{ asset($picture) }}" alt="Asset Image" 
                 class="w-full h-[230px] object-cover transition-all group-hover:scale-105 transform hover:filter rounded-md" draggable="false">
-
             </div>
         @endforeach
     </div>
@@ -26,7 +25,6 @@
     }
 
     .swiper-button-next, .swiper-button-prev {
-        /* display: none !important; */
         display: flex;
         opacity: 0;
         background-color: rgba(0, 0, 0, 0.5); 

@@ -10,10 +10,13 @@
     "require": {
         "php": "^8.2",
         "aws/aws-sdk-php": "^3.316",
+        "cloudinary-labs/cloudinary-laravel": "^2.2",
         "laravel/framework": "^11.0",
         "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "3.0",
         "livewire/livewire": "^3.5",
+        "mailersend/laravel-driver": "^2.6",
         "spatie/laravel-permission": "^6.4"
     },
     "require-dev": {
