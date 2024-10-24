@@ -11,33 +11,33 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('uid')->unique();
-            $table->string('project_id');
-            $table->string('asset_type');
-            $table->string('asset_name');
-            $table->string('slug')->unique();
-            $table->text('pictures')->nullable();
-            $table->text('video')->nullable();
-            $table->string('asset_location_details');
-            $table->string('asset_information');
-            $table->text('technical_report');
-            $table->double('price');
-            $table->string('coordinates');
-            $table->double('land_size')->nullable();
-            $table->text('mineral_details');
-            $table->text('reserve_deposit')->nullable();
-            $table->enum('plan', ['bronze', 'silver', 'gold', 'diamond', 'platinum']);
-            $table->string('duration');
-            $table->text('jorc_report')->nullable();
-            $table->string('opportunity_type')->nullable();
-            $table->text('geological_location');
-            $table->text('contact_information');
-            $table->timestamp('date_added')->useCurrent();
-            $table->integer('view_count')->default(0);
+            $table->unsignedBigInteger('user_id'); //done
+            $table->string('uid')->unique(); //done
+            $table->string('project_id'); //done
+            $table->integer('likes')->default(0); //done
+            $table->integer('dislikes')->default(0); //done
+            $table->string('asset_type'); //done
+            $table->string('asset_type_value'); //done
+            $table->string('asset_qty'); //done
+            $table->string('slug')->unique(); //done
+            $table->text('pictures')->nullable(); //done
+            $table->string('asset_location_details');  //done
+            $table->string('asset_information'); //done
+            $table->string('price'); //done
+            $table->double('land_size')->nullable(); //done
+            $table->text('mineral_details'); //done
+            $table->text('reserve_deposit')->nullable(); //done
+            $table->enum('plan', ['bronze', 'silver', 'gold', 'diamond', 'platinum']); //done
+            $table->integer('duration'); //done
+            $table->text('jorc_report')->nullable(); //done
+            $table->text('geological_location'); //done
+            $table->text('contact_information'); //done
+            $table->timestamp('date_added')->useCurrent(); //done
             $table->float('click_rate')->default(0);
-            $table->timestamp('date_activated')->nullable();
             $table->boolean('active')->default(false);
+            $table->integer('view_count')->default(0);
+            $table->timestamp('date_activated')->nullable();
+            $table->timestamp('date_deactivated')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

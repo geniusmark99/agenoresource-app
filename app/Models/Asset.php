@@ -11,16 +11,33 @@ class Asset extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-        'user_id', 'uid', 'project_id', 'asset_name', 'asset_type',
-        'asset_qty', 'asset_capacity', 'slug', 'pictures',
-        'video', 'asset_location_details', 'asset_information',
-        'technical_report', 'price', 'coordinates',
-        'land_size', 'mineral_details', 'reserve_deposit',
-        'jorc_report', 'opportunity_type', 'geological_location',
-        'contact_information',  'active', 'plan', 'duration',
-        'view_count','click_rate','date_activated'
+        'user_id', //done
+        'uid', //done
+        'project_id', //done
+        'likes', //done
+        'dislikes', //done
+        'asset_type', //done
+        'asset_type_value', //done
+        'asset_qty', //done
+        'slug', //done
+        'pictures', //done
+        'asset_location_details', //done
+        'asset_information', //done
+        'price', //done
+        'land_size', //done
+        'mineral_details', //done
+        'reserve_deposit', //done
+        'plan', //done
+        'duration', //done
+        'geological_location', //done
+        'contact_information', //done
+        'date_added',
+        'click_rate',
+        'active',
+        'view_count',
+        'date_activated',
+        'date_deactivated',
     ];
 
 
@@ -83,7 +100,17 @@ class Asset extends Model
         parent::boot();
 
         static::creating(function ($asset) {
-            $asset->slug = static::generateSlug($asset->asset_name);
+            $asset->slug = static::generateSlug($asset->asset_type_value);
+        });
+
+        static::saving(function ($asset) {
+            if ($asset->asset_type_value === 'land') {
+                if ($asset->asset_qty > 1) {
+                    $asset->asset_qty = $asset->asset_qty . ' plots';
+                } else {
+                    $asset->asset_qty = $asset->asset_qty . ' plot';
+                }
+            }
         });
     }
 

@@ -28,11 +28,11 @@ class UserFactory extends Factory
         return [
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
-            'status' => fake()->randomElement(['active','blocked']),
+            'status' => 'blocked',
             'uuid' => 'E' . substr(str_shuffle('0123456789'), 0, 6),
             'email' => fake()->unique()->safeEmail(),
             'account_user_type' => fake()->randomElement(['individual', 'cooperate']),
-            'user_type' => fake()->randomElement(['seller', 'leaser', 'buyer', 'investor']),
+            'user_type' => fake()->randomElement(['seller', 'buyer']),
             'phone_number' => fake()->unique()->phoneNumber(),
             'profile_pics' => fake()->imageUrl(200, 200),
             'email_verified_at' => now(),
@@ -46,7 +46,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

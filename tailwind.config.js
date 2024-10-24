@@ -13,6 +13,15 @@ export default {
 
     theme: {
         extend: {
+            keyframes: {
+                blink: {
+                  '0%, 100%': { opacity: 0 },
+                  '50%': { opacity: 1 },
+                },
+              },
+              animation: {
+                blink: 'blink 1.4s infinite both',
+              },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
@@ -21,6 +30,7 @@ export default {
         // 'ageno-2':'#4458AC',
         // 'ageno-3':'#53287E'
         'ageno':'rgb(59 130 246)',
+        // 'ageno':'#673de6',
         'ageno-2':'rgb(37 99 235)',
         // 'ageno': '#8B4513',
         // 'ageno-2': '#CC7722',

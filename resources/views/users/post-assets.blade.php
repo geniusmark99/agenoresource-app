@@ -261,13 +261,13 @@
     @include('posts.partials.post-assets-sales')
     </div>
     </div>
-    </div>
+</div>
 
 @endsection
 
 @section('app-script')
 
-<script>
+{{-- <script>
     const Id = (el) => document.getElementById(el);
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -285,7 +285,6 @@
 
 
         uploadButton.addEventListener('click', () => {
-            // alert("sdjsd");
             imageSelector.click()
         });
 
@@ -298,16 +297,16 @@
         function handleImageSelection(event) {
             const files = Array.from(event.target.files);
             processFiles(files);
-            imageSelector.value = ''; // Reset the input
+            imageSelector.value = ''; 
         }
 
         function handleDragOver(event) {
-            event.preventDefault(); // Prevent default behavior
+            event.preventDefault(); 
             dropZone.classList.add('drag-over');
         }
 
         function handleDrop(event) {
-            event.preventDefault(); // Prevent default behavior
+            event.preventDefault(); 
             dropZone.classList.remove('drag-over');
             const files = Array.from(event.dataTransfer.files);
             processFiles(files);
@@ -422,5 +421,5 @@
         }
     });
 
-</script>
+</script> --}}
 @endsection

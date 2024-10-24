@@ -169,6 +169,75 @@ class AdminController extends Controller
         return view('admin.message');
     }
 
+    public function notification()
+    {
+
+        // $user = auth()->user();
+        // $user = User::with('unreadNotifications')->find(1);
+        // // $user = User::with('unreadNotifications')->get();
+        // if ($user) {
+        //     $unreadNotifications = $user->unreadNotifications;
+        //     return view('admin.notification', ['notifications' => $unreadNotifications]);
+        // } else {
+        //     return redirect()->route('admin.login')->with('error', 'Please log in to view notifications.');
+        // }
+
+        // Get the currently authenticated admin
+        // $user = auth()->user();
+        $admin = Auth::guard('admin')->user();
+        $notifications = $admin->unreadNotifications;
+        // dd($notifications);
+
+        return view('admin.notifications', compact('notifications'));
+    }
+
+    // public function markAsRead($id)
+    // {
+    //     $admin = Auth::guard('admin')->user();
+
+    //     $notification = $admin->notifications()->findOrFail($id);
+
+    //     if ($notification) {
+    //         $notification->markAsRead();
+    //     }
+
+    //     return redirect()->back()->with('success', 'Notification marked as read.');
+
+    //     // $notification = auth()->user()->notifications()->findOrFail($id);
+    //     // $notification->markAsRead();
+    //     // return redirect()->back()->with('success', 'Notification marked as read.');
+    // }
+
+
+    // Mark notification as read
+    public function markAsRead($id)
+    {
+        //  $admin = Auth::guard('admin')->user();
+        $admin = Admin::find(1);
+        $notification = $admin->notifications()->find($id);
+
+        if ($notification) {
+            $notification->markAsRead();
+            return redirect()->back()->with('success', 'Notification marked as read!');
+        }
+
+        return redirect()->back()->with('error', 'Notification not found.');
+    }
+
+    public function deleteNotification($id)
+    {
+        $admin = Admin::find(1);
+        $notification = $admin->notifiations()->find($id);
+
+        if ($notification) {
+            $notification->delete();
+            return redirect()->back()->with('success', 'Notification deleted successfully!');
+        }
+
+        return redirect()->back()->with('error', 'Notification not found.');
+    }
+
+
     public function users()
     {
         return view('admin.users');

@@ -274,9 +274,10 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
    {{-- COME HERE --}}
 
-<form action="{{ route('cloudinary-image-upload',$assetImageId) }}" enctype="multipart/form-data">
+<form action="{{ route('cloudinary-image-upload',$assetImageId) }}" enctype="multipart/form-data" method="POST">
+    @csrf
 <div class="mb-4 mx-10 relative flex flex-col justify-center">
-<label for="pictures"></label>
+{{-- <label for="pictures"></label> --}}
 <input type="file" name="pictures[]"  accept="image/*"  multiple />
 {{-- id="image-selector" --}}
 <div id="dropZone" class="drop-zone">

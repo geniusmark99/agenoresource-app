@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminAuth::class,
             'track.view' => \App\Http\Middleware\TrackAssetView::class,
+            'admin.notifications' => \App\Http\Middleware\AdminNotificationMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

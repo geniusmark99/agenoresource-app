@@ -174,7 +174,7 @@ Create an Account
 </template>
 {{-- End of Assets Modal Popup --}}
 
-<div class="swiper-container overflow-x-hidden">
+<div class="swiper-container overflow-hidden">
 <div class="swiper-wrapper">
 <div class="swiper-slide">
 <div class="flex justify-center items-center home-hero-section relative">
@@ -224,34 +224,78 @@ Post mining assets and get insights from industry experts.
 
 <div class="w-full flex">
 <div class="relative w-full">
-<input type="text" 
-class="border-none outline-none w-full dark:bg-slate-900 focus:outline-none appearance-none focus:border-none ring-0 focus:ring-0  text-gray-700 py-4 rounded-tl-md rounded-bl-md dark:text-white dark:placeholder:text-gray-300"
-:placeholder="'Enter to search for assets to ' + placeholder"
-x-model="query" 
-@input="filterAssets" @keydown.arrow-down="highlightNext"
-@keydown.arrow-up="highlightPrev">
-<div class="absolute text-sm md:text-base  bg-white dark:bg-slate-900 text-slate-900
+<div class="flex mt-2">
+    <input type="text" 
+    class="border-none outline-none w-full dark:bg-slate-900 focus:outline-none appearance-none focus:border-none 
+    ring-0 focus:ring-0  text-gray-700 py-4 rounded-tl-md rounded-bl-md dark:text-white dark:placeholder:text-gray-300"
+    :placeholder="'Enter to search for assets to ' + placeholder"
+    x-model="query" 
+    @input="filterAssets" @keydown.arrow-down="highlightNext"
+    @keydown.arrow-up="highlightPrev">
+
+    <button @click="handleSubmit"  class="w-[15%] lg:w-1/12 
+    bg-gradient-to-tr from-ageno-2 to-emerald-400 shadow-sm hover:shadow-md
+    rounded-tr-md rounded-br-md flex justify-center items-center cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  class="w-6 h-6 lg:w-7 lg:h-7 fill-white">
+    <path d="M9 2C5.1458514 2 2 5.1458514 2 9C2 12.854149 5.1458514 16 9 16C10.747998 16 12.345009 15.348024 13.574219 14.28125L14 14.707031L14 16L20 22L22 20L16 14L14.707031 14L14.28125 13.574219C15.348024 12.345009 16 10.747998 16 9C16 5.1458514 12.854149 2 9 2 z M 9 4C11.773268 4 14 6.2267316 14 9C14 11.773268 11.773268 14 9 14C6.2267316 14 4 11.773268 4 9C4 6.2267316 6.2267316 4 9 4 z"/>
+    </svg>
+    </button>
+</div>
+
+
+<div class="absolute text-sm md:text-base bg-white dark:bg-slate-900 text-slate-900
 p-2 shadow-md w-full max-h-80 z-[2000] overflow-y-auto border-none outline-none rounded-md mt-1" 
 x-show="filteredAssets.length > 0" x-cloak>
-<ul role="listbox" aria-activedescendant="">
+<ul role="listbox" aria-activedescendant="" class="flex flex-col gap-y-2">
 <template x-for="(asset, index) in filteredAssets" :key="asset.id">
+
 <li :class="{'bg-ageno text-white': index === highlightedIndex}" 
 role="option" tabindex="-1"
-class="px-4 py-2 hover:bg-ageno hover:text-white rounded-md cursor-pointer text-left" @click="selectAsset(asset)" @mouseover="highlightIndex(index)">
-<span x-text="asset.asset_type"></span>:  <span x-text="asset.asset_name"></span>
+class="px-4 py-2 hover:bg-ageno border-b shadow-sm last:border-b-0 hover:text-white rounded-md cursor-pointer text-left flex justify-between"
+ @click="selectAsset(asset)" @mouseover="highlightIndex(index)"
+ >
+ <div class="flex items-center gap-x-2">
+
+<template x-if="asset.asset_type_value === 'land'">
+<div class="size-10 rounded-full bg-gray-100 border shadow-sm flex justify-center items-center">
+<svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="QmtC6eo1hoHtgsLMKPtFva" x1="19.695" x2="32.536" y1="10.951" y2="43.729" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2aa4f4"/><stop offset="1" stop-color="#007ad9"/></linearGradient><path fill="url(#QmtC6eo1hoHtgsLMKPtFva)" d="M40,10H15.797c-0.522,0-1.035,0.136-1.488,0.395L8,14L5,24l3,6c0,0-2,4-2,4l1.688,4.219c0.204,0.511,0.545,0.956,0.985,1.286L12,42h9.292c0.466,0,0.925-0.108,1.342-0.317L26,40l6,4l6.949-2.316C40.174,41.275,41,40.129,41,38.838V35l2-4l-3-6l1.664-1.109C42.499,23.334,43,22.398,43,21.394V13C43,11.343,41.657,10,40,10z"/><radialGradient id="QmtC6eo1hoHtgsLMKPtFvb" cx="16" cy="31" r="3" gradientUnits="userSpaceOnUse"><stop offset="0"/><stop offset="1" stop-opacity="0"/></radialGradient><circle cx="16" cy="31" r="3" fill="url(#QmtC6eo1hoHtgsLMKPtFvb)"/><path fill="#f9f9f9" d="M16,29c-1.105,0-2,0.895-2,2s0.895,2,2,2s2-0.895,2-2S17.105,29,16,29z"/><path d="M39,12c0-0.685-0.07-1.354-0.202-2H19.202C19.07,10.646,19,11.315,19,12c0,2.612,1.006,5.086,2.806,6.937c0.024,0.027,0.026,0.029,5.78,5.788c0.39,0.39,0.901,0.585,1.414,0.585c0.512,0,1.024-0.195,1.414-0.585c4.924-4.928,5.636-5.64,5.754-5.76C37.994,17.086,39,14.612,39,12z" opacity=".05"/><path d="M19.5,12c0,2.481,0.955,4.831,2.677,6.602c0.013,0.013,0.018,0.02,5.763,5.769c0.292,0.292,0.677,0.438,1.061,0.438s0.769-0.146,1.061-0.438c5.068-5.073,5.67-5.674,5.749-5.755v0c1.735-1.785,2.69-4.135,2.69-6.616c0-0.686-0.077-1.355-0.216-2H19.716C19.577,10.645,19.5,11.314,19.5,12z" opacity=".07"/><linearGradient id="QmtC6eo1hoHtgsLMKPtFvc" x1="22.637" x2="35.363" y1="5.635" y2="18.361" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#d43a02"/><stop offset="1" stop-color="#b9360c"/></linearGradient><path fill="url(#QmtC6eo1hoHtgsLMKPtFvc)" d="M35.451,18.268C37.026,16.647,38,14.438,38,12c0-4.97-4.03-9-9-9s-9,4.03-9,9c0,2.438,0.974,4.647,2.549,6.268c0.009,0.009,5.744,5.749,5.744,5.749c0.391,0.391,1.024,0.391,1.414,0C29.707,24.017,35.442,18.277,35.451,18.268z"/><radialGradient id="QmtC6eo1hoHtgsLMKPtFvd" cx="29" cy="12" r="3.938" gradientUnits="userSpaceOnUse"><stop offset=".177"/><stop offset="1" stop-opacity="0"/></radialGradient><circle cx="29" cy="12" r="3.938" fill="url(#QmtC6eo1hoHtgsLMKPtFvd)"/><circle cx="29" cy="12" r="3.375" fill="#f9f9f9"/></svg>
+</div>
+</template>
+
+<template x-if="asset.asset_type_value !== 'land'">
+<div class="size-10 rounded-full bg-gray-100 border shadow-sm flex justify-center items-center">
+<svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#64717c" d="M27,33.606L11.464,18.07L25.169,4.364c1.011-1.011,2.651-1.011,3.662,0L42.536,18.07L27,33.606z"/><path fill="#889097" d="M19,31L6.278,18.278L17.501,7.054c0.828-0.828,2.171-0.828,2.999,0l11.223,11.223L19,31z"/><path fill="#d43a02" d="M45,25H3c-0.552,0-1-0.448-1-1v0c0-0.552,0.448-1,1-1h42c0.552,0,1,0.448,1,1v0C46,24.552,45.552,25,45,25z"/><linearGradient id="M5f2RUfnu6QgYHsDSBBc2a" x1="21.604" x2="28.097" y1="20.818" y2="43.375" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b9360c"/><stop offset=".999" stop-color="#ab320b"/></linearGradient><path fill="url(#M5f2RUfnu6QgYHsDSBBc2a)" d="M41,41H7c-1.105,0-2-0.895-2-2V19h38v20C43,40.105,42.105,41,41,41z"/><path fill="#586169" d="M38,41c0,2.209-1.79,4-4,4s-4-1.791-4-4s1.79-4,4-4S38,38.791,38,41"/><path fill="#999" d="M36,41c0,1.105-0.895,2-2,2s-2-0.895-2-2s0.895-2,2-2S36,39.895,36,41"/><path fill="#586169" d="M18,41c0,2.209-1.79,4-4,4s-4-1.791-4-4s1.79-4,4-4S18,38.791,18,41"/><path fill="#999" d="M16,41c0,1.105-0.895,2-2,2s-2-0.895-2-2s0.895-2,2-2S16,39.895,16,41"/><path fill="#d43a02" d="M43,19H5c-0.552,0-1-0.448-1-1v0c0-0.552,0.448-1,1-1h38c0.552,0,1,0.448,1,1v0C44,18.552,43.552,19,43,19z"/></svg>
+</div>
+</template>
+
+<div class="flex flex-col">
+  
+    <div class="flex items-center gap-x-1 text-[10px] md:text-xs">
+        <p>Asset type:</p>
+        <p class="font-normal text-xs md:text-sm" x-text="asset.asset_type_value"></p>
+    </div>
+</div>
+ </div>
+ <div class="flex items-center gap-x-2">
+<div class="flex items-center gap-x-1 text-[10px] md:text-xs">
+    <p>Asset quantity:</p>
+    <p class="font-normal text-xs md:text-sm" x-text="asset.asset_qty"></p>
+</div>
+<a class="rounded-md py-1 px-2 transition-all text-sm hover:bg-white hover:text-ageno-2  bg-ageno-2 text-white flex items-center gap-x-1">
+      <svg class="size-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 4C5.142 4 1.8857031 9.8786406 1.0957031 11.556641C0.96370312 11.836641 0.96370313 12.161406 1.0957031 12.441406C1.8857031 14.120406 5.142 20 12 20C18.834 20 22.092484 14.162937 22.896484 12.460938C23.034484 12.167938 23.034484 11.832062 22.896484 11.539062C22.092484 9.8370625 18.834 4 12 4 z M 12 7C14.761 7 17 9.239 17 12C17 14.761 14.761 17 12 17C9.239 17 7 14.761 7 12C7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z" />
+      </svg>
+    view
+</a>
+ </div>
+
 </li>
 </template>
 </ul>
 </div>
 </div>
 
-<button @click="handleSubmit"  class="w-[15%] lg:w-1/12 
-bg-gradient-to-tr from-ageno-2 to-emerald-400 shadow-sm hover:shadow-md
-rounded-tr-md rounded-br-md flex justify-center items-center cursor-pointer">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  class="w-6 h-6 lg:w-7 lg:h-7 fill-white">
-<path d="M9 2C5.1458514 2 2 5.1458514 2 9C2 12.854149 5.1458514 16 9 16C10.747998 16 12.345009 15.348024 13.574219 14.28125L14 14.707031L14 16L20 22L22 20L16 14L14.707031 14L14.28125 13.574219C15.348024 12.345009 16 10.747998 16 9C16 5.1458514 12.854149 2 9 2 z M 9 4C11.773268 4 14 6.2267316 14 9C14 11.773268 11.773268 14 9 14C6.2267316 14 4 11.773268 4 9C4 6.2267316 6.2267316 4 9 4 z"/>
-</svg>
-</button>
+
 </div>
 </form>
 
@@ -262,7 +306,53 @@ rounded-tr-md rounded-br-md flex justify-center items-center cursor-pointer">
 </div>
 
 
+
 </div>
+{{-- EXTRA --}}
+<div class="my-10 w-full flex justify-center z-[2000]"> 
+    <div class="w-full mx-6 lg:w-[1000px] rounded-lg lg:rounded-full bg-white shadow-md shadow-ageno/30 
+    flex flex-col gap-y-5 p-3 lg:p-0 md:flex-row md:justify-between">
+    <div class="flex gap-x-2 border-b lg:border-b-0 lg:border-r border-gray-200  py-2 px-1 lg:p-3">
+    <div>
+        <svg class="size-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#199be2" d="M35.983,32.448l-3.536,3.536l7.87,7.87c0.195,0.195,0.512,0.195,0.707,0l2.828-2.828c0.195-0.195,0.195-0.512,0-0.707L35.983,32.448z"/><radialGradient id="KGt2acGa95QyN2j07oBX6a" cx="20.024" cy="20.096" r="19.604" gradientUnits="userSpaceOnUse"><stop offset=".693" stop-color="#006185"/><stop offset=".921" stop-color="#35c1f1"/></radialGradient><polygon fill="url(#KGt2acGa95QyN2j07oBX6a)" points="31.601,28.065 28.065,31.601 32.448,35.983 35.983,32.448"/><linearGradient id="KGt2acGa95QyN2j07oBX6b" x1="8.911" x2="31.339" y1="8.911" y2="31.339" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a3ffff"/><stop offset=".223" stop-color="#9dfbff"/><stop offset=".53" stop-color="#8bf1ff"/><stop offset=".885" stop-color="#6ee0ff"/><stop offset="1" stop-color="#63daff"/></linearGradient><circle cx="20" cy="20" r="16" fill="url(#KGt2acGa95QyN2j07oBX6b)"/></svg>
+    </div>
+    <div class="flex flex-col gap-y-0.5 bg-white rounded-lg text-center">
+    <h2 class="text-sm font-semibold">Search Assets</h2>
+    <div class="text-xs">
+     Search for your desired mineral assets.
+    </div>
+    </div>
+    </div>
+
+
+    <div class="flex gap-x-2 border-b lg:border-b-0 lg:border-r border-gray-200  py-2 px-1 lg:p-3">
+        <div>
+            <svg class="size-8" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><linearGradient id="uFGHvrjBu-Ewd9VgP8-lXa" x1="12.952" x2="34.386" y1="7.43" y2="42.777" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7dd8f3"/><stop offset="1" stop-color="#45b0d0"/></linearGradient><path fill="url(#uFGHvrjBu-Ewd9VgP8-lXa)" d="M36,42H10c-1.105,0-2-0.895-2-2V8c0-1.105,0.895-2,2-2l26,0c1.105,0,2,0.895,2,2v32C38,41.105,37.105,42,36,42z"/><linearGradient id="uFGHvrjBu-Ewd9VgP8-lXb" x1="20" x2="20" y1="37.284" y2="42.01" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0176d0"/><stop offset="1" stop-color="#16538c"/></linearGradient><path fill="url(#uFGHvrjBu-Ewd9VgP8-lXb)" d="M34,40v-3H4v3c0,1.105,0.895,2,2,2h30C34.895,42,34,41.105,34,40z"/><path fill="#057093" d="M32.5,19h-13c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h13c0.276,0,0.5,0.224,0.5,0.5v2C33,18.776,32.776,19,32.5,19z"/><path fill="#057093" d="M32.5,25h-13c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h13c0.276,0,0.5,0.224,0.5,0.5v2C33,24.776,32.776,25,32.5,25z"/><path fill="#057093" d="M32.5,31h-13c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h13c0.276,0,0.5,0.224,0.5,0.5v2C33,30.776,32.776,31,32.5,31z"/><path fill="#057093" d="M15.5,19h-2c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h2c0.276,0,0.5,0.224,0.5,0.5v2C16,18.776,15.776,19,15.5,19z"/><path fill="#057093" d="M15.5,25h-2c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h2c0.276,0,0.5,0.224,0.5,0.5v2C16,24.776,15.776,25,15.5,25z"/><path fill="#057093" d="M15.5,31h-2c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h2c0.276,0,0.5,0.224,0.5,0.5v2C16,30.776,15.776,31,15.5,31z"/></svg>
+        </div>
+        <div class="flex flex-col gap-y-0.5 bg-white rounded-lg text-center">
+        <h2 class="text-sm font-semibold">Filter Assets</h2>
+        <div class="text-xs">
+Filter through assets that match your budgets.
+        </div>
+        </div>
+    </div>
+
+
+        <div class="flex gap-x-2  py-2 px-1 lg:p-3">
+            <div>
+                <svg class="size-8" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 48 48"><linearGradient id="SVGID_1_" x1="19" x2="43" y1="-.8" y2="-.8" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"/><stop offset="1" stop-color="#c28200"/></linearGradient><path fill="url(#SVGID_1_)" d="M32.4,8.2c-0.8-0.8-2-0.8-2.8,0L19,18.2v4.6h24v-4L32.4,8.2z"/><linearGradient id="SVGID_00000059290628557707764960000010852522842068389767_" x1="9" x2="33" y1="-2.8" y2="-2.8" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffcf54"/><stop offset=".261" stop-color="#fdcb4d"/><stop offset=".639" stop-color="#f7c13a"/><stop offset="1" stop-color="#f0b421"/></linearGradient><path fill="url(#SVGID_00000059290628557707764960000010852522842068389767_)" d="M22.4,6.2c-0.8-0.8-2-0.8-2.8,0L9,16.2v4.6h24v-4L22.4,6.2z"/><linearGradient id="SVGID_00000034812631326983524610000007903118283503895738_" x1="9" x2="33" y1="-2.8" y2="-2.8" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffcf54"/><stop offset=".261" stop-color="#fdcb4d"/><stop offset=".639" stop-color="#f7c13a"/><stop offset="1" stop-color="#f0b421"/></linearGradient><path fill="url(#SVGID_00000034812631326983524610000007903118283503895738_)" d="M22.4,6.2c-0.8-0.8-2-0.8-2.8,0L9,16.2v4.6h24v-4L22.4,6.2z"/><linearGradient id="SVGID_00000160887027043244215090000000414941184857482636_" x1="5.76" x2="5.76" y1="8.877" y2="-9" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#92a3b0"/><stop offset=".015" stop-color="#a3b5c4"/><stop offset=".032" stop-color="#aec2d1"/><stop offset=".046" stop-color="#b2c6d6"/></linearGradient><path fill="url(#SVGID_00000160887027043244215090000000414941184857482636_)" d="M9.5,24.9c-0.5,0-0.9-0.3-1-0.8L5.7,10.6C5.5,9.7,4.7,9,3.8,9H2C1.4,9,1,8.6,1,8s0.4-1,1-1h1.8c1.9,0,3.5,1.3,3.9,3.2l2.8,13.5c0.1,0.5-0.2,1.1-0.8,1.2C9.6,24.9,9.5,24.9,9.5,24.9z"/><circle cx="37" cy="41" r="3" fill="#5c5f61"/><circle cx="37" cy="41" r="1" opacity=".15"/><circle cx="15" cy="41" r="3" fill="#5c5f61"/><circle cx="15" cy="41" r="1" opacity=".15"/><linearGradient id="SVGID_00000031191064817237660110000014523617691931823805_" x1="25.5" x2="25.5" y1="23" y2="15" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#92a3b0"/><stop offset=".015" stop-color="#a3b5c4"/><stop offset=".032" stop-color="#aec2d1"/><stop offset=".046" stop-color="#b2c6d6"/></linearGradient><path fill="url(#SVGID_00000031191064817237660110000014523617691931823805_)" d="M41,39H13c-2.2,0-4-1.8-4-4s1.8-4,4-4h25c0.6,0,1,0.4,1,1c0,0.6-0.4,1-1,1H13c-1.1,0-2,0.9-2,2s0.9,2,2,2h28c0.6,0,1,0.4,1,1S41.6,39,41,39z"/><linearGradient id="SVGID_00000122716546589680379100000016567160213169045944_" x1=".756" x2="3.384" y1="-9.244" y2="-6.616" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#199ae0"/><stop offset="1" stop-color="#0782d8"/></linearGradient><path fill="url(#SVGID_00000122716546589680379100000016567160213169045944_)" d="M4,8c0,1.1-0.9,2-2,2S0,9.1,0,8s0.9-2,2-2S4,6.9,4,8z"/><linearGradient id="SVGID_00000128464189415478911710000003670154318624603819_" x1="6.8" x2="44.369" y1="8.55" y2="8.55" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3079d6"/><stop offset="1" stop-color="#297cd2"/></linearGradient><path fill="url(#SVGID_00000128464189415478911710000003670154318624603819_)" d="M9.7,31.4c0.2,0.9,1,1.6,2,1.6h28.7c1,0,1.8-0.7,2-1.7L44.3,19L6.8,16.1L9.7,31.4z"/><linearGradient id="SVGID_00000056409240594451539550000011610800944927830170_" x1="6" x2="44.834" y1="-.5" y2="-.5" gradientTransform="translate(0 16)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#42a3f2"/><stop offset="1" stop-color="#42a4eb"/></linearGradient><path fill="url(#SVGID_00000056409240594451539550000011610800944927830170_)" d="M43.9,14.9L6,12l0.8,4.1L44.4,19l0.5-2.9C44.9,15.5,44.5,15,43.9,14.9z"/></svg>
+            </div>
+            <div class="flex flex-col gap-y-0.5 bg-white rounded-lg text-center">
+            <h2 class="text-sm font-semibold">Buy Assets</h2>
+            <div class="text-xs">
+             Connect to mineral owners to buy your desired assets.
+            </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{{-- END OF EXTRA --}}
 
 
 
@@ -381,23 +471,70 @@ rounded-tr-md rounded-br-md flex justify-center items-center cursor-pointer">
 </div>
 </div>
 
-
+{{-- PLATINUM ASSETS --}}
 <div class="flex flex-col mt-4">
 <div class="flex justify-between items-center px-4 sm:px-6 lg:px-28">
-<h3 class="  text-left text-ageno lg:text-3xl dark:text-white nanum-gothic-extrabold">Featured Latest assets</h3>
+<h3 class="  text-left text-gray-600 lg:text-4xl dark:text-white nanum-gothic-extrabold">Platinum Latest assets</h3>
 
 <a href="{{ route('assets') }}" class="py-1 md:py-1.5 lg:py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">See all</a>
 </div>
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 
 <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-8">
-<x-widgets.asset-widget :assets="$assets"/>
+<x-widgets.asset-widget :assets="$platinum_assets"/>
+</div>
+{{-- <div class="w-full flex justify-center items-center mt-10">
+<a href="{{ route('assets') }}" class="py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">View more assets</a>
+</div> --}}
+<hr class="bg-red-600"/>
+</div>
+</div>
+{{-- END OF PLATINUM ASSETS --}}
+
+
+
+{{-- DIAMOND ASSETS --}}
+<div class="flex flex-col mt-12">
+<div class="flex justify-between items-center px-4 sm:px-6 lg:px-28">
+<h3 class="  text-left text-gray-600 lg:text-4xl dark:text-white nanum-gothic-extrabold">Diamond Latest assets</h3>
+
+<a href="{{ route('assets') }}" class="py-1 md:py-1.5 lg:py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">See all</a>
+</div>
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-8">
+<x-widgets.asset-widget :assets="$diamond_assets"/>
 </div>
 <div class="w-full flex justify-center items-center mt-10">
 <a href="{{ route('assets') }}" class="py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">View more assets</a>
 </div>
 </div>
 </div>
+{{-- END OF DIAMOND ASSETS --}}
+
+
+{{-- GOLD ASSETS --}}
+<div class="flex flex-col mt-12">
+<div class="flex justify-between items-center px-4 sm:px-6 lg:px-28">
+<h3 class="  text-left text-gray-600 lg:text-4xl dark:text-white nanum-gothic-extrabold">Gold Latest assets</h3>
+
+<a href="{{ route('assets') }}" class="py-1 md:py-1.5 lg:py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">See all</a>
+</div>
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-8">
+<x-widgets.asset-widget :assets="$gold_assets"/>
+</div>
+<div class="w-full flex justify-center items-center mt-10">
+<a href="{{ route('assets') }}" class="py-2 px-3 rounded-md bg-ageno-2 hover:bg-ageno transition-all dark:text-neutral-200 text-white">View more assets</a>
+</div>
+</div>
+</div>
+{{-- END OF GOLD ASSETS --}}
+
+<section class="flex flex-col ">
+
+</section>
 
 <section class="bg-white dark:bg-gray-900">
 <div class="container px-6 py-10 mx-auto">
@@ -602,8 +739,8 @@ highlightedIndex: -1,
 filterAssets() {
 if (this.query.length > 0) {
 this.filteredAssets = this.assets.filter(asset => 
-asset.asset_name.toLowerCase().includes(this.query.toLowerCase()) || 
-asset.asset_type.toLowerCase().includes(this.query.toLowerCase())
+asset.asset_type_value.toLowerCase().includes(this.query.toLowerCase()) || 
+asset.asset_type_value.toLowerCase().includes(this.query.toLowerCase())
 );
 } else {
 this.filteredAssets = [];
@@ -613,20 +750,20 @@ this.highlightedIndex = -1;
 highlightNext() {
 if (this.highlightedIndex < this.filteredAssets.length - 1) {
 this.highlightedIndex++;
-this.query = this.filteredAssets[this.highlightedIndex].asset_type;
+this.query = this.filteredAssets[this.highlightedIndex].asset_type_value;
 
 }
 },
 highlightPrev() {
 if (this.highlightedIndex > 0) {
 this.highlightedIndex--;
-this.query = this.filteredAssets[this.highlightedIndex].asset_type;
+this.query = this.filteredAssets[this.highlightedIndex].asset_type_value;
 
 }
 },
 highlightIndex(index) {
 this.highlightedIndex = index;
-this.query = this.filteredAssets[index].asset_type;
+this.query = this.filteredAssets[index].asset_type_value;
 
 },
 selectHighlighted() {
@@ -635,7 +772,7 @@ this.selectAsset(this.filteredAssets[this.highlightedIndex]);
 }
 },
 selectAsset(asset) {
-this.query = asset.asset_type;
+this.query = asset.asset_type_value;
 this.filteredAssets = [];
 window.location.href = `/assets/${asset.slug}`;
 },

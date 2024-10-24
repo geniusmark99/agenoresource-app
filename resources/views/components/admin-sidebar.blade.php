@@ -144,14 +144,18 @@ Unactive users
         </li>
   
         <li><a 
-  x-bind:class="isActive('/admin/message') ? 'text-blue-600 bg-gray-100 dark:bg-neutral-800 dark:text-white' : 'text-neutral-700'"
+  x-bind:class="isActive('/admin/notification') ? 'text-blue-600 bg-gray-100 dark:bg-neutral-800 dark:text-white' : 'text-neutral-700'"
 
-          href="{{ route('admin.message') }}"
+          href="{{ route('admin.notification') }}"
           class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5  text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-800 dark:text-white ">
 
 
-          <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
-          Message
+          {{-- <svgxmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg> --}}
+     
+          <svg  class="flex-shrink-0 size-4"  xmlns="http://www.w3.org/2000/svg" fill="currentColor"  width="48" height="48" viewBox="0 0 48 48">
+            <path d="M23.277344 4.0175781C15.193866 4.3983176 9 11.343391 9 19.380859L9 26.648438L6.3496094 31.980469 A 1.50015 1.50015 0 0 0 6.3359375 32.009766C5.2696804 34.277268 6.9957076 37 9.5019531 37L18 37C18 40.295865 20.704135 43 24 43C27.295865 43 30 40.295865 30 37L38.496094 37C41.002339 37 42.730582 34.277829 41.664062 32.009766 A 1.50015 1.50015 0 0 0 41.650391 31.980469L39 26.648438L39 19C39 10.493798 31.863289 3.6133643 23.277344 4.0175781 z M 23.417969 7.0136719C30.338024 6.6878857 36 12.162202 36 19L36 27 A 1.50015 1.50015 0 0 0 36.15625 27.667969L38.949219 33.289062C39.128826 33.674017 38.921017 34 38.496094 34L9.5019531 34C9.077027 34 8.8709034 33.674574 9.0507812 33.289062C9.0507812 33.289062 9.0507812 33.287109 9.0507812 33.287109L11.84375 27.667969 A 1.50015 1.50015 0 0 0 12 27L12 19.380859C12 12.880328 16.979446 7.3169324 23.417969 7.0136719 z M 21 37L27 37C27 38.674135 25.674135 40 24 40C22.325865 40 21 38.674135 21 37 z" />
+          </svg>    
+           Notifications
         </a></li>
       
       </ul>

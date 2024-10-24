@@ -15,41 +15,32 @@ class GuestController extends Controller
         return view('test-image-video');
     }
 
-    // public function testUpload(Request $request)
-    // {
-    //     $request->validate([
-    //         'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
-    //         'videos.*' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime|max:50240',
-    //     ]);
 
-    //     $uploadedFiles = [];
+    public function buyer()
+    {
+        return view('users.buyer');
+    }
 
-    //     if ($request->hasFile('images')) {
-    //         foreach ($request->file('images') as $image) {
-    //             $path = $image->store('public/images');
-    //             $uploadedFiles[] = [
-    //                 'user_id' => auth()->id(),
-    //                 'file_path' => $path,
-    //                 'file_type' => 'image',
-    //             ];
-    //         }
-    //     }
+    public function assetPlan()
+    {
 
-    //     if ($request->hasFile('videos')) {
-    //         foreach ($request->file('videos') as $video) {
-    //             $path = $video->store('public/videos');
-    //             $uploadedFiles[] = [
-    //                 'user_id' => auth()->id(),
-    //                 'file_path' => $path,
-    //                 'file_type' => 'video',
-    //             ];
-    //         }
-    //     }
+        $assets = Asset::where('active', 1);
 
-    //     UserAsset::insert($uploadedFiles);
+        // dd($assets);
+        //  $assetPlan = Asset::with('user')->where('slug', $slug)->firstOrFail();
+        // $silverPlan =   $assets->where('plan', '>=', 'silver');
+        // $bronzePlan =   $assets->where('plan', '>=', 'bronze');
+        // $goldPlan =   $assets->where('plan', '>=', 'gold');
+        // $diamondPlan =   $assets->where('plan', '>=', 'diamond');
+        // $plantinumPlan =   $assets->where('plan', '>=', 'plantinum');
+        $plantinum_assets = $assets->where('plan', 'platinum')->get();
 
-    //     return response()->json(['message' => 'Files uploaded successfully!']);
-    // }
+        dd($plantinum_assets);
+        // $query->where('price', '>=', $request->minPrice);
+
+
+
+    }
 
     public function testFilter()
     {
@@ -61,13 +52,24 @@ class GuestController extends Controller
     {
 
         $asset = Asset::with('user')->where('slug', $slug)->firstOrFail();
+        $user = auth()->user();
 
-        if ($asset && (!auth()->check() || auth()->id() !== $asset->user_id)) {
-            $asset->increment('view_count');
-            $asset->click_rate = $asset->view_count / max($asset->view_count, 1);
-            $asset->save();
+        if (!$asset) {
+            return abort(404);
         }
-        return view('guests.assetsmore', compact('asset'));
+
+        if ($asset->active || ($user && $user->id === $asset->user_id)) {
+            if ($asset && (!auth()->check() || auth()->id() !== $asset->user_id)) {
+                $asset->increment('view_count');
+                $asset->click_rate = $asset->view_count / max($asset->view_count, 1);
+                $asset->save();
+            }
+            return view('guests.assetsmore', compact('asset'));
+        }
+
+        return view('guests.pending_approval', compact('asset'));
+        // http://127.0.0.1:8000/assets/equipment-16
+        // return view('guests.assetsmore', compact('asset'));
     }
 
 
@@ -118,7 +120,6 @@ class GuestController extends Controller
 
     public function  uploadVideo(Request $request)
     {
-        // Validate the uploaded videos
         $request->validate([
             'videos.*' => 'required|mimes:mp4,mov,avi,wmv|max:50000', // Adjust the mime types and max file size as needed
         ]);
@@ -136,9 +137,25 @@ class GuestController extends Controller
 
     public function home()
     {
-        $assets = Asset::latest()->where('active', 1)->limit(10)->get();
+        // $assets = Asset::latest()->where('active', 1)->limit(10)->get();
         $assetAll = Asset::latest()->where('active', 1)->get();
-        return view('guests.home', ['assets' => $assets, 'assetAll' => $assetAll]);
+        $silver_assets =    Asset::where('plan', 'silver')->where('active', 1)->get();
+        $bronze_assets =    Asset::where('plan', 'bronze')->where('active', 1)->get();
+        $gold_assets =   Asset::where('plan', 'gold')->where('active', 1)->get();
+        $diamond_assets =   Asset::where('plan', 'diamond')->where('active', 1)->get();
+        $plantinum_assets =  Asset::where('plan', 'platinum')->where('active', 1)->get();
+
+        return view(
+            'guests.home',
+            [
+                'platinum_assets' => $plantinum_assets,
+                'silver_assets' => $silver_assets,
+                'gold_assets' => $gold_assets,
+                'diamond_assets' => $diamond_assets,
+                'bronze_assets' => $bronze_assets,
+                'assetAll' => $assetAll
+            ]
+        );
     }
 
     public function assets()

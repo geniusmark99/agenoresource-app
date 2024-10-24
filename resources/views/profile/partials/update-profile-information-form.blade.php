@@ -28,13 +28,15 @@ class="shadow-md">
 
 
 
-<form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6 w-full relative">
-@csrf
-@method('patch')
+<div class="mt-6 space-y-6 w-full relative">
+{{-- @csrf
+@method('patch') --}}
 
 
 <div class="grid grid-cols-1 lg:grid-cols-2 w-full lg:w-[1000px] gap-y-4 lg:gap-x-10">
-<div class="w-full flex flex-col gap-y-4">
+<form method="post" action="{{ route('profile.update') }}"  class="w-full flex flex-col gap-y-4">
+  @csrf
+@method('patch')
 <div>
 <x-input-label for="uuid" :value="__('Your ID')" />
 <x-text-input id="uuid" name="uuid" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('uuid', $user->uuid)" required autofocus autocomplete="name" disabled />
@@ -87,103 +89,102 @@ focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 <x-input-error :messages="$errors->get('user_type')" class="mt-2" />
 
 </div>
-</div>
-
-<div class="rounded-sm border border-gray-300 bg-white shadow-default dark:border-gray-700 dark:bg-gray-900">
-  <div class="border-b border-gray-300 py-4 px-7 dark:border-gray-700">
-  <h3 class="font-medium text-black dark:text-white">
-  Your Photo
-  </h3>
-  </div>
-  <div class="p-7" 
-  x-data="{ 
-  previewUrl: './images/user-profile.svg',
-  updatePreview(event) {
-  const file = event.target.files[0];
-  if (file) {
-  this.previewUrl = URL.createObjectURL(file);
-  }
-  },
-  clearPreview() {
-  this.previewUrl = 'https://via.placeholder.com/128';
-  this.$refs.fileInput.value = '';
-  }
-  }" 
-  >
-  <div class="mb-4 flex items-center gap-3">
-  <div class="h-14 w-14 rounded-full">
-  <img 
-  :src="previewUrl" 
-
-  alt="User">
-  </div>
-  <div>
-  <span class="mb-1.5 font-medium text-black dark:text-white">Edit your photo</span>
-  <span class="flex gap-3">
-  <button class="text-sm text-gray-500 dark:text-gray-400 font-medium hover:text-blue-500">
-  Delete
-  </button>
-  <button class="text-sm text-gray-500 dark:text-gray-400 font-medium hover:text-blue-500">
-  Update
-  </button>
-  </span>
-  </div>
-  </div>
-
-
-  <div id="FileUpload" 
-
-  class="relative mb-5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-blue-600 bg-gray py-4 px-4 bg-blue-400/5 dark:bg-blue-500/5 sm:py-7.5"
-
-  >
-  <input type="file" name="profile_pics" accept="image/*" 
-  x-ref="fileInput" @change="updatePreview"
-  class="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none">
-  <div class="flex flex-col items-center justify-center space-y-3 dark:text-gray-200 font-thin">
-  <span class="flex h-10 w-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-gray-500 dark:bg-gray-800">
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M1.99967 9.33337C2.36786 9.33337 2.66634 9.63185 2.66634 10V12.6667C2.66634 12.8435 2.73658 13.0131 2.8616 13.1381C2.98663 13.2631 3.1562 13.3334 3.33301 13.3334H12.6663C12.8431 13.3334 13.0127 13.2631 13.1377 13.1381C13.2628 13.0131 13.333 12.8435 13.333 12.6667V10C13.333 9.63185 13.6315 9.33337 13.9997 9.33337C14.3679 9.33337 14.6663 9.63185 14.6663 10V12.6667C14.6663 13.1971 14.4556 13.7058 14.0806 14.0809C13.7055 14.456 13.1968 14.6667 12.6663 14.6667H3.33301C2.80257 14.6667 2.29387 14.456 1.91879 14.0809C1.54372 13.7058 1.33301 13.1971 1.33301 12.6667V10C1.33301 9.63185 1.63148 9.33337 1.99967 9.33337Z" fill="#3C50E0"></path>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5286 1.52864C7.78894 1.26829 8.21106 1.26829 8.4714 1.52864L11.8047 4.86197C12.0651 5.12232 12.0651 5.54443 11.8047 5.80478C11.5444 6.06513 11.1223 6.06513 10.8619 5.80478L8 2.94285L5.13807 5.80478C4.87772 6.06513 4.45561 6.06513 4.19526 5.80478C3.93491 5.54443 3.93491 5.12232 4.19526 4.86197L7.5286 1.52864Z" fill="#3C50E0"></path>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99967 1.33337C8.36786 1.33337 8.66634 1.63185 8.66634 2.00004V10C8.66634 10.3682 8.36786 10.6667 7.99967 10.6667C7.63148 10.6667 7.33301 10.3682 7.33301 10V2.00004C7.33301 1.63185 7.63148 1.33337 7.99967 1.33337Z" fill="#3C50E0"></path>
-  </svg>
-  </span>
-  <p class="text-sm font-medium">
-  <span class="text-blue-500">Click to upload</span>
-  or drag and drop
-  </p>
-  <p class="mt-1.5 text-sm font-medium">
-  SVG, PNG, JPG or GIF
-  </p>
-  <p class="text-sm font-medium">
-  (max, 800px by 800px)
-  </p>
-  </div>
-
-
-
-  </div>
-  <div class="flex justify-end gap-4 mt-4">
-  <button @click="clearPreview" class="flex justify-center rounded border border-gray-400 t py-2 px-6 font-medium text-black hover:shadow-md dark:border-gray-600 dark:text-white" >
-  Cancel
-  </button>
-  <button class="flex justify-center rounded bg-blue-600 py-2 px-6 font-medium text-white hover:bg-opacity-90" type="submit">
-  Save
-  </button>
-  </div>
-  </div>
-
-</div>
-
-</div>
 
 
 <div class="flex items-center gap-4">
 <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-
-
-
-
 </div>
 </form>
+
+
+<div> 
+  
+  <div class="avatar-display my-3">
+  @if (auth()->user()->profile_pics)
+      <img src="{{ auth()->user()->profile_pics }}" alt="User Profile Pics" class="size-48 lg:size-20 rounded-full object-cover">
+  @else
+      <img src="{{ asset('images/default-avatar.png') }}" alt="User Default Avatar" class="size-10 rounded-full object-cover" 
+      >
+  @endif
+</div>
+
+<form
+action="{{ route('profile.update.pics') }}" method="POST" enctype="multipart/form-data"
+class="rounded-sm border border-gray-300 bg-white shadow-default dark:border-gray-700 dark:bg-gray-900">
+  @csrf
+  @method('PUT')
+
+  <div class="form-group mt-3">
+    <label for="profile_pics">Upload Profile Picture</label>
+    <input type="file" name="profile_pics" class=" @error('profile_pics') @enderror" required>
+    @error('profile_pics')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<button type="submit" class="bg-ageno py-2 px-3 rounded-md text-white mt-3">Upload photo</button>
+
+
+</form>
+
+<form method="post" action="{{ route('profile.businessinfo.update') }}" class="mt-4 flex flex-col gap-y-4">
+@csrf
+@method('patch')
+<div class="relative flex flex-col gap-y-3">
+<label for="Business_description">About Business</label>
+<textarea id="Business_description" name="business_description"
+class="p-4 pb-12 block w-full bg-gray-100 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Write about your company..."> {{ old('business_description', $user->business_description ?? '')}}
+</textarea>
+</div>
+
+<div>
+  <x-input-label for="business_address" :value="__('Business Address')" />
+  <x-text-input id="business_address" name="business_address" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('business_address', $user->business_address)" required autofocus />
+  <x-input-error class="mt-2" :messages="$errors->get('business_address')" />
+</div>
+
+
+{{-- <div>
+  <x-input-label for="business_state" :value="__('Business State')" />
+  <x-text-input id="business_state" name="business_state" type="text" class="mt-1 block w-full dark:bg-gray-900" :value="old('business_state', $user->business_state)" required autofocus />
+  <x-input-error class="mt-2" :messages="$errors->get('business_state')" />
+</div> --}}
+
+<div class="mt-4">
+  <label for="business_state" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Business State</label>
+  
+  <select id="business_state" name="business_state"
+  class="dark:bg-gray-900 mt-1 block w-full
+  dark:border-gray-700 dark:focus:border-indigo-600  dark:focus:ring-ageno 
+  dark:text-gray-300 py-3 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none
+  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+  >
+    <option value="" disabled>Select a state</option>
+    @foreach ($states as $state)
+        <option value="{{ $state }}" {{ $currentState == $state ? 'selected' : '' }}>
+            {{ $state }}
+        </option>
+    @endforeach
+</select>
+  <x-input-error :messages="$errors->get('business_state')" class="mt-2" />
+  
+  </div>
+  
+<div class="bottom-px inset-x-px p-2 ">
+  <button type="submit" class="py-1 px-3 inline-flex shrink-0 justify-center items-center  rounded-lg text-white bg-blue-600 hover:bg-blue-500 focus:z-10 focus:outline-none focus:bg-blue-500">
+
+    Update
+  </button>
+</div>
+</form>
+
+</div>
+
+</div>
+
+{{-- 
+<div class="flex items-center gap-4">
+<x-primary-button>{{ __('Save') }}</x-primary-button>
+</div> --}}
+</div>
 </section>

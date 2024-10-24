@@ -14,8 +14,7 @@ class DashboardController extends Controller
         $asset = $user->assets;
         $totalViews = $asset->sum('view_count');
         $averageClickRate = $asset->avg('click_rate');
-
-        $assets = Asset::latest()->take(10)->with('user')->get();
+        $assets = Asset::latest()->where('active', 1)->take(10)->with('user')->get();
 
         return view('dashboard', compact('assets', 'totalViews', 'averageClickRate', 'asset'));
     }

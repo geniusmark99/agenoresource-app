@@ -17,12 +17,14 @@ class AssetFactory extends Factory
         // $user = User::factory()->create();
         $plans = ['bronze', 'silver', 'gold', 'diamond', 'platinum'];
         $planPrices = [
+            'platinum' => 9000,
+            'diamond' => 8000,
             'bronze' => 5000,
             'silver' => 6000,
-            'gold' => 7000,
-            'diamond' => 8000,
-            'platinum' => 9000
+            'gold' => 7000
         ];
+
+
         $contactInformation = fake()->randomElement(['+234']);
 
 
@@ -50,25 +52,7 @@ class AssetFactory extends Factory
             '23, Utako, Abuja'
         ]);
 
-        $assetName = fake()->randomElement([
-            'Diamond Asset',
-            'Silver Asset',
-            'Lithium Asset',
-            'Tantalite Asset',
-            'Columbite Asset',
-            'Tungsten Asset',
-            'Tin Asset',
-            'Nickel Asset',
-            'Cobalt Asset',
-            'Manganese Asset',
-            'Lead',
-            'Beryl Asset',
-            'Tourmaline Asset',
-            'Amethyst Asset',
-            'Citrine Asset',
-            'Zinc Asset',
-            'Gold Asset'
-        ]);
+
 
         $mineralDetails = [
             "diamond" => "Diamonds are precious gemstones known for their extraordinary hardness and brilliance. They are formed under high-pressure, high-temperature conditions deep within the Earth and are used in jewelry and industrial applications.",
@@ -92,162 +76,117 @@ class AssetFactory extends Factory
             "copper" => "Copper is a reddish-brown metal known for its excellent electrical and thermal conductivity. It has been used by humans for thousands of years, making it one of the earliest metals to be worked into tools, ornaments, and building materials. Copper is highly malleable, ductile, and resistant to corrosion, which makes it ideal for use in electrical wiring, plumbing, and various industrial applications. Its natural antibacterial properties also make it valuable in medical settings. Over time, copper develops a greenish patina, known as verdigris, which is often seen on old statues and buildings.",
             "bronze" => "Bronze is an alloy primarily composed of copper, usually with tin as the main additive. Known for its durability and resistance to corrosion, bronze has been used for thousands of years in various applications, from tools and weapons in ancient times to modern-day sculptures, coins, and industrial parts. Its distinctive reddish-brown color, which can develop a greenish patina over time, adds to its aesthetic appeal. Bronze is valued not only for its strength and hardness but also for its excellent conductivity, making it a versatile material in both historical and contemporary contexts.",
             "iron" => "Iron is a strong, silvery-gray metal that is one of the most abundant elements on Earth. It is a key component of steel, which is produced by alloying iron with carbon, and is essential in construction, manufacturing, and transportation industries. Iron's high tensile strength and affordability make it a fundamental material for building infrastructure, tools, and machinery. However, iron is prone to rusting when exposed to moisture, which can be mitigated by treatments such as galvanization or alloying with other metals. Iron is also crucial in biology, as it forms the core of hemoglobin, the molecule that carries oxygen in the blood.",
+            "land" => "Buying land is a significant investment that offers long-term value and potential for development. Whether for residential, commercial, or agricultural purposes, owning land provides a tangible asset that can appreciate over time. Key considerations when purchasing land include location, zoning regulations, access to utilities, and future development plans in the area. Land ownership also grants flexibility, allowing buyers to build, lease, or hold the property as a financial asset. It’s important to conduct thorough research, including a title check and land survey, to ensure a smooth and secure purchase process.",
+            "equipment" => "Hiring mining equipment is an efficient and cost-effective solution for companies looking to scale operations without the high upfront investment of purchasing machinery. It allows businesses to access top-tier equipment like excavators, drill rigs, and loaders without the long-term commitment. Renting also provides flexibility, enabling companies to upgrade or switch machinery based on project demands. Additionally, equipment hire often includes maintenance support, ensuring reduced downtime and smoother operations."
         ];
 
         $plan = fake()->randomElement($plans);
 
         $plan_price = $planPrices[$plan];
-        $durations = ['1 week', '2 weeks', '3 weeks', '4 weeks'];
+        $durations = [1, 2, 3, 4, 5, 6];
         $duration = fake()->randomElement($durations);
-        $assetType =  $this->faker->randomElement(array_keys($mineralDetails));
-
-
-
-
+        // $assetType =  $this->faker->randomElement(array_keys($mineralDetails));
+        $assetType = $this->faker->randomElement(['natural_minerals', 'mineral_assets']);
+        $assetNaturalAssets = ($assetType == 'natural_minerals') ?
+            $this->faker->randomElement(array_keys($mineralDetails)) : ($this->faker->randomElement(['land', 'equipment']));
 
 
         // Define matching pairs of asset types and corresponding pictures
         $assetTypePictures = [
-            'diamond' => [
-                'images/diamond-image.jpg',
-                'images/diamond-image.jpg',
-                'images/diamond-image.jpg',
-            ],
-            'silver' => [
-                'images/silver-image.jpg',
-                'images/silver-image.jpg',
-                'images/silver-image.jpg',
-            ],
-            'gold' => [
-                'images/gold-image.jpg',
-                'images/gold-image.jpg',
-                'images/gold-image.jpg',
-            ],
-            'tin' => [
-                'images/tin.jpeg',
-                'images/tin.jpeg',
-                'images/tin.jpeg',
-            ],
-            'lithium' => [
-                'images/lithium.jpeg',
-                'images/lithium.jpeg',
-                'images/lithium.jpeg',
-            ],
-            'tantalite' => [
-                'images/tin.jpeg',
-                'images/tin.jpeg',
-                'images/tin.jpeg',
-            ],
-            'columbite' => [
-                'images/columbite.webp',
-                'images/columbite.webp',
-                'images/columbite.webp',
-            ],
-            'tungsten' => [
-                'images/tungsten-image.jpg',
-                'images/tungsten-image.jpg',
-                'images/tungsten-image.jpg',
-            ],
-            'nickel' => [
-                'images/nickel.jpg',
-                'images/nickel.jpg',
-                'images/nickel.jpg',
-            ],
+            'diamond' =>   'images/diamond-image.jpg',
+            'silver' =>  'images/silver-image.jpg',
+            'gold' => 'images/gold-image.jpg',
+            'tin' =>    'images/tin.jpeg',
+            'lithium' =>  'images/lithium.jpeg',
+            'tantalite' => 'images/tin.jpeg',
+            'columbite' =>  'images/columbite.webp',
+            'tungsten' => 'images/tungsten-image.jpg',
+            'nickel' => 'images/nickel.jpg',
+            'cobalt' => 'images/cobalt-image.webp',
+            'manganese' =>  'images/manganese.jpg',
+            'lead' => 'images/lead.jpg',
+            'beryl' =>  'images/beryl.jpeg',
+            'tourmaline' => 'images/tourmaline.jpeg',
+            'amethyst' => 'images/amethyst.jpg',
+            'citrine' => 'images/citrine.jpeg',
+            'zinc' => 'images/zinc-image.jpg',
+            'copper' => 'images/copper-image.jpg',
+            'bronze' => 'images/bronze-image.jpg',
+            'iron' => 'images/iron-image.jpg',
+            'land' => 'images/land-1.jpg',
+            'equipment' => 'images/equipment-1.webp',
 
-            'cobalt' => [
-                'images/cobalt-image.webp',
-                'images/cobalt-image.webp',
-                'images/cobalt-image.webp',
-            ],
 
-            'manganese' => [
-                'images/manganese.jpg',
-                'images/manganese.jpg',
-                'images/manganese.jpg',
-            ],
-            'lead' => [
-                'images/lead.jpg',
-                'images/lead.jpg',
-                'images/lead.jpg',
-            ],
-            'beryl' => [
-                'images/beryl.jpeg',
-                'images/beryl.jpeg',
-                'images/beryl.jpeg',
-            ],
-            'tourmaline' => [
-                'images/tourmaline.jpeg',
-                'images/tourmaline.jpeg',
-                'images/tourmaline.jpeg',
-            ],
-            'amethyst' => [
-                'images/amethyst.jpg',
-                'images/amethyst.jpg',
-                'images/amethyst.jpg',
-            ],
-            'citrine' => [
-                'images/citrine.jpeg',
-                'images/citrine.jpeg',
-                'images/citrine.jpeg',
-            ],
-            'zinc' => [
-                'images/zinc-image.jpg',
-                'images/zinc-image.jpg',
-                'images/zinc-image.jpg',
-            ],
-
-            'copper' => [
-                'images/copper-image.jpg',
-                'images/copper-image.jpg',
-                'images/copper-image.jpg',
-            ],
-            'bronze' => [
-                'images/bronze-image.jpg',
-                'images/bronze-image.jpg',
-                'images/bronze-image.jpg',
-            ],
-
-            'iron' => [
-                'images/iron-image.jpg',
-                'images/iron-image.jpg',
-                'images/iron-image.jpg',
-            ]
         ];
 
 
+        $assetQuantiy = $this->faker->numberBetween(10, 50);
+        $likes = $this->faker->numberBetween(0, 100);
+        $dislikes = $this->faker->numberBetween(0, 100);
 
-        // Get matching pictures for the selected asset type
-        $pictures = fake()->randomElements($assetTypePictures[$assetType], rand(2, 3));
-        // $randomImagePath = fake()->randomElements($aassetimagePaths, rand(3, 5));
+        if ($likes > $dislikes) {
+            $dislikes = $this->faker->numberBetween(0, $likes / 2); // reduce dislikes if likes are too high
+        }
+
+        // if ($assetType == 'natural_minerals') {
+        //     $assetTypeValue = $assetNaturalAssets;
+        //     $pictures = [fake()->randomElements($assetTypePictures[$assetTypeValue], rand(2, 3))];
+        // } else if ($assetType == 'mineral_assets') {
+        //     $assetTypeValue = $this->faker->randomElement(['land', 'equipment']);
+        //     $pictures = [fake()->randomElements($assetTypePictures[$assetTypeValue], rand(2, 3))];
+        // }
+
+        $assetType = $this->faker->randomElement(['natural_minerals', 'mineral_assets']);
+        $pictures = [];
+
+        if ($assetType == 'natural_minerals') {
+            $assetTypeValue = $assetNaturalAssets;
+            $pictures = array_map(function () use ($assetTypePictures, $assetTypeValue) {
+                return [
+                    'url' => $assetTypePictures[$assetTypeValue],
+                    'public_id' => Str::random(20),
+                ];
+            }, range(1, 3));
+        } else if ($assetType == 'mineral_assets') {
+            $assetTypeValue = $this->faker->randomElement(['land', 'equipment']);
+            $pictures = array_map(function () use ($assetTypePictures, $assetTypeValue) {
+                return [
+                    'url' => $assetTypePictures[$assetTypeValue],
+                    'public_id' => Str::random(20),
+                ];
+            }, range(1, 3));
+        }
+
+
 
         return [
             'user_id' => $this->faker->numberBetween(1, 100),
             'uid' => $this->faker->unique()->uuid,
             'project_id' => $this->faker->unique()->uuid,
+            'likes' => $likes,
+            'dislikes' => $dislikes,
             'asset_type' => $assetType,
-            'asset_name' => $assetName,
-            'slug' => Str::slug($assetName . '-' . Str::random(6)),
+            'asset_type_value' => $assetTypeValue,
+            'asset_qty' => $assetQuantiy,
+            'slug' => Str::slug($assetTypeValue . '-' . Str::random(6)),
             'pictures' => json_encode($pictures),
-            'video' => $this->faker->url(),
             'asset_location_details' => $addressLocationDetails,
             'asset_information' => $this->faker->randomElement(['greenfield', 'brownfield']),
-            'technical_report' => $this->faker->text,
             'price' => $this->faker->randomFloat(2, 1000, 100000),
-            'coordinates' => $this->faker->latitude . ', ' . $this->faker->optional()->longitude,
             'land_size' => $this->faker->randomFloat(2, 1, 1000),
-            'mineral_details' => $mineralDetails[$assetType],
+            'mineral_details' => ($assetType == 'natural_minerals') ? $mineralDetails[$assetNaturalAssets] : (($assetTypeValue == 'land') ? $mineralDetails[$this->faker->randomElement(['land'])] : $mineralDetails[$this->faker->randomElement(['equipment'])]),
             'reserve_deposit' => $this->faker->text,
+            'plan' => $plan,
+            'duration' => $duration,
             'jorc_report' => $this->faker->text,
-            'opportunity_type' => $this->faker->optional()->randomElement(['JV or partnership', 'sale', 'lease']),
             'geological_location' => $this->faker->text,
             'contact_information' => $contactInformation,
             'date_added' => now(),
-            'view_count' => 0,
             'click_rate' => 0,
-            'date_activated' => null,
             'active' => $this->faker->randomElement([false, true]),
-            'plan' => $plan,
-            'duration' => $duration,
+            'view_count' => 0,
+            'date_activated' => null,
+            'date_deactivated' => null,
         ];
     }
 }

@@ -7,9 +7,10 @@ nextButtons = document.querySelectorAll(".js-next"),
 prevButtons = document.querySelectorAll(".js-prev"),
 progressBar = Id("progressBar"),
 form = Id("progressForm"),
-assetName = Id('asset_name'),
+assetTypeValue = Id('asset_type_value'),
 assetInfo = Id('asset_information'),
 technicalReport = Id("technical_report"),
+duration = Id("duration"),
 formSectionOne = Id("form_section_one");
 formSectionTwo = Id("form_section_two");
 let currentStep = 0;
@@ -57,7 +58,7 @@ Id(btnId).classList.add('cursor-not-allowed');
 
 
 function checkThirdFields(btnId,inputRefs) {
-if(Id(inputRefs[0]).value !== '' && Id(inputRefs[1]).value !== '' && Id(inputRefs[2]).value !== '' && Id(inputRefs[3]).value !== '') {
+if(Id(inputRefs[0]).value !== '' && Id(inputRefs[1]).value !== '' && Id(inputRefs[2]).value !== '') {
 Id('form_section_three').classList.add('hidden');
 Id('form_section_three').classList.remove('flex');
 Id(btnId).disabled = false;
@@ -76,27 +77,29 @@ Id(btnId).classList.add('cursor-not-allowed');
 }
 
 //************** First Form Section **************//
-['asset_name','asset_information','technical_report'].forEach((e)=>{
+['asset_type_value','asset_information','duration'].forEach((e)=>{
 Id(e).addEventListener('input',()=>{
-checkFirstFields('first_next_btn',[assetName,assetInfo,technicalReport]);
+checkFirstFields('first_next_btn',[assetTypeValue,assetInfo,duration]);
 });
 });
 //************** End of First Form Section **************//
 
 //************** Second Form Section
-['asset_location_details','geological_location','price','coordinates','reserve_deposit','jorc_report'].forEach((e)=>{
+['asset_location_details','geological_location','price','asset_qty','reserve_deposit','jorc_report'].forEach((e)=>{
 Id(e).addEventListener('input',()=>{
-checkSecondFields('second_next_btn',['asset_location_details','geological_location','price','coordinates','reserve_deposit','jorc_report']);
+checkSecondFields('second_next_btn',['asset_location_details','geological_location','price','asset_qty','reserve_deposit','jorc_report']);
 });
 });
 //************** End of Second Form Section **************//
 
 //************** Third Form Section **************//
-['opportunity_type','land_size','mineral_details','contact_information'].forEach((e)=>{
+['opportunity_type','land_size','mineral_details'].forEach((e)=>{
 Id(e).addEventListener('input',()=>{
-checkThirdFields('third_next_btn',['opportunity_type','land_size','mineral_details','contact_information']);
+checkThirdFields('third_next_btn',['opportunity_type','land_size','mineral_details']);
 });
 });
+
+// 'contact_information'
 //************** End of Third Form Section **************//
     
 
@@ -145,37 +148,75 @@ showStep(currentStep);
 });
 
 
-document.addEventListener('DOMContentLoaded',function(){
+// INPUT AND CHECKBOX LOCALSTORAGE
+    // document.addEventListener('DOMContentLoaded',function(){
 
-    const formElements = document.querySelectorAll('#progressForm input');
-    const form = document.getElementById('progressForm');
+    //     const formElements = document.querySelectorAll('#progressForm input');
+    //     const form = document.getElementById('progressForm');
 
-    for (let i = 0; i < form.elements.length; i++) {
-            const element = form.elements[i];
-            const savedValue = localStorage.getItem(element.name);
-            if (savedValue !== null) {
+    //     for (let i = 0; i < form.elements.length; i++) {
+    //             const element = form.elements[i];
+    //             const savedValue = localStorage.getItem(element.name);
+    //             if (savedValue !== null) {
 
-                if (element.type === 'checkbox' || element.type === 'radio') {
-                    element.checked = (element.value === savedValue);
-                } else {
-                if (element.type !== 'file') {
-                    element.value = savedValue;
-                }
-                }
+    //                 if (element.type === 'checkbox' || element.type === 'radio') {
+    //                     element.checked = (element.value === savedValue);
+    //                 } else {
+    //                 if (element.type !== 'file') {
+    //                     element.value = savedValue;
+    //                 }
+    //                 }
+    //             }
+    //         }
+
+    //         form.addEventListener('input', function (event) {
+    //             const element = event.target;
+    //             if (element.type === 'checkbox' || element.type === 'radio') {
+    //                 if (element.checked) {
+    //                     localStorage.setItem(element.name, element.value);
+    //                 }
+    //             } else {
+    //                 if (element.type !== 'file') {
+    //                 localStorage.setItem(element.name, element.value);
+    //                 }
+    //             }
+    //         });
+    // });
+
+// END OF INPUT AND CHECKBOX LOCALSTORAGE
+
+
+
+function dropdowns() {
+    return {
+        // Initial Data
+        minerals: ['Natural minerals', 'Mineral assets'],
+        mineralAssets: [],
+        landsAndEquipment: [],
+        
+        selectedMineral: '',
+        selectedAsset: '',
+        selectedLandOrEquipment: '',
+
+        // Methods
+        loadMineralAssets() {
+            if (this.selectedMineral === 'Natural minerals') {
+                this.mineralAssets = ['Gold', 'Diamond', 'Silver','Tungsten','Platinum','Lithium','Tantalite','Comlumite',
+                    'Nickel','Mangenese','Lead','Beryl'];
+            } else if (this.selectedMineral === 'Mineral assets') {
+                this.mineralAssets = ['Land','Equipment'];
+            } 
+            this.selectedAsset = '';
+            this.landsAndEquipment = [];
+        },
+
+        loadLandsAndEquipment() {
+            if (this.selectedAsset) {
+                this.landsAndEquipment = ['Land 1', 'Land 2', 'Equipment 1', 'Equipment 2'];
             }
+            this.selectedLandOrEquipment = '';
         }
+    }
+}
 
-        form.addEventListener('input', function (event) {
-            const element = event.target;
-            if (element.type === 'checkbox' || element.type === 'radio') {
-                if (element.checked) {
-                    localStorage.setItem(element.name, element.value);
-                }
-            } else {
-                if (element.type !== 'file') {
-                localStorage.setItem(element.name, element.value);
-                }
-            }
-        });
-});
 

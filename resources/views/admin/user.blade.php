@@ -1,4 +1,45 @@
-@extends('admin.layout')
+@extends('admin.app')
+@section('admin-style')
+<link rel="stylesheet" href="{{ asset('css/swiper.css') }}"/>
+
+<style>
+  .swiper-pagination {
+      display: flex;
+      justify-content: center;
+      bottom: 0;
+      position: absolute;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+      display: flex;
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0.5); 
+      color: white; 
+      border-radius: 50%; 
+      width: 40px; 
+      height: 40px;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .swiper-button-next::after, .swiper-button-prev::after {
+      font-size: 1.2rem; 
+  }
+
+  .swiper-button-next {
+      right: 10px; 
+  }
+
+  .swiper-button-prev {
+      left: 10px; 
+  }
+
+  .group:hover .swiper-button-next,
+  .group:hover .swiper-button-prev {
+      opacity: 1; /* Show on hover */
+  }
+</style>
+@endsection
 @section('admin-content')
 <div class="dark:text-gray-300 flex justify-center flex-col items-center" 
 
@@ -62,9 +103,14 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
 
 <div class="-mt-24">
     <div class="relative flex size-[120px] border-4 rounded-full mx-auto dark:border-neutral-800">
-  
-<x-admin-user-avatar :fname="$user->firstname" :lname="$user->lastname" class="object-cover text-xl rounded-full 
-  size-full max-w-full block "/>
+    @if ($user->profile_pics)
+    <img src="{{ $user->profile_pics }}" alt="{{ $user->firstname }} {{ $user->lastname }} Profile picture" class="object-cover text-xl rounded-full size-full max-w-full block"/>
+
+    @else
+    <x-admin-user-avatar :fname="$user->firstname" :lname="$user->lastname" class="object-cover text-xl rounded-full 
+    size-full max-w-full block "/>
+    @endif
+
     
     <div class="absolute bottom-0 -end-2">
     <button class="shadow-md font-base bg-rose-600 rounded-full p-2">
@@ -297,441 +343,38 @@ x-init="setTimeout(() => { showSnackbar = false }, 5000)"
     <!-- Masonry Cards -->
 <div class="max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Grid -->
-    <div class="grid sm:grid-cols-12 gap-6">
-      <div class="sm:self-end col-span-12 sm:col-span-7 md:col-span-8 lg:col-span-5 lg:col-start-3">
-        <!-- Card -->
-        <div class="group relative block rounded-xl overflow-hidden shadow-md outset-none">
+    <div class="">
+
+      <div class="flex flex-col w-full lg:flex-row gap-y-10 lg:gap-x-4">
+
+        <div class="w-full rouned-md lg:w-6/12">
           <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
             <img class="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl 
-            w-full object-cover" src="{{Storage::url($user->govt_id)}}"
+            w-full object-cover" src="{{($user->govt_id)}}"
             alt="Image Description">
           </div>
-          <div class="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
-            <div class="text-sm font-bold text-gray-800 rounded-lg bg-white p-4 md:text-xl dark:bg-neutral-800 dark:text-neutral-200">
-                {{$user->firstname}} {{$user->lastname}} Govertment.
-            </div>
-          </div>
         </div>
-        <!-- End Card -->
-      </div>
-      <!-- End Col -->
-  
-      <div class="sm:self-end col-span-12 sm:col-span-5 md:col-span-4 lg:col-span-3">
-        <!-- Card -->
-     @if ($user->govt_id)
 
-        <div class="group relative block rounded-xl overflow-hidden">
+
+        <div class="w-full rouned-md lg:w-6/12">
           <div class="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
-            <img class="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover" 
-            src="{{Storage::url($user->govt_id)}}" alt="{{$user->firstlast}} {{$user->lastname}} Govt ID">
+            <img class="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl 
+            w-full object-cover" src="{{($user->cac_document)}}"
+            alt="Image Description">
           </div>
-       
         </div>
-        @else
-
-        @endif
-
-        <!-- End Card -->
       </div>
       <!-- End Col -->
-  
-    
-  
 
-  
     
     </div>
     <!-- End Grid -->
   </div>
-  <!-- End Masonry Cards -->
-    {{-- @if ($user->govt_id)
-    USER DOCUMENT
-    <img src="{{ Storage::url($user->govt_id) }}" alt="{{$user->firstlast}} {{$user->lastname}} Govt ID" 
-    class="h-[200px] rounded-lg object-cover w-[200px] lg:w-full"/>
-    @else      
-    {{ $user->firstname }} {{ $user->lastname }} have not uploaded his/her Govt ID card.
-    @endif
-
-    @if ($user->cac_document)
-    USER DOCUMENT
-    <img src="{{ Storage::url($user->cac_document) }}" alt="{{$user->firstlast}} {{$user->lastname}} CAC Document" 
-    class="h-[200px] rounded-lg object-cover w-[200px] lg:w-full"/>
-    @else      
-    {{ $user->firstname }} {{ $user->lastname }} have not uploaded his/her CAC Document card.
-    @endif --}}
 </div>
 
     <div x-cloak="" x-show="isActive('tab3')">
         <h1 class="text-center text-sm md:text-xl font-semibold dark:text-neutral-200">{{$user->firstname}}'s Assets</h1>
-        @forelse ($user->assets as $asset)
-        <div class="relative my-10">
-
-        @if ($asset->active)
-
-
-        <form action="{{ route('admin.unactivate-asset', $asset->id) }}" method="POST" style="display: inline;">
-        @csrf
-        <button  type="submit" class="absolute top-2 right-5 text-green-100 bg-green-500 py-1 px-3 rounded-md">
-        deactivate
-        </button>
-
-        </form>
-        @else
-
-        <form action="{{ route('admin.activate-asset', $asset->id) }}" method="POST" style="display: inline;">
-        @csrf
-        <button  type="submit" class="absolute top-2 right-5 text-rose-100 bg-rose-500 py-1 px-3 rounded-md">
-        Activate
-        </button>
-
-        </form>
-        @endif
-
-        {{-- <div class="border dark:border-neutral-700 my-5 overflow-x-hidden dark:bg-neutral-800 shadow-sm rounded-lg py-4 px-2 space-y-4">
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">ID:</div>
-            <div>{{ $asset->user_id }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Project ID:</div>
-            <div>{{ $asset->project_id }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Asset Status:</div>
-            <div>{{ $asset->active }}  
-            {{  $asset->active ? 'Activated' : 'Not Activated' }}
-
-            </div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-              <div class="font-semibold text-base">Date Added:</div>
-              <div>{{ $asset->date_added }}</div>
-              </div>   
-
-            <div class="flex items-center gap-x-2">
-              <div class="font-semibold text-base">Date Activated:</div>
-              <div>{{ $asset->date_activated }}</div>
-              </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Asset name:</div>
-            <div>{{ $asset->asset_name }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Asset Type:</div>
-            <div>{{ $asset->asset_type }}</div>
-            </div>
-
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Asset Location Address:</div>
-            <div>{{ $asset->asset_location_details }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Technical  Report:</div>
-            <div>{{ $asset->technical_report }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Price:</div>
-            <div> &#8358;&nbsp;{{ $asset->price }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Coordinates:</div>
-            <div>{{ $asset->coordinates }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Land Size:</div>
-            <div>{{ $asset->land_size }}</div>
-            </div>
-
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Mineral Details:</div>
-            <div>{{ $asset->mineral_details }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Reserve Deposit:</div>
-            <div>{{ $asset->reserve_deposit }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Plan:</div>
-            <div>{{ $asset->plan }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Duration:</div>
-            <div>{{ $asset->duration }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Contact Information:</div>
-            <div>{{ $asset->contact_information }}</div>
-            </div>
-
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">JORC Report:</div>
-            <div>{{ $asset->jorc_report }}</div>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Opportunity Type:</div>
-            <div>{{ $asset->opportunity_type }}</div>
-            </div>
-
-
-            <div class="flex items-center gap-x-2">
-            <div class="font-semibold text-base">Geological Location:</div>
-            <div>{{ $asset->geological_location }}</div>
-            </div>
-
-         
-        </div> --}}
-
-
-        <!-- List -->
-<div class="border dark:border-neutral-700  overflow-x-hidden dark:bg-neutral-800 
-shadow-sm rounded-lg py-4 px-2 space-y-4">
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">ID:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          <div>{{ $asset->user_id }}</div>
-        </li>
-   
-      </ul>
-    </dd>
-  </dl>
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Asset Status:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-['']  font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{  $asset->active ? 'Activated' : 'Not Activated' }}
-        </li>
-      
-      </ul>
-    </dd>
-  </dl>
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Asset name:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[','] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          <svg class="shrink-0 size-4 me-1" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.7438 0.940745C6.84695 1.30308 2.6841 1.63631 2.48837 1.67533C1.9396 1.77319 1.44038 2.14544 1.20563 2.63537L1 3.06646L1.01982 13.3407L1.04893 23.615L1.36234 24.2517C1.53886 24.6042 2.73365 26.2499 4.0362 27.9439C6.61221 31.2836 6.79802 31.47 7.77726 31.5679C8.06156 31.597 10.1966 31.4991 12.5081 31.3622C14.8295 31.2154 18.5508 30.99 20.7842 30.863C30.3233 30.2839 29.8334 30.3328 30.3815 29.8627C31.0672 29.2947 31.0183 30.2251 31.0474 17.7377C31.0672 7.15003 31.0573 6.45509 30.9006 6.13177C30.7148 5.76943 30.3815 5.51487 26.0329 2.45885C23.1243 0.421704 22.9186 0.313932 21.6155 0.294111C21.0772 0.274911 16.6307 0.568497 11.7438 0.940745ZM22.752 2.28232C23.1633 2.46814 26.1704 4.56412 26.6108 4.9661C26.7284 5.08378 26.7675 5.18164 26.7086 5.24048C26.5717 5.35817 7.96245 6.465 7.42421 6.38634C7.17956 6.34732 6.81722 6.20052 6.61159 6.06302C5.75932 5.48514 3.64413 3.75149 3.64413 3.62452C3.64413 3.29129 3.57538 3.29129 11.8714 2.69421C13.4582 2.58644 16.0633 2.39071 17.6502 2.26312C21.0871 1.98874 22.1159 1.99865 22.752 2.28232ZM28.6677 7.63996C28.8046 7.77685 28.9223 8.04132 28.9613 8.29589C28.9904 8.53125 29.0102 12.9189 28.9904 18.0313C28.9613 26.8067 28.9514 27.3555 28.7848 27.61C28.6869 27.7667 28.4912 27.9333 28.3438 27.9823C27.9331 28.1489 8.43318 29.2557 8.03183 29.138C7.84601 29.0891 7.59083 28.9324 7.45394 28.7955L7.21858 28.541L7.18947 19.0799C7.16965 12.4395 7.18947 9.5012 7.26813 9.23672C7.32697 9.041 7.47376 8.80564 7.60136 8.72759C7.77788 8.60991 8.93364 8.51205 12.9101 8.2773C15.7016 8.1206 20.0206 7.85613 22.4987 7.70933C28.3933 7.34638 28.3741 7.34638 28.6677 7.63996Z" class="fill-black dark:fill-neutral-200" fill="currentColor"></path><path d="M23.4277 10.8818C22.3698 10.9506 21.4296 11.0484 21.3218 11.1073C20.9985 11.2739 20.8028 11.5483 20.7638 11.8617C20.7347 12.185 20.8325 12.224 21.8898 12.3516L22.35 12.4104V16.5925C22.35 19.0799 22.311 20.7256 22.2621 20.6767C22.2131 20.6178 20.8226 18.5027 19.167 15.9756C17.512 13.4392 16.1407 11.3525 16.1209 11.3333C16.1011 11.3135 15.024 11.3724 13.7313 11.4609C12.1445 11.5687 11.273 11.6666 11.0965 11.7644C10.8122 11.9112 10.4988 12.4303 10.4988 12.7734C10.4988 12.979 10.871 13.0868 11.6545 13.0868H12.0658V25.1139L11.4 25.3196C10.8809 25.4763 10.7044 25.5741 10.6165 25.7698C10.4598 26.1031 10.4697 26.4066 10.6264 26.4066C10.6852 26.4066 11.792 26.3378 13.0649 26.2598C15.582 26.113 15.8657 26.0442 16.1302 25.5252C16.2088 25.3685 16.277 25.2019 16.277 25.1529C16.277 25.1139 15.9345 24.9962 15.5226 24.8984C15.1014 24.8005 14.6802 24.7027 14.5923 24.6828C14.4257 24.6339 14.4157 24.3304 14.4157 20.1186V15.6033L17.3931 20.2753C20.5173 25.1721 20.9093 25.7308 21.3893 25.9755C21.987 26.2889 23.5051 26.0733 24.2688 25.5741L24.5042 25.4273L24.524 18.7479L24.5531 12.0586L25.0722 11.9608C25.6891 11.8431 25.9734 11.5594 25.9734 11.0695C25.9734 10.7561 25.9536 10.7362 25.66 10.7462C25.4847 10.7542 24.4757 10.813 23.4277 10.8818Z" class="fill-black dark:fill-neutral-200" fill="currentColor"></path></svg>
-          {{ $asset->asset_name }}
-        </li>
-      
-      </ul>
-    </dd>
-  </dl>
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Asset Type:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->asset_type }}
-        </li>
-    
-      </ul>
-    </dd>
-  </dl>
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Date added:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->date_added }}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Date activated:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->date_activated }}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Price:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->price }}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Cordinate:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->coordinates }}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Mineral Details:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->mineral_details}}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Plan:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->plan}}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Duration:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->duration}}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Contact info:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->contact_information}}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">JORC Report:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->jorc_report}}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Opportunity Type:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->opportunity_type}}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-  
-  <dl class="flex flex-col sm:flex-row gap-1">
-    <dt class="min-w-40">
-      <span class="block text-sm text-gray-500 dark:text-neutral-500">Geological Location:</span>
-    </dt>
-    <dd>
-      <ul>
-        <li class="me-1 after:content-[''] font-semibold inline-flex items-center text-sm text-gray-800 dark:text-neutral-200">
-          {{ $asset->geological_location}}
-        </li>
-       
-      </ul>
-    </dd>
-  </dl>
-
-
-
-
-</div>
-<!-- End List -->
-
-        </div>
+        {{-- @forelse ($user->assets as $asset)
 
         @empty
         <div class="flex justify-center items-center border shadow-sm mt-5 dark:border-neutral-700 py-4 rounded-lg dark:bg-neutral-800 min-h-[200px]">
@@ -739,7 +382,145 @@ shadow-sm rounded-lg py-4 px-2 space-y-4">
         {{ $user->firstname }} have not uploaded any asset(s) yet
         </h1>
        </div>
-       @endforelse
+       @endforelse --}}
+  <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 mt-10">
+  @foreach($user->assets as $asset)
+  <div class="group flex flex-col relative justify-between gap-y-1 overflow-hidden bg-white border-2 
+  border-gray-300/50 hover:border-ageno-2 rounded-xl dark:border-neutral-600 dark:bg-neutral-800
+  ">
+ <div class="p-2 md:p-2.5 flex items-center border-b dark:border-neutral-600 font-semibold bg-ageno/5 dark:bg-neutral-900 text-ageno justify-between">
+    <div> {{ $asset->asset_type_value }} asset</div>
+    <div>
+    @switch($asset->plan)
+    @case('platinum')
+    <div class="flex justify-between w-full gap-x-0.5 items-center">
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    </div>
+    @break
+    @case('diamond')
+    <div class="flex justify-between w-full gap-x-0.5 items-center">
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="zI5~V7kqQWqczEwQDvqzya" x1="9.009" x2="38.092" y1="519.64" y2="480.734" gradientTransform="matrix(1 0 0 -1 0 526)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#zI5~V7kqQWqczEwQDvqzya)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/><radialGradient id="zI5~V7kqQWqczEwQDvqzyb" cx="20.375" cy="20.637" r="23.105" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fafafb"/><stop offset=".293" stop-color="#f6f7f8"/><stop offset=".566" stop-color="#ebecee"/><stop offset=".832" stop-color="#d8dcdf"/><stop offset="1" stop-color="#c8cdd1"/></radialGradient><path fill="url(#zI5~V7kqQWqczEwQDvqzyb)" d="M43.769,18.887l-13.378-1.413L24.913,5.186C24.737,4.79,24.368,4.593,24,4.593v32.548l11.653,6.723c0.75,0.432,1.658-0.227,1.478-1.074L34.34,29.629l9.993-9.005C44.976,20.045,44.63,18.978,43.769,18.887z"/></svg>
+    </div>
+    @break
+    @case('gold')
+    <div class="flex justify-between w-full gap-x-0.5 items-center">
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="dy387SCudbBlR6FY1Dyrka" x1="9.009" x2="38.092" y1="6.36" y2="45.266" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"/><stop offset="1" stop-color="#feb705"/></linearGradient><path fill="url(#dy387SCudbBlR6FY1Dyrka)" d="M24.913,5.186l5.478,12.288l13.378,1.413c0.861,0.091,1.207,1.158,0.564,1.737l-9.993,9.005l2.791,13.161c0.18,0.847-0.728,1.506-1.478,1.074L24,37.141l-11.653,6.722c-0.75,0.432-1.657-0.227-1.478-1.074l2.791-13.161l-9.993-9.005c-0.643-0.579-0.296-1.646,0.564-1.737l13.378-1.413l5.478-12.288C23.439,4.395,24.561,4.395,24.913,5.186z"/></svg>
+    </div>
+    @break
+    @default
+    @endswitch
+    </div>
+  </div>
+  <div class="p-2 md:p-2.5 flex gap-x-3 flex-col lg:flex-row w-full">
+
+  <div class="w-full lg:w-5/12 overflow-hidden rounded-md">
+  @if ($asset->pictures)
+  @if (count($asset->pictures) > 1)
+  {{-- <x-swiper-gallery :pictures="$asset->pictures" /> --}}
+    <div class="admin-swiper-container" class="group">
+      @if(!empty($asset->pictures))
+      <div class="swiper-wrapper">
+          @foreach ($asset->pictures as $picture)
+              <div class="swiper-slide">
+                  <img src="{{ asset($picture['url']) }}" alt="Asset Image" 
+                  class="w-full h-[230px] object-cover transition-all group-hover:scale-105 transform hover:filter rounded-md" draggable="false">
+              </div>
+          @endforeach
+      </div>
+      @else
+      <p>No pictures available for this asset.</p>
+  @endif
+    
+      <div class="swiper-pagination"></div>
+      
+      <div class="swiper-button-next group-hover:flex"></div>
+      <div class="swiper-button-prev group-hover:flex"></div>
+  </div>
+  @else
+  @foreach ($asset->pictures as $picture) 
+  <img src="{{ asset($picture) }}" alt="" 
+  class="w-full h-[230px] object-cover transition-all transform hover:filter rounded-md group-hover:scale-105" draggable="false">
+  @endforeach 
+  @endif
+
+  @endif 
+  </div>  
+
+  <div class="w-full lg:w-7/12 flex flex-col gap-y-3 mt-10">
+  <p style="display: -webkit-box; -webkit-box-orient: vertical;  -webkit-line-clamp: 3;"
+  class="text-gray-500 w-full max-h-[4.5em]  overflow-hidden text-ellipsis dark:text-gray-200 relative min-h-[150px] before:absolute before:content-[''] before:w-full before:h-[0.1px] before:bg-gray-200 dark:before:bg-gray-600 before:-bottom-1">
+  {{ $asset->mineral_details }}
+  </p>
+  <div class="flex gap-x-3 items-center">
+  <h1 class="text-base lg:text-2xl font-bold"><span class="text-gray-600 dark:text-gray-300">Price:</span>
+  <span class="text-blue-600">&#8358;{{ $asset->price }}</span>
+  </h1>
+  </div>
+  </div>
+  </div>
+
+  <div class="flex border-t-[0.5px] p-2 bg-gray-300/20 rounded-br-xl rounded-bl-xl border-gray-300/50 dark:border-gray-500 justify-between dark:text-gray-300">
+  <div class="flex gap-x-2 items-center">
+
+    @if ($asset->active)
+    <form action="{{ route('admin.unactivate-asset', $asset->id) }}" method="POST" style="display: inline;">
+    @csrf
+    <button  type="submit" class="text-green-100 bg-green-500 py-1 px-3 rounded-md">
+    deactivate
+    </button>
+
+    </form>
+    @else
+
+    <form action="{{ route('admin.activate-asset', $asset->id) }}" method="POST" style="display: inline;">
+    @csrf
+    <button  type="submit" class="text-rose-100 bg-rose-500 py-1 px-3 rounded-md">
+    Activate
+    </button>
+
+    </form>
+    @endif
+  {{-- <div class="text-xs md:text:sm text-gray-500 font-semibold dark:text-gray-100">
+  Ratings:
+  </div>
+  <div class="flex items-center gap-x-2">
+   <div class="flex items-center gap-x-2 text-xs">
+  <button id="like-btn" class="flex bg-ageno-2 text-white rounded-md items-center gapx-x-2 outline-none border-none shadow-sm p-2">
+  <div>
+      <svg class="size-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <path d="M36.9,19.5c-0.9-1-2.1-1.5-3.4-1.5h-9.2c-0.2,0-0.3-0.1-0.4-0.2c-0.1-0.2-0.1-0.4,0-0.6c0.8-1.8,1.3-3.4,1.7-5.4C25.9,10.7,26,10,26,9.3c0-2.9-2.2-4-3.3-4.2c-0.2,0-0.4,0-0.5,0.2c-0.1,0.1-6.4,9.2-8.9,11.7c-2.1,2-3.3,4.5-3.3,7v6.6C10,36.3,14.7,41,20.5,41h9.3c3.3,0,6-2.4,6.5-5.7L38,23.1C38.2,21.8,37.8,20.5,36.9,19.5z" />
+        </svg>
+  </div>
+  <div class="flex text-center">{{ $asset->likes }}</div>
+
+  </button>
+  </div> 
+
+  </div> --}}
+  </div>
+
+  <a href="{{ route('assets.show',[$asset->slug]) }}" class="outset-none flex gap-x-2 items-center text-white bg-blue-600 rounded-md px-2 py-1 hover:shadow-md transition-all hover:bg-opacity-95">
+  <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-white" viewBox="0 0 48 48"><path d="M23.986328 9C12.666705 9 2.6928719 16.845918 0.046875 27.126953 A 1.5002454 1.5002454 0 0 0 2.953125 27.873047C5.2331281 19.014082 14.065951 12 23.986328 12C33.906705 12 42.767507 19.01655 45.046875 27.873047 A 1.5002454 1.5002454 0 0 0 47.953125 27.126953C45.306493 16.84345 35.305951 9 23.986328 9 z M 24.001953 17C18.681885 17 14.337891 21.343999 14.337891 26.664062C14.337891 31.984127 18.681885 36.330078 24.001953 36.330078C29.322021 36.330078 33.667969 31.984126 33.667969 26.664062C33.667969 21.343999 29.322021 17 24.001953 17 z"/></svg>
+  <div>View</div>
+  </a>  
+
+
+  </div>
+  </div> 
+  @endforeach
+  </div>
+
     </div>
 
 </div>
@@ -787,11 +568,29 @@ class="bg-white dark:bg-neutral-900 rounded-lg shadow-lg w-full max-w-[400px] lg
 </div>
 </div>
 </div>
+@endsection
 
-
-    
-
-
+@section('admin-script')
+<script src="{{asset('js/swiper.js')}}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.admin-swiper-container', {
+    loop: true,
+    autoplay: {
+    delay: 3000, 
+    disableOnInteraction: false,
+    },
+    pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    },
+    navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+    },
+    });
+    });
+  </script>
 
 @endsection
 

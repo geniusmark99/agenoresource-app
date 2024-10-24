@@ -1,4 +1,4 @@
-@props(['pictures'])
+    @props(['pictures'])
 
 @php
 $classes = ($active ?? false)
@@ -8,7 +8,7 @@ $classes = ($active ?? false)
     <div class="swiper-wrapper">
         @foreach ($pictures as $picture)
             <div class="swiper-slide w-full">
-                <img src="{{ asset($picture) }}" alt="Asset Image" 
+                <img src="{{ asset($picture['url']) }}" alt="Asset Image" 
                 class="w-full object-cover h-[230px] md:h-[400px]" draggable="false">
 
             </div>

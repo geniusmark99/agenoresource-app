@@ -1,5 +1,5 @@
   <!-- ========== FOOTER ========== -->
-  <footer class="relative overflow-hidden bg-ageno text-white">
+  <footer class="relative overflow-hidden bg-slate-900 text-white">
     <!-- Gradients -->
     <div aria-hidden="true" class="flex absolute start-0 -z-[1]">
       <div class="bg-purple-200 opacity-10 blur-3xl w-[1036px] h-[600px] dark:bg-purple-900 dark:opacity-20"></div>
@@ -13,7 +13,7 @@
         <div class="col-span-full hidden lg:col-span-1 lg:block">
          <x-application-logo class="size-16"/>
           <p class="mt-3 text-xs sm:text-sm text-white dark:text-gray-400">© {{ date('Y') }} Ageno Resources.</p>
-        </div>
+        </div>  
         <!-- End Col -->
   
         <div>
@@ -57,17 +57,24 @@
           <h4 class="text-xs font-semibold text-white uppercase dark:text-gray-100">Follow us</h4>
   
           <div class="mt-3 grid grid-cols-1 lg:grid-cols-4 text-sm">
-            <a class="inline-block text-white hover:text-gray-800 dark:hover:text-gray-200" href="#">
+            <a target="_blank" class="inline-block text-white hover:text-green-500 dark:hover:text-gray-200" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="size-6" fill="currentColor"><path d="M24,4C12.97,4,4,12.97,4,24c0,3.19,0.77,6.34,2.23,9.17l-2.14,7.66c-0.24,0.87,0.01,1.8,0.64,2.44 C5.21,43.74,5.85,44,6.5,44c0.23,0,0.45-0.03,0.67-0.09l7.66-2.14C17.66,43.23,20.82,44,24,44c11.03,0,20-8.97,20-20 C44,12.97,35.03,4,24,4z M34.36,31.37c-0.44,1.23-2.6,2.42-3.57,2.51c-0.97,0.09-1.88,0.44-6.34-1.32 c-5.38-2.12-8.78-7.63-9.04-7.99c-0.27-0.35-2.16-2.86-2.16-5.47c0-2.6,1.37-3.88,1.85-4.41c0.49-0.53,1.06-0.66,1.41-0.66 c0.36,0,0.71,0,1.02,0.01c0.37,0.02,0.79,0.04,1.19,0.92c0.47,1.04,1.5,3.66,1.63,3.93c0.13,0.26,0.22,0.57,0.04,0.92 c-0.17,0.35-0.26,0.57-0.53,0.88c-0.26,0.31-0.55,0.69-0.79,0.93c-0.26,0.26-0.54,0.55-0.23,1.08c0.31,0.53,1.37,2.26,2.94,3.66 c2.02,1.8,3.72,2.36,4.25,2.63c0.53,0.26,0.84,0.22,1.15-0.14c0.31-0.35,1.32-1.54,1.68-2.07c0.35-0.53,0.7-0.44,1.19-0.26 c0.48,0.17,3.08,1.45,3.61,1.72c0.53,0.26,0.88,0.39,1.01,0.61C34.8,29.07,34.8,30.13,34.36,31.37z"/></svg>
 
             </a>
 
-            <a class="inline-block text-white hover:text-gray-800 dark:hover:text-gray-200" href="#">
+            <a target="_blank" class="inline-block text-white hover:text-pink-600 dark:hover:text-gray-200" href="https://www.instagram.com/p/DBd4gploHDB/?utm_source=ig_web_button_share_sheet&igsh=ODdmZWVhMTFiMw==">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 48 48">
+                <path d="M16.5 5C10.159 5 5 10.159 5 16.5L5 31.5C5 37.841 10.159 43 16.5 43L31.5 43C37.841 43 43 37.841 43 31.5L43 16.5C43 10.159 37.841 5 31.5 5L16.5 5 z M 34 12C35.105 12 36 12.895 36 14C36 15.104 35.105 16 34 16C32.895 16 32 15.104 32 14C32 12.895 32.895 12 34 12 z M 24 14C29.514 14 34 18.486 34 24C34 29.514 29.514 34 24 34C18.486 34 14 29.514 14 24C14 18.486 18.486 14 24 14 z M 24 17 A 7 7 0 1 0 24 31 A 7 7 0 1 0 24 17 z"  />
+              </svg>
+            </a>
+
+            <a target="_blank" class="inline-block text-white hover:text-blue-500 dark:hover:text-gray-200" href="https://x.com/AgenoResource/status/1849042309976821969">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="size-6" fill="currentColor"><path d="M12.5 6C8.916 6 6 8.916 6 12.5L6 35.5C6 39.084 8.916 42 12.5 42L35.5 42C39.084 42 42 39.084 42 35.5L42 12.5C42 8.916 39.084 6 35.5 6L12.5 6 z M 13.828125 14L20.265625 14L25.123047 20.943359L31.136719 14L33.136719 14L26.025391 22.234375L34.257812 34L27.820312 34L22.470703 26.351562L15.865234 34L13.822266 34L21.564453 25.056641L13.828125 14 z M 16.935547 15.695312L28.587891 32.304688L31.150391 32.304688L19.498047 15.695312L16.935547 15.695312 z"/></svg>
 
             </a>
 
-            <a class="inline-block text-white hover:text-gray-800 dark:hover:text-gray-200" href="#">
+
+            <a target="_blank" class="inline-block text-white hover:text-blue-700 dark:hover:text-gray-200" href="https://www.facebook.com/61567189601923/posts/122106364886572986/?substory_index=1049836770266964&app=fbl">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="size-6" fill="currentColor"><path d="M24,4C12.972,4,4,12.972,4,24c0,10.006,7.394,18.295,17,19.75V29h-4c-0.552,0-1-0.447-1-1v-3c0-0.553,0.448-1,1-1h4v-3.632C21,15.617,23.427,13,27.834,13c1.786,0,3.195,0.124,3.254,0.129C31.604,13.175,32,13.607,32,14.125V17.5c0,0.553-0.448,1-1,1h-2c-1.103,0-2,0.897-2,2V24h4c0.287,0,0.56,0.123,0.75,0.338c0.19,0.216,0.278,0.502,0.243,0.786l-0.375,3C31.555,28.624,31.129,29,30.625,29H27v14.75c9.606-1.455,17-9.744,17-19.75C44,12.972,35.028,4,24,4z"/></svg>
 
             </a>

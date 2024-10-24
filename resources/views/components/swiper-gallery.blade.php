@@ -1,17 +1,22 @@
 @props(['pictures'])
 
 <div class="swiper-container" {{ $attributes->merge(['class' => "group"]) }}>
+    @if(!empty($pictures))
     <div class="swiper-wrapper">
         @foreach ($pictures as $picture)
             <div class="swiper-slide">
-                <img src="{{ asset($picture) }}" alt="Asset Image" 
+                <img src="{{ asset($picture['url']) }}" alt="Asset Image" 
                 class="w-full h-[230px] object-cover transition-all group-hover:scale-105 transform hover:filter rounded-md" draggable="false">
+            
             </div>
         @endforeach
     </div>
-    <!-- Add Pagination -->
+    @else
+    <p>No pictures available for this asset.</p>
+@endif
+  
     <div class="swiper-pagination"></div>
-    <!-- Add Navigation -->
+    
     <div class="swiper-button-next group-hover:flex"></div>
     <div class="swiper-button-prev group-hover:flex"></div>
 </div>

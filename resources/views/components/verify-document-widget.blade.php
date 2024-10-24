@@ -14,6 +14,26 @@
    </a>
   </div>
 </div>
+@elseif (Auth::user()->govt_id || Auth::user()->cac_document)
+@if ("blocked" === Auth::user()->status)
+
+<div class="flex mx-6 mb-10 justify-center items-center">
+  <div class="bg-green-500 fixed z-[3000] text-green-100 text-center items-center border border-transparent 
+  transition-[border-color] hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-md dark:border-gray-700  
+  dark:text-gray-400 shadow-sm dark:bg-gray-800 flex justify-between rounded-xl py-3 px-3">
+  <div class="text-xs lg:text-sm">
+    <div class="flex items-center justify-center space-x-1 flex-wrap">
+      <img src="{{ asset('images/approval.png') }}" alt="Approval icon"  class="size-5">
+
+      <div>Admin verifying your credentials before your can upload asset(s)</div>
+      <div class="animate-blink">.</div>
+      <div class="animate-blink [animation-delay:0.2s]">.</div>
+      <div class="animate-blink [animation-delay:0.4s]">.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
 @endif
 
-{{-- || !!Auth::user()->cac_document --}}
+@endif

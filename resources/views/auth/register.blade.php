@@ -49,8 +49,8 @@
                 <select id="user_type" name="user_type" class="font-medium mt-1 block w-full py-3 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm dark:focus:border-indigo-600  dark:focus:ring-ageno focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     <option value="seller">Seller</option>
                     <option value="buyer">Buyer</option>
-                    <option value="leaser">Leaser</option>
-                    <option value="investor">Investor</option>
+                    {{-- <option value="leaser">Leaser</option>
+                    <option value="investor">Investor</option> --}}
                 </select>
                 <x-input-error :messages="$errors->get('user_type')" class="mt-2" />
     

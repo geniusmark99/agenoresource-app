@@ -40,18 +40,13 @@ font-style: normal;
 </style>
 </head>
 <body class="font-sans text-gray-900 antialiased">
-<div class="min-h-screen pattern flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-<div>
-<a href="/" class="flex flex-col text-center justify-center items-center">
-    <x-application-logo class="size-32" />
-</a>    
-</div>
-
-{{-- <div class="sm:max-w-sm mt-6 mb-5 px-6 py-4 bg-white border border-ageno/30 dark:bg-gray-800 shadow-sm overflow-y-auto rounded-lg">
-</div> --}}
+@include('layouts.general-navigation')
+<main class="pt-16 pattern bg-gray-100">
+<div class="min-h-screen mt-10 flex flex-col sm:justify-center items-center pt-6 sm:pt-0  dark:bg-gray-900">
 {{ $slot }}
-
 </div>
+<x-general-footer/>
+</main>
 
 
 <script src="{{ asset('js/libphonenumber-min.js') }}"></script>
